@@ -4,11 +4,11 @@ A 32.8M-parameter transformer written from scratch in PyTorch and trained on
 **Taglish** — Tagalog-English code-switched Filipino, the register Filipinos
 actually write in online. Free Kaggle GPU, open corpora, ₱0.
 
-Language sibling of [Munti](../Munti), which proved the same architecture on
+Language sibling of [Munti](https://github.com/Zeref538/munti), which proved the same architecture on
 English TinyStories. The model code is Munti's, essentially unchanged. The new
 work is the data.
 
-**[Read the case study →](docs/index.html)**
+**[Read the case study →](https://zeref538.github.io/liitllm/)** · **[Models and results on Kaggle →](https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish)**
 
 ## Results
 

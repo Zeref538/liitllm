@@ -13,7 +13,7 @@ and drops it, so this project filters *for* code-switching instead of against it
 and then runs a controlled ablation to prove the filter is what caused the
 behaviour.
 
-It is the second **from-scratch** project alongside [Munti](../Munti), and the
+It is the second **from-scratch** project alongside [Munti](https://github.com/Zeref538/munti), and the
 harder one: Munti proved the architecture on English, LiitLLM is the same
 architecture pointed at a data problem with a real experimental result.
 
@@ -48,9 +48,8 @@ The four things that make it portfolio-worthy, in order:
    The final run stopped at step 55,000 and the automation topped it up to 60,000
    unattended.
 
-**Links:** repo `https://github.com/Zeref538/liitllm` *(create — not pushed yet)* ·
-live case study `https://zeref538.github.io/liitllm/` *(publish `docs/`)* ·
-Kaggle notebooks below.
+**Links:** repo https://github.com/Zeref538/liitllm · live case study
+https://zeref538.github.io/liitllm/ · Kaggle links below.
 
 ### Kaggle links — all on the main account
 

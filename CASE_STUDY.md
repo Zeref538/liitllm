@@ -21,7 +21,7 @@ A language model does one job: given some tokens, put a probability on every
 possible next token. Train it on text where writers flip between Tagalog and
 English mid-sentence, and the switch itself becomes something it can predict.
 
-The architecture is [Munti](../Munti)'s, essentially unchanged — a decoder-only
+The architecture is [Munti](https://github.com/Zeref538/munti)'s, essentially unchanged — a decoder-only
 transformer, 9 layers, 8 heads, 512-wide, weight-tied embeddings. That reuse is
 deliberate and it is load-bearing: because the model code was already proven
 correct on English, **any difference in Taglish output is attributable to the
