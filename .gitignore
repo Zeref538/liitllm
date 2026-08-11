@@ -31,3 +31,6 @@ data/filtered/
 data/unfiltered/
 data/*.raw
 data/*.trim
+
+# Playwright MCP verification scratch
+.playwright-mcp/
