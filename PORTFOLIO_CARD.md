@@ -52,9 +52,16 @@ The four things that make it portfolio-worthy, in order:
 live case study `https://zeref538.github.io/liitllm/` *(publish `docs/`)* ·
 Kaggle notebooks below.
 
-### Kaggle links
+### Kaggle links — all on the main account
 
-Profile: https://www.kaggle.com/johnandreimartinez · https://www.kaggle.com/zeref824
+Profile: https://www.kaggle.com/johnandreimartinez
+
+**All four models, weights and results, one public dataset:**
+https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish
+
+Contains `{filtered,unfiltered}-seed{1,2}/` — each with a weights-only checkpoint
+(131MB, optimizer state stripped), its loss curve and its generations — plus the
+verdict JSON, the shared tokenizer, the lexicons, and both writeups.
 
 | run | notebook |
 |---|---|
@@ -62,14 +69,19 @@ Profile: https://www.kaggle.com/johnandreimartinez · https://www.kaggle.com/zer
 | filtered, seed 1 | https://www.kaggle.com/code/johnandreimartinez/baseline-part1 |
 | unfiltered, seed 1 | https://www.kaggle.com/code/johnandreimartinez/ablation-part1 |
 | unfiltered, seed 1 (top-up) | https://www.kaggle.com/code/johnandreimartinez/ablation-part2 |
-| corpus build (2nd account) | https://www.kaggle.com/code/zeref824/00-prep |
-| filtered, seed 2 | https://www.kaggle.com/code/zeref824/baseline2-part1 |
-| unfiltered, seed 2 | https://www.kaggle.com/code/zeref824/ablation2-part1 |
-| unfiltered, seed 2 (top-up) | https://www.kaggle.com/code/zeref824/ablation2-part2 |
 
-**These are private until set to Public in the Kaggle UI** (each notebook →
+**Notebooks are private until set to Public in the Kaggle UI** (each notebook →
 Settings → Visibility → Public). The CLI cannot flip visibility without re-running
-the notebook, which would restart four 11-hour GPU jobs.
+the notebook, which for a training notebook means a failed or cancelled latest
+version whose Output tab is empty — destroying the evidence the page exists to
+show.
+
+**On the seed-2 runs.** They executed on a second account used purely for GPU
+quota, and a Kaggle kernel cannot be transferred between accounts. Re-running them
+on the main account would cost ~22 GPU-hours to regenerate artifacts that already
+exist, so their *outputs* are in the dataset above instead and the second account
+stays private. The quota split is an operational detail, not part of the result;
+all four runs' curves and checkpoints are published together.
 
 ---
 

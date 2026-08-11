@@ -34,3 +34,6 @@ data/*.trim
 
 # Playwright MCP verification scratch
 .playwright-mcp/
+
+# Publish staging (rebuild: python publish_bundle.py)
+.publish/
