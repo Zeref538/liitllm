@@ -1,0 +1,171 @@
+[{"stream_name":"stderr","time":5.371984833,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":5.372658611,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":6.0859802179999996,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.08601049,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.086015733,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.086019377,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.633964584,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.634015021,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.6340463100000004,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.634050274,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.770022739,"data":"Tesla T4  sm_75\n"}
+,{"stream_name":"stdout","time":11.955277583,"data":"repo: /kaggle/input/datasets/johnandreimartinez/liitllm-repo -\u003e /kaggle/working/liitllm-repo\n"}
+,{"stream_name":"stdout","time":13.705845781,"data":"Liit correctness gate\r\n"}
+,{"stream_name":"stdout","time":13.705873224,"data":"\r\n"}
+,{"stream_name":"stdout","time":13.70587959,"data":"- test_shapes_and_init_loss\r\n"}
+,{"stream_name":"stdout","time":13.9080389,"data":"  ok  shapes + init loss 4.875 (~4.852)\r\n"}
+,{"stream_name":"stdout","time":13.908068183,"data":"- test_causal_mask\r\n"}
+,{"stream_name":"stdout","time":13.908073951,"data":"  ok  causal mask (no future leakage)\r\n"}
+,{"stream_name":"stdout","time":13.908078597,"data":"- test_fast_matches_manual\r\n"}
+,{"stream_name":"stdout","time":13.908083333,"data":"  ok  fused attention == reference implementation\r\n"}
+,{"stream_name":"stdout","time":13.908088118,"data":"- test_no_pos_is_order_blind\r\n"}
+,{"stream_name":"stdout","time":13.908092959,"data":"  ok  ablation config is genuinely order-blind\r\n"}
+,{"stream_name":"stdout","time":13.908097775,"data":"- test_get_batch_alignment\r\n"}
+,{"stream_name":"stdout","time":13.95868564,"data":"  ok  get_batch targets are inputs shifted by exactly one\r\n"}
+,{"stream_name":"stdout","time":13.958710096,"data":"- test_overfit_batches\r\n"}
+,{"stream_name":"stdout","time":18.916493468,"data":"      step    0 loss 4.8970\r\n"}
+,{"stream_name":"stdout","time":21.648852902,"data":"      step  300 loss 0.0001\r\n"}
+,{"stream_name":"stdout","time":24.325668785,"data":"      step  600 loss 0.0000\r\n"}
+,{"stream_name":"stdout","time":26.956850318,"data":"      step  900 loss 0.0000\r\n"}
+,{"stream_name":"stdout","time":29.643686275,"data":"  ok  OVERFIT GATE: mean loss 0.0000, greedy recall 100.0%\r\n"}
+,{"stream_name":"stdout","time":29.643715154,"data":"\r\n"}
+,{"stream_name":"stdout","time":29.643721503,"data":"ALL PASS — the transformer and training loop are correct. GPU run is cleared.\r\n"}
+,{"stream_name":"stdout","time":33.196662469,"data":"LiitLLM resume gate\r\n"}
+,{"stream_name":"stdout","time":33.196702876,"data":"\r\n"}
+,{"stream_name":"stdout","time":33.196709002,"data":"- test_resume_continues\r\n"}
+,{"stream_name":"stdout","time":33.196713159,"data":"device=cpu params=117,056\r\n"}
+,{"stream_name":"stdout","time":33.19671692,"data":"corpus=60,000 tokens | budget=10,240 tokens (0.2 epochs)\r\n"}
+,{"stream_name":"stdout","time":34.262375436,"data":"precision: fp32\r\n"}
+,{"stream_name":"stdout","time":34.314196041,"data":"step      0 | loss 5.5627 | 0s\r\n"}
+,{"stream_name":"stdout","time":34.773442323,"data":"  eval @ 20: train 5.5583 val 5.5571\r\n"}
+,{"stream_name":"stdout","time":35.180288707,"data":"  eval @ 39: train 5.5541 val 5.5568\r\n"}
+,{"stream_name":"stdout","time":35.232001453,"data":"done in 0.0 min -\u003e /tmp/tmpnnozvwbp/out/ckpt.pt\r\n"}
+,{"stream_name":"stdout","time":35.232030367,"data":"device=cpu params=117,056\r\n"}
+,{"stream_name":"stdout","time":35.232034385,"data":"corpus=60,000 tokens | budget=20,480 tokens (0.3 epochs)\r\n"}
+,{"stream_name":"stdout","time":35.232038735,"data":"loaded checkpoint ckpt.pt @ step 39\r\n"}
+,{"stream_name":"stdout","time":35.232042544,"data":"=== RESUMING at step 40/80 ===\r\n"}
+,{"stream_name":"stdout","time":35.232046081,"data":"precision: fp32\r\n"}
+,{"stream_name":"stdout","time":35.485991895,"data":"  eval @ 40: train 5.5567 val 5.5575\r\n"}
+,{"stream_name":"stdout","time":35.892730614,"data":"  eval @ 60: train 5.5504 val 5.5557\r\n"}
+,{"stream_name":"stdout","time":36.29635536,"data":"  eval @ 79: train 5.5510 val 5.5548\r\n"}
+,{"stream_name":"stdout","time":36.296376722,"data":"done in 0.0 min -\u003e /tmp/tmpnnozvwbp/out/ckpt.pt\r\n"}
+,{"stream_name":"stdout","time":36.296380591,"data":"  ok  resumed 40 -\u003e 80, 5 clean rows: [20, 39, 40, 60, 79]\r\n"}
+,{"stream_name":"stdout","time":36.347293227,"data":"- test_rng_state_restored\r\n"}
+,{"stream_name":"stdout","time":36.34735931,"data":"device=cpu params=117,056\r\n"}
+,{"stream_name":"stdout","time":36.347367255,"data":"corpus=60,000 tokens | budget=5,120 tokens (0.1 epochs)\r\n"}
+,{"stream_name":"stdout","time":36.347372448,"data":"precision: fp32\r\n"}
+,{"stream_name":"stdout","time":36.347377392,"data":"step      0 | loss 5.5627 | 0s\r\n"}
+,{"stream_name":"stdout","time":36.65023977,"data":"  eval @ 10: train 5.5592 val 5.5579\r\n"}
+,{"stream_name":"stdout","time":37.003869847,"data":"  eval @ 19: train 5.5572 val 5.5548\r\n"}
+,{"stream_name":"stdout","time":37.003940423,"data":"done in 0.0 min -\u003e /tmp/tmpcuyou9ok/out/ckpt.pt\r\n"}
+,{"stream_name":"stdout","time":37.003964244,"data":"  ok  RNG state restored (resumed run sees new batches)\r\n"}
+,{"stream_name":"stdout","time":37.003969513,"data":"- test_corrupt_checkpoint_falls_back\r\n"}
+,{"stream_name":"stdout","time":37.003974238,"data":"device=cpu params=117,056\r\n"}
+,{"stream_name":"stdout","time":37.003979103,"data":"corpus=60,000 tokens | budget=10,240 tokens (0.2 epochs)\r\n"}
+,{"stream_name":"stdout","time":37.003983516,"data":"precision: fp32\r\n"}
+,{"stream_name":"stdout","time":37.00398771,"data":"step      0 | loss 5.5627 | 0s\r\n"}
+,{"stream_name":"stdout","time":37.407836938,"data":"  eval @ 20: train 5.5583 val 5.5571\r\n"}
+,{"stream_name":"stdout","time":37.81141396,"data":"  eval @ 39: train 5.5541 val 5.5568\r\n"}
+,{"stream_name":"stdout","time":37.81143796,"data":"done in 0.0 min -\u003e /tmp/tmpq_m5fbfm/out/ckpt.pt\r\n"}
+,{"stream_name":"stdout","time":37.811443226,"data":"WARNING: ckpt.pt unreadable (PytorchStreamReader failed reading zip archive: failed finding central directory); trying older checkpoint\r\n"}
+,{"stream_name":"stdout","time":37.811456478,"data":"loaded checkpoint ckpt_prev.pt @ step 20\r\n"}
+,{"stream_name":"stdout","time":37.811460245,"data":"  ok  corrupt ckpt.pt fell back to ckpt_prev.pt @ step 20\r\n"}
+,{"stream_name":"stdout","time":37.811463866,"data":"- test_max_hours_stops_cleanly\r\n"}
+,{"stream_name":"stdout","time":37.86265148,"data":"device=cpu params=117,056\r\n"}
+,{"stream_name":"stdout","time":37.862680612,"data":"corpus=60,000 tokens | budget=51,200 tokens (0.9 epochs)\r\n"}
+,{"stream_name":"stdout","time":37.862686973,"data":"precision: fp32\r\n"}
+,{"stream_name":"stdout","time":37.862691689,"data":"step      0 | loss 5.5627 | 0s\r\n"}
+,{"stream_name":"stdout","time":38.166835814,"data":"  eval @ 10: train 5.5591 val 5.5581\r\n"}
+,{"stream_name":"stdout","time":38.166859416,"data":"=== hit --max-hours 0.0 at step 10; stopping cleanly ===\r\n"}
+,{"stream_name":"stdout","time":38.166864103,"data":"=== next part resumes at step 11/200 ===\r\n"}
+,{"stream_name":"stdout","time":38.166867645,"data":"  ok  --max-hours stopped cleanly at step 10 with a full checkpoint\r\n"}
+,{"stream_name":"stdout","time":38.166871394,"data":"\r\n"}
+,{"stream_name":"stdout","time":38.166875193,"data":"ALL PASS - a killed session can resume. Long runs are cleared.\r\n"}
+,{"stream_name":"stdout","time":38.873512968,"data":"batch_size: 64\n"}
+,{"stream_name":"stdout","time":38.873545182,"data":"data_dir: /kaggle/input/notebooks/johnandreimartinez/00-prep/data/filtered\n"}
+,{"stream_name":"stdout","time":38.873567417,"data":"device: null\n"}
+,{"stream_name":"stdout","time":38.873570835,"data":"eval_every: 500\n"}
+,{"stream_name":"stdout","time":38.873574016,"data":"grad_accum: 1\n"}
+,{"stream_name":"stdout","time":38.873577033,"data":"grad_clip: 1.0\n"}
+,{"stream_name":"stdout","time":38.873580257,"data":"log_every: 100\n"}
+,{"stream_name":"stdout","time":38.873583235,"data":"lr: 0.0006\n"}
+,{"stream_name":"stdout","time":38.873586257,"data":"max_steps: 18000\n"}
+,{"stream_name":"stdout","time":38.873589264,"data":"model:\n"}
+,{"stream_name":"stdout","time":38.873592252,"data":"  bias: false\n"}
+,{"stream_name":"stdout","time":38.873595208,"data":"  block_size: 512\n"}
+,{"stream_name":"stdout","time":38.873598269,"data":"  dropout: 0.1\n"}
+,{"stream_name":"stdout","time":38.873601192,"data":"  fast_attn: true\n"}
+,{"stream_name":"stdout","time":38.873604239,"data":"  learned_pos: true\n"}
+,{"stream_name":"stdout","time":38.873607186,"data":"  n_embd: 512\n"}
+,{"stream_name":"stdout","time":38.873610192,"data":"  n_head: 8\n"}
+,{"stream_name":"stdout","time":38.873613094,"data":"  n_layer: 8\n"}
+,{"stream_name":"stdout","time":38.873616044,"data":"  vocab_size: 8192\n"}
+,{"stream_name":"stdout","time":38.873619008,"data":"out_dir: /kaggle/working/out\n"}
+,{"stream_name":"stdout","time":38.873621976,"data":"seed: 1337\n"}
+,{"stream_name":"stdout","time":38.873624911,"data":"tokenizer_path: /kaggle/input/notebooks/johnandreimartinez/00-prep/data/tokenizer.json\n"}
+,{"stream_name":"stdout","time":38.873628057,"data":"warmup_steps: 500\n"}
+,{"stream_name":"stdout","time":38.873631017,"data":"weight_decay: 0.1\n"}
+,{"stream_name":"stdout","time":38.873634058,"data":"\n"}
+,{"stream_name":"stdout","time":46.280665089,"data":"=== RESUMING from /kaggle/input/notebooks/johnandreimartinez/baseline-part3/out @ step 11000 ===\n"}
+,{"stream_name":"stdout","time":47.09155394,"data":"device=cuda params=29,630,976\n"}
+,{"stream_name":"stdout","time":47.091589269,"data":"corpus=199,000,000 tokens | budget=589,824,000 tokens (3.0 epochs)\n"}
+,{"stream_name":"stdout","time":48.399232168,"data":"loaded checkpoint ckpt.pt @ step 11000\n"}
+,{"stream_name":"stdout","time":48.399266947,"data":"=== RESUMING at step 11001/18000 ===\n"}
+,{"stream_name":"stdout","time":48.399272116,"data":"precision: torch.float16\n"}
+,{"stream_name":"stdout","time":105.93196107,"data":"step  11100 | loss 3.0006 | 58s\n"}
+,{"stream_name":"stdout","time":164.887022861,"data":"step  11200 | loss 3.2147 | 116s\n"}
+,{"stream_name":"stdout","time":222.612827475,"data":"step  11300 | loss 3.1083 | 174s\n"}
+,{"stream_name":"stdout","time":281.087499278,"data":"step  11400 | loss 3.2501 | 233s\n"}
+,{"stream_name":"stdout","time":339.502238634,"data":"step  11500 | loss 3.0617 | 291s\n"}
+,{"stream_name":"stdout","time":358.756739633,"data":"  eval @ 11500: train 2.9956 val 2.9802\n"}
+,{"stream_name":"stdout","time":419.379121269,"data":"step  11600 | loss 3.2354 | 371s\n"}
+,{"stream_name":"stdout","time":478.14155426,"data":"step  11700 | loss 2.9762 | 430s\n"}
+,{"stream_name":"stdout","time":536.879319936,"data":"step  11800 | loss 3.1406 | 488s\n"}
+,{"stream_name":"stdout","time":595.149684309,"data":"step  11900 | loss 3.0932 | 547s\n"}
+,{"stream_name":"stdout","time":653.362327919,"data":"step  12000 | loss 3.1459 | 605s\n"}
+,{"stream_name":"stdout","time":672.519165145,"data":"  eval @ 12000: train 3.0014 val 2.9621\n"}
+,{"stream_name":"stdout","time":732.459703177,"data":"step  12100 | loss 3.0139 | 684s\n"}
+,{"stream_name":"stdout","time":791.120873735,"data":"step  12200 | loss 3.1641 | 743s\n"}
+,{"stream_name":"stdout","time":849.873400022,"data":"step  12300 | loss 3.2260 | 801s\n"}
+,{"stream_name":"stdout","time":908.36079226,"data":"step  12400 | loss 3.1031 | 860s\n"}
+,{"stream_name":"stdout","time":966.51027221,"data":"step  12500 | loss 3.2022 | 918s\n"}
+,{"stream_name":"stdout","time":985.693403515,"data":"  eval @ 12500: train 2.9500 val 2.9730\n"}
+,{"stream_name":"stdout","time":1045.958536949,"data":"step  12600 | loss 3.1496 | 998s\n"}
+,{"stream_name":"stdout","time":1104.640529672,"data":"step  12700 | loss 3.0186 | 1056s\n"}
+,{"stream_name":"stdout","time":1163.368831634,"data":"step  12800 | loss 3.0747 | 1115s\n"}
+,{"stream_name":"stdout","time":1222.120485444,"data":"step  12900 | loss 3.1773 | 1174s\n"}
+,{"stream_name":"stdout","time":1280.903528277,"data":"step  13000 | loss 3.1372 | 1232s\n"}
+,{"stream_name":"stdout","time":1300.077866297,"data":"  eval @ 13000: train 2.9649 val 2.9433\n"}
+,{"stream_name":"stdout","time":1360.090275586,"data":"step  13100 | loss 3.0120 | 1312s\n"}
+,{"stream_name":"stdout","time":1418.361919476,"data":"step  13200 | loss 2.9473 | 1370s\n"}
+,{"stream_name":"stdout","time":1476.842869283,"data":"step  13300 | loss 3.2154 | 1428s\n"}
+,{"stream_name":"stdout","time":1535.389812966,"data":"step  13400 | loss 2.9331 | 1487s\n"}
+,{"stream_name":"stdout","time":1593.947244469,"data":"step  13500 | loss 3.1658 | 1546s\n"}
+,{"stream_name":"stdout","time":1613.136600288,"data":"  eval @ 13500: train 2.9515 val 2.9372\n"}
+,{"stream_name":"stdout","time":1673.448369659,"data":"step  13600 | loss 2.9477 | 1625s\n"}
+,{"stream_name":"stdout","time":1732.175521139,"data":"step  13700 | loss 3.0990 | 1684s\n"}
+,{"stream_name":"stdout","time":1790.902615633,"data":"step  13800 | loss 3.1231 | 1742s\n"}
+,{"stream_name":"stdout","time":1849.63655623,"data":"step  13900 | loss 2.7890 | 1801s\n"}
+,{"stream_name":"stdout","time":1908.17365239,"data":"step  14000 | loss 2.9615 | 1860s\n"}
+,{"stream_name":"stdout","time":1927.353025015,"data":"  eval @ 14000: train 2.9270 val 2.8966\n"}
+,{"stream_name":"stdout","time":1987.658738529,"data":"step  14100 | loss 2.8911 | 1939s\n"}
+,{"stream_name":"stdout","time":2046.173435476,"data":"step  14200 | loss 3.3047 | 1998s\n"}
+,{"stream_name":"stdout","time":2104.262056653,"data":"step  14300 | loss 3.0782 | 2056s\n"}
+,{"stream_name":"stdout","time":2162.576692025,"data":"step  14400 | loss 2.8965 | 2114s\n"}
+,{"stream_name":"stdout","time":2221.172292953,"data":"step  14500 | loss 3.1216 | 2173s\n"}
+,{"stream_name":"stdout","time":2240.367564048,"data":"  eval @ 14500: train 2.9173 val 2.8900\n"}
+,{"stream_name":"stdout","time":2241.971773892,"data":"=== reached --stop-at-step 14399; stopping cleanly ===\n"}
+,{"stream_name":"stdout","time":2241.971802249,"data":"=== next part resumes at step 14501/18000 ===\n"}
+,{"stream_name":"stdout","time":2241.971807298,"data":"['ckpt.pt', 'ckpt_prev.pt', 'curve.png', 'loss.csv', 'samples.md']\n"}
+,{"stream_name":"stdout","time":2242.234001473,"data":"wrote /kaggle/working/out/curve.png\n"}
+,{"stream_name":"stdout","time":2242.234027986,"data":"best val 2.8900 @ step 14500   last val 2.8900 @ step 14500\n"}
+,{"stream_name":"stdout","time":2242.234034193,"data":"still improving - run the next part\n"}
+,{"stream_name":"stderr","time":2245.417300849,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2245.417329802,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2245.559799344,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2245.559824134,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2246.186510738,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2246.50840418,"data":"[NbConvertApp] Writing 22185 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2248.766122254,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2249.557574522,"data":"[NbConvertApp] Writing 307229 bytes to __results__.html\n"}
+]

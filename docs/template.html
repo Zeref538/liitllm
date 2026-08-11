@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="en" data-view="plain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiitLLM — A Small Model That Speaks Taglish</title>
+<meta name="description" content="Case study: every large web corpus filters code-switching out as noise. This one filters for it — a 32.8M-parameter Taglish language model trained from scratch, with a two-seed ablation proving the filter is what causes the code-switching.">
+<style>
+  /* ============================================================
+     LIITLLM — visual identity
+
+     The subject is two languages inside one sentence, so the page
+     is built on a pair, not a spectrum. Every hue is one of three:
+
+       clay   = Tagalog — the matrix language, the grammar
+       tide   = English — the words borrowed into it
+       switch = where they meet: the code-switch itself, and
+                anything the reader can touch
+       ash    = failure, and what the model cannot do
+
+     Nothing else gets a colour. Where clay and tide sit next to
+     each other on the page, that adjacency IS the argument.
+
+     Typeset in humanist sans with a heavy display cut. Munti used
+     monospace as its display face because its subject was tokens;
+     this project's subject is register — how people actually write
+     — so the page is set the way writing is set, and monospace is
+     demoted back to what it is: the face for numbers and code.
+     ============================================================ */
+  :root {
+    color-scheme: light;
+    --paper:  #f3eee4;
+    --card:   #fffdf8;
+    --sunk:   #e8e1d3;
+    --ink:    #191510;
+    --ink-2:  #4a4136;
+    --ink-3:  #7a6f60;
+    --rule:   #ded6c6;
+    --rule-2: #c9bfab;
+    --clay:   #a8442a;
+    --tide:   #14657f;
+    --switch: #6b46c1;
+    --ash:    #8a2f4f;
+    --good:   #1c6b47;
+    --track:  #e2dacb;
+    --clay-w: #f6ded3;
+    --tide-w: #d4e8ef;
+    --sw-w:   #e4dbf9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --paper: #14120e; --card: #1e1a15; --sunk: #26211a;
+      --ink: #f6f1e7; --ink-2: #c0b6a5; --ink-3: #8b8171;
+      --rule: #302a22; --rule-2: #423a2f;
+      --clay: #ff8a5f; --tide: #5cc4e6; --switch: #b39aff;
+      --ash: #ff7fae; --good: #56d199; --track: #2b251d;
+      --clay-w: #4a2417; --tide-w: #123a48; --sw-w: #2f2657;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #14120e; --card: #1e1a15; --sunk: #26211a;
+    --ink: #f6f1e7; --ink-2: #c0b6a5; --ink-3: #8b8171;
+    --rule: #302a22; --rule-2: #423a2f;
+    --clay: #ff8a5f; --tide: #5cc4e6; --switch: #b39aff;
+    --ash: #ff7fae; --good: #56d199; --track: #2b251d;
+    --clay-w: #4a2417; --tide-w: #123a48; --sw-w: #2f2657;
+  }
+
+  :root {
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16.5px; line-height: 1.66;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 26px; }
+  @media (max-width: 560px) { .wrap { padding: 0 17px; } }
+
+  a { color: var(--switch); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, [contenteditable]:focus-visible {
+    outline: 2px solid var(--switch); outline-offset: 2px; border-radius: 3px;
+  }
+
+  /* ---------------- sticky bar ---------------- */
+  .bar {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar .wrap { display: flex; align-items: center; gap: 12px; height: 54px; }
+  .brand {
+    font-weight: 800; letter-spacing: -.02em; margin-right: auto;
+    font-size: 15.5px;
+  }
+  .brand span { color: var(--switch); }
+  .seg {
+    display: inline-flex; border: 1px solid var(--rule-2); border-radius: 999px;
+    overflow: hidden; background: var(--card);
+  }
+  .seg button {
+    font: inherit; font-size: 12.5px; font-weight: 600;
+    padding: 5px 12px; border: 0; background: transparent; color: var(--ink-3);
+    cursor: pointer; white-space: nowrap;
+  }
+  .seg button[aria-pressed="true"] { background: var(--switch); color: #fff; }
+  .iconbtn {
+    font: inherit; width: 32px; height: 32px; border-radius: 999px;
+    border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2);
+    cursor: pointer; line-height: 1;
+  }
+  @media (max-width: 480px) { .seg button { padding: 5px 9px; font-size: 11.5px; } }
+
+  /* ---------------- type ---------------- */
+  h1 {
+    font-size: clamp(30px, 6.2vw, 47px); line-height: 1.06;
+    letter-spacing: -.033em; font-weight: 830; margin: 0 0 14px;
+  }
+  h2 {
+    font-size: clamp(21px, 3.4vw, 27px); line-height: 1.2;
+    letter-spacing: -.022em; font-weight: 780; margin: 0 0 14px;
+  }
+  h3 {
+    font-size: 16px; font-weight: 730; letter-spacing: -.008em;
+    margin: 30px 0 9px;
+  }
+  p { margin: 0 0 15px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: .15em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 9px;
+  }
+  .lede { font-size: 18.5px; color: var(--ink-2); }
+  section { padding: 46px 0; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: 0; }
+  .muted { color: var(--ink-3); }
+  .small { font-size: 14px; }
+  b, strong { font-weight: 700; }
+
+  /* ---------------- hero ---------------- */
+  .hero { padding: 52px 0 40px; }
+  .stat-line {
+    display: flex; flex-wrap: wrap; gap: 7px 20px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink-3);
+    margin-bottom: 26px;
+  }
+  .stat-line b { color: var(--ink); font-weight: 700; }
+
+  /* ---------------- the scorer widget ---------------- */
+  .scorer {
+    background: var(--card); border: 1px solid var(--rule-2);
+    border-radius: 13px; overflow: hidden;
+  }
+  .scorer-head {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 16px; border-bottom: 1px solid var(--rule);
+    background: var(--sunk);
+  }
+  .scorer-head .kicker { margin: 0; }
+  .chips { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer;
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--rule-2); background: var(--card); color: var(--ink-2);
+  }
+  .chip:hover { border-color: var(--switch); color: var(--switch); }
+  #text {
+    padding: 17px 16px; font-size: 17px; line-height: 1.85; min-height: 92px;
+    outline: none;
+  }
+  #text w { border-radius: 3px; padding: 1px 2px; }
+  #text w.tl { background: var(--clay-w); color: var(--clay); font-weight: 600; }
+  #text w.en { background: var(--tide-w); color: var(--tide); font-weight: 600; }
+  .readout {
+    border-top: 1px solid var(--rule); padding: 13px 16px;
+    display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: center;
+  }
+  @media (max-width: 560px) {
+    .readout { grid-template-columns: 1fr 1fr; }
+    .readout .verdict { grid-column: 1 / -1; }
+  }
+  .meter .lbl {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    display: flex; justify-content: space-between; margin-bottom: 5px;
+  }
+  .meter .lbl b { font-weight: 700; }
+  .bar-track { height: 7px; background: var(--track); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0; border-radius: 999px; transition: width .18s ease; }
+  .m-tl .bar-fill { background: var(--clay); } .m-tl .lbl { color: var(--clay); }
+  .m-en .bar-fill { background: var(--tide); } .m-en .lbl { color: var(--tide); }
+  .verdict {
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    padding: 7px 13px; border-radius: 999px; text-align: center; white-space: nowrap;
+  }
+  .verdict.keep { background: var(--sw-w); color: var(--switch); }
+  .verdict.drop { background: var(--sunk); color: var(--ink-3); }
+
+  /* ---------------- blocks ---------------- */
+  .card {
+    background: var(--card); border: 1px solid var(--rule-2);
+    border-radius: 12px; padding: 17px 19px; margin: 20px 0;
+  }
+  .note {
+    border-left: 3px solid var(--switch); background: var(--card);
+    padding: 13px 17px; margin: 20px 0; border-radius: 0 8px 8px 0;
+  }
+  .note.warn { border-left-color: var(--ash); }
+  .note .kicker { color: var(--switch); }
+  .note.warn .kicker { color: var(--ash); }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+       text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+  td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .tw { overflow-x: auto; }
+
+  code {
+    font-family: var(--mono); font-size: .88em;
+    background: var(--sunk); padding: 1.5px 5px; border-radius: 4px;
+  }
+  pre {
+    font-family: var(--mono); font-size: 13px; line-height: 1.6;
+    background: var(--card); border: 1px solid var(--rule-2);
+    border-radius: 10px; padding: 14px 16px; overflow-x: auto;
+  }
+  pre code { background: none; padding: 0; }
+
+  blockquote {
+    margin: 0 0 16px; padding: 12px 16px; border-radius: 0 8px 8px 0;
+    background: var(--card); border-left: 3px solid var(--rule-2);
+    font-size: 15.5px;
+  }
+  blockquote.clay { border-left-color: var(--clay); }
+  blockquote.tide { border-left-color: var(--tide); }
+  blockquote.fail { border-left-color: var(--ash); color: var(--ink-2); }
+  .gen-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    display: block; margin-bottom: 6px;
+  }
+  .gen-tag em { color: var(--clay); font-style: normal; }
+  .gen-tag i  { color: var(--tide); font-style: normal; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+
+  .big {
+    font-family: var(--mono); font-size: clamp(30px, 7vw, 42px);
+    font-weight: 700; letter-spacing: -.03em; line-height: 1;
+  }
+  .big.clay { color: var(--clay); } .big.tide { color: var(--tide); }
+  .big.switch { color: var(--switch); }
+
+  figure { margin: 20px 0; }
+  figcaption { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
+  svg { display: block; max-width: 100%; height: auto; }
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px;
+    font-family: var(--mono); color: var(--ink-3); margin-bottom: 8px;
+  }
+  .legend i { width: 11px; height: 3px; border-radius: 2px; display: inline-block;
+              vertical-align: middle; margin-right: 6px; }
+
+  ul { margin: 0 0 15px; padding-left: 21px; }
+  li { margin-bottom: 7px; }
+
+  footer { padding: 40px 0 64px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 14px; }
+
+  /* ---------------- plain / technical ---------------- */
+  [data-mode] { display: none; }
+  html[data-view="plain"] [data-mode="plain"],
+  html[data-view="expert"] [data-mode="expert"] { display: block; }
+  html[data-view="plain"] span[data-mode="plain"],
+  html[data-view="expert"] span[data-mode="expert"] { display: inline; }
+  html[data-view="plain"] li[data-mode="plain"],
+  html[data-view="expert"] li[data-mode="expert"] { display: list-item; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="brand">Liit<span>LLM</span></div>
+    <div class="seg" role="group" aria-label="Reading level">
+      <button type="button" id="m-plain" aria-pressed="true">Plain English</button>
+      <button type="button" id="m-expert" aria-pressed="false">Technical</button>
+    </div>
+    <button type="button" class="iconbtn" id="theme" aria-label="Switch colour theme">◐</button>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <p class="kicker">Case study — from-scratch language model</p>
+  <h1>Every big corpus throws Taglish away.<br>This one keeps only Taglish.</h1>
+  <p class="lede" data-mode="plain">
+    Filipinos online don't write pure Tagalog or pure English — they switch between
+    them mid-sentence. The tools that assemble training data for large language
+    models treat that mixing as garbage and delete it. I built the opposite: a
+    filter that keeps <em>only</em> the mixed writing, trained a small model on it,
+    and then trained an identical model on unfiltered text to prove the filter is
+    what made the difference.
+  </p>
+  <p class="lede" data-mode="expert">
+    Web-scale corpora are assembled with document-level fastText language ID, which
+    scores heavily code-switched Filipino as low-confidence and drops it or misroutes
+    it to <code>en</code>. Standard pipelines filter code-switching out; this one
+    filters for it. A 32.8M-parameter transformer trained from scratch on a
+    Taglish-filtered corpus, ablated against an identical model trained on the
+    unfiltered corpus at exactly equal token budget, two seeds per arm.
+  </p>
+
+  <div class="stat-line">
+    <span><b>32.8M</b> parameters</span>
+    <span><b>995M</b> tokens per arm</span>
+    <span><b>4</b> runs &times; 60k steps</span>
+    <span><b>~44</b> GPU-hours</span>
+    <span><b>&#8369;0</b> spent</span>
+  </div>
+
+  <div class="scorer">
+    <div class="scorer-head">
+      <p class="kicker">The filter, running live</p>
+      <div class="chips">
+        <button type="button" class="chip" data-ex="taglish">Taglish</button>
+        <button type="button" class="chip" data-ex="tagalog">Formal Tagalog</button>
+        <button type="button" class="chip" data-ex="english">English</button>
+        <button type="button" class="chip" data-ex="gen">Model output</button>
+      </div>
+    </div>
+    <div id="text" contenteditable="true" spellcheck="false" role="textbox"
+         aria-multiline="true" aria-label="Editable text scored for code-switching"></div>
+    <div class="readout">
+      <div class="meter m-tl">
+        <div class="lbl"><span>Tagalog</span><b id="v-tl">0%</b></div>
+        <div class="bar-track"><div class="bar-fill" id="f-tl"></div></div>
+      </div>
+      <div class="meter m-en">
+        <div class="lbl"><span>English</span><b id="v-en">0%</b></div>
+        <div class="bar-track"><div class="bar-fill" id="f-en"></div></div>
+      </div>
+      <div class="verdict drop" id="verdict">—</div>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:10px">
+    Type in the box. This is the actual scorer — the same 431 Tagalog and 647 English
+    words, the same affix stripping — that chose which documents the model learned from.
+  </p>
+</header>
+
+<main>
+
+<section class="wrap" id="why">
+  <p class="kicker">01 — The premise</p>
+  <h2 data-mode="plain">A filter that calls the real language "noise"</h2>
+  <h2 data-mode="expert">Language ID is a document-level classifier, and Taglish is a sentence-level phenomenon</h2>
+
+  <div data-mode="plain">
+    <p>
+      To build a training set, you crawl the web and sort pages by language. A tool
+      looks at each page and says "this is Tagalog" or "this is English." Pages it
+      can't confidently label get thrown out.
+    </p>
+    <p>
+      Now consider how a Filipino actually writes: <em>"Kahapon nag-commute ako
+      papuntang office kasi grabe ang traffic."</em> The grammar is Tagalog. Half the
+      nouns are English. The tool sees a page full of that, can't commit to either
+      label, and deletes it.
+    </p>
+    <p>
+      So the register that millions of people actually write in is systematically
+      absent from the data that language models learn from. Not by anyone's decision —
+      as a side effect of a sorting step nobody thinks about.
+    </p>
+  </div>
+  <div data-mode="expert">
+    <p>
+      CC-100, OSCAR, FineWeb-2 and friends all route documents through a fastText
+      langid classifier with a confidence floor. Intra-sentential code-switching —
+      English content words inserted into Tagalog morphosyntax — produces exactly the
+      low-confidence, split-posterior documents that floor is designed to remove.
+    </p>
+    <p>
+      The consequence is a systematic register gap. The Filipino text that survives
+      collection skews formal and monolingual: news copy, encyclopedic prose, official
+      statements. The conversational register — the one with the code-switching in it —
+      is thinned out at the point of collection, before any model sees it.
+    </p>
+    <p>
+      Tagalog Wikipedia is excluded here for the same reason, deliberately. It is
+      clean, well-formed, and almost entirely free of the phenomenon under study.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="filter">
+  <p class="kicker">02 — The scorer</p>
+  <h2 data-mode="plain">Two word lists and a rule about prefixes</h2>
+  <h2 data-mode="expert">Lexicon-ratio scoring, and why the two lists are built differently</h2>
+
+  <div data-mode="plain">
+    <p>
+      The filter is about thirty lines. It splits text into words and asks, for each
+      one, "is this in my Tagalog list?" and "is this in my English list?" Then it
+      keeps documents where <em>both</em> answers come back often enough.
+    </p>
+    <p>
+      Two details make it work, and both took a rewrite to find.
+    </p>
+  </div>
+  <div data-mode="expert">
+    <p>
+      <code>score(text)</code> returns the fraction of word tokens matching each
+      lexicon; <code>is_taglish</code> keeps a document when both fractions clear a
+      floor. No new dependencies, no model, and explainable in a paragraph — which
+      matters, because this same function decides the training corpus, the ablation,
+      <em>and</em> the headline metric.
+    </p>
+  </div>
+
+  <h3>The two lists are not symmetric</h3>
+  <p>
+    The Tagalog list is almost all <b>function words</b> — <code>ang</code>,
+    <code>ng</code>, <code>sa</code>, <code>kasi</code>, <code>naman</code>. Those are
+    a closed class: you cannot write Tagalog syntax without them, and English text
+    will not accidentally produce them.
+  </p>
+  <p>
+    The English list deliberately includes <b>content words</b> — <code>office</code>,
+    <code>traffic</code>, <code>meeting</code>. That asymmetry is forced by the
+    phenomenon itself: in <em>"nag-commute ako sa office"</em> there is not a single
+    English function word. Score English by function words and the most
+    characteristically Taglish sentences read as pure Tagalog.
+  </p>
+
+  <h3>Hyphens get split, or the most Taglish word scores nothing</h3>
+  <p>
+    <code>nag-commute</code> matches neither list as a single token — and neither does
+    <code>nagcommute</code>, because the affix stripper only finds a stem that is itself
+    in the Tagalog list, and <code>commute</code> is English. So the single most
+    characteristically Taglish word in the sentence would contribute <b>zero</b> to
+    either side.
+  </p>
+  <p>
+    Splitting on the hyphen fixes half of that: <code>commute</code> lands in the
+    English list. The <code>nag-</code> half still scores nothing, since bare affixes
+    are not lexicon entries. That is a real limitation, not a design choice — but it
+    only ever <em>under</em>-counts, and it under-counts the Tagalog side of a word
+    already surrounded by Tagalog function words, so the document is not at risk of
+    being misread as English.
+  </p>
+
+  <div class="note">
+    <p class="kicker">Morphology</p>
+    <p style="margin:0">
+      Tagalog is agglutinative: <code>trabaho</code> becomes <code>nagtrabaho</code>,
+      <code>trabahuhan</code>, <code>pinagtrabahuhan</code>. A bare root list misses all
+      of those and under-counts the Tagalog side. The scorer peels one prefix and one
+      suffix, and handles reduplication (<code>nagcocommute</code> &rarr;
+      <code>commute</code>). It stops at one layer on purpose — two layers reduces
+      <code>nasa</code> to <code>sa</code> and starts inventing matches.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="corpus">
+  <p class="kicker">03 — The finding that dented my own premise</p>
+  <h2 data-mode="plain">The web text was already 40% Taglish</h2>
+  <h2 data-mode="expert">Measured keep-rate: 38.0% and 39.5%, not the ~10% the thesis assumed</h2>
+
+  <p data-mode="plain">
+    My whole pitch was that code-switching gets filtered out of web corpora. So I
+    measured how much survives, expecting very little. Across 50,000 documents from
+    each of two sources, <b>38% and 39.5%</b> already passed the Taglish test —
+    untouched, straight out of the corpus.
+  </p>
+  <p data-mode="expert">
+    Bake-off across FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>,
+    50,000 documents sampled from each: keep-rates of <b>38.0%</b> and <b>39.5%</b>.
+    The langid filter thins code-switched text but does not come close to removing it.
+  </p>
+
+  <div class="two">
+    <div class="card">
+      <div class="big clay">38.0%</div>
+      <p class="small muted" style="margin:6px 0 0">FineWeb-2 <code>fil_Latn</code> already passes the Taglish filter</p>
+    </div>
+    <div class="card">
+      <div class="big clay">39.5%</div>
+      <p class="small muted" style="margin:6px 0 0">HPLT 2.0 <code>tgl_Latn</code>, same measurement</p>
+    </div>
+  </div>
+
+  <div class="note warn">
+    <p class="kicker">This weakens the control arm, and it stays in</p>
+    <p style="margin:0">
+      The "unfiltered" model is supposed to be the contrast. But if its corpus is
+      already ~40% code-switched, it is not a clean negative — it is a weaker dose,
+      not a zero dose. The honest framing is not "filtering creates code-switching
+      from nothing." It is: <b>Filipino web text is already heavily code-switched, and
+      filtering the rest of the way still measurably changes the model.</b> That is a
+      smaller claim than I set out to make, and it is the one the data supports.
+    </p>
+  </div>
+
+  <h3>An earlier version of this page would have said something false</h3>
+  <p>
+    I first ran that bake-off on <b>2,000</b> documents and got 46.8% versus 34.4% —
+    a clear win for FineWeb-2, and I wrote it down as one. At 50,000 documents it is
+    38.0% versus 39.5%: the two sources are equivalent and the ranking had
+    <em>inverted</em>. Small samples do not give you a quiet, proportional error.
+    They give you a confident answer that is backwards.
+  </p>
+</section>
+
+<section class="wrap" id="build">
+  <p class="kicker">04 — The model</p>
+  <h2 data-mode="plain">What it is, and what "from scratch" means</h2>
+  <h2 data-mode="expert">32.8M-parameter decoder-only transformer, no pretrained weights</h2>
+
+  <p data-mode="plain">
+    No downloaded model, no fine-tuning. The tokenizer, the transformer, the training
+    loop are code in this repository. The only things brought in from outside are the
+    raw text and PyTorch itself.
+  </p>
+  <p data-mode="expert">
+    Architecture is inherited unchanged from <a href="../../Munti/docs/index.html">Munti</a>,
+    a prior from-scratch model proven on TinyStories — deliberately, so that any
+    difference in output is attributable to data rather than code. What changed is
+    scale and context.
+  </p>
+
+  <div class="tw"><table>
+    <thead><tr><th>&nbsp;</th><th class="num">Munti</th><th class="num">LiitLLM</th></tr></thead>
+    <tbody>
+      <tr><td>Layers / heads / width</td><td class="num">6 / 6 / 384</td><td class="num">9 / 8 / 512</td></tr>
+      <tr><td>Context window</td><td class="num">256</td><td class="num">512</td></tr>
+      <tr><td>Vocabulary</td><td class="num">4,096</td><td class="num">8,192</td></tr>
+      <tr><td>Parameters</td><td class="num">12.3M</td><td class="num">32.8M</td></tr>
+      <tr><td>Training tokens</td><td class="num">~330M</td><td class="num">1.97B</td></tr>
+      <tr><td>GPU-hours</td><td class="num">~6</td><td class="num">~44</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>
+    The <b>512-token context is a deliberate choice for this subject</b>. Code-switching
+    is a discourse-level behaviour — a writer flips register across clauses and
+    sentences, not within a three-word window. At 256 tokens the model would rarely see
+    a full switch cycle.
+  </p>
+
+  <div class="note">
+    <p class="kicker">One tokenizer, trained on the unfiltered corpus</p>
+    <p style="margin:0">
+      Both arms share a byte-level BPE tokenizer, and it is trained on the
+      <em>unfiltered</em> text on purpose. Training it on the filtered corpus would tune
+      the vocabulary to the filtered model's own distribution and hand that arm an
+      advantage that has nothing to do with the experiment. The two data-prep runs ran
+      on two different accounts a day apart and produced <b>byte-identical</b>
+      tokenizers, which is the check that this was actually deterministic rather than
+      merely intended to be.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="training">
+  <p class="kicker">05 — Surviving the clock</p>
+  <h2 data-mode="plain">Four 11-hour runs on a service that kills you at 12</h2>
+  <h2 data-mode="expert">Crash-safe checkpointing, a wall-clock guard, and a chained runner across two accounts</h2>
+
+  <p data-mode="plain">
+    The free GPU I used stops every session at 12 hours, whether or not you are done.
+    Each run needs about 11. There is no room for a crash, and a crash at hour 10 that
+    loses everything is not a setback, it is the end of the project.
+  </p>
+  <p data-mode="expert">
+    Kaggle: ~30 GPU-h per week per account, hard 12-hour session wall. Four runs of
+    ~10.9h each across two accounts. Every failure mode below actually fired at least
+    once during this project.
+  </p>
+
+  <h3>What makes an 11-hour run survivable</h3>
+  <ul>
+    <li><b>Atomic checkpoints.</b> Write to a temp file, then <code>os.replace</code>
+      onto the target, keeping the previous one as a fallback. A crash mid-write
+      otherwise truncates the only copy you have.</li>
+    <li><b>Random state is saved too.</b> Without it, a resumed run replays the same
+      batches it already learned from and quietly trains on a shorter corpus than you
+      think.</li>
+    <li><b>A wall-clock guard.</b> The loop stops itself at 11 hours and checkpoints
+      cleanly, so <em>I</em> choose when the session ends rather than the platform
+      choosing mid-write.</li>
+    <li><b>A runner that assumes it will die.</b> Re-running the entrypoint skips
+      finished work and resumes partial work. It also detects the specific case where a
+      run finished on the server but its output was never downloaded — which is what
+      happens every time the laptop sleeps.</li>
+    <li><b>A lockfile.</b> Two runners once raced and pushed the same job 18 seconds
+      apart, burning double the GPU on identical work.</li>
+  </ul>
+
+  <p>
+    The last run made the case for all of it: it stopped at step 55,000 instead of
+    60,000. The runner noticed, pushed a continuation from the last checkpoint,
+    finished the remaining 5,000 steps, and moved on to scoring — with nobody awake.
+  </p>
+
+  <figure>
+    <div class="legend">
+      <span><i style="background:var(--clay)"></i>Filtered (Taglish)</span>
+      <span><i style="background:var(--tide)"></i>Unfiltered (control)</span>
+      <span class="muted">two seeds each</span>
+    </div>
+    <div id="chart-loss"></div>
+    <figcaption>
+      Validation loss, 60,000 steps. Both seeds of each arm sit on top of each other —
+      the runs are reproducible. <b>The two arms cannot be compared on this chart</b>,
+      and section 07 explains why.
+    </figcaption>
+  </figure>
+</section>
+
+<section class="wrap" id="result">
+  <p class="kicker">06 — The result</p>
+  <h2 data-mode="plain">The filtered model borrows about three times as much English</h2>
+  <h2 data-mode="expert">en_mean 0.185 vs 0.065, with no overlap between arms</h2>
+
+  <p data-mode="plain">
+    Both models were given the same eight Taglish prompts and asked to continue them,
+    32 continuations each. Then the same scorer from the top of this page measured how
+    much English came out.
+  </p>
+  <p data-mode="expert">
+    Fixed committed prompt set, 32 generations per checkpoint, scored with
+    <code>taglish.score</code>. Reported as a range across two seeds per arm, because a
+    single run per arm cannot separate a real gap from seed noise.
+  </p>
+
+  <figure>
+    <div id="chart-gap"></div>
+    <figcaption>
+      English word fraction in each model's generations. Each dot is one training run.
+      The gap between arms is far larger than the spread within either.
+    </figcaption>
+  </figure>
+
+  <div class="tw"><table>
+    <thead><tr><th>Arm</th><th class="num">Seed 1</th><th class="num">Seed 2</th><th class="num">Spread</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--clay)">Filtered</b> — English fraction</td>
+          <td class="num">0.206</td><td class="num">0.164</td><td class="num">0.042</td></tr>
+      <tr><td><b style="color:var(--tide)">Unfiltered</b> — English fraction</td>
+          <td class="num">0.061</td><td class="num">0.070</td><td class="num">0.009</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>
+    The arms do not overlap. The gap between them is <b>0.120</b> — the filtered models
+    put roughly <b>three times</b> as much English into their output — and that gap is
+    <b>2.8&times; the widest within-arm spread</b>. Filtering for code-switching produced
+    a model that code-switches.
+  </p>
+
+  <div class="note">
+    <p class="kicker">The headline metric is noisier than that, and I am reporting both</p>
+    <p style="margin:0">
+      My pre-registered metric was <em>taglish share</em> — the fraction of generations
+      passing the full <code>is_taglish</code> test. It gives a gap of <b>0.328</b>
+      against a within-arm spread of <b>0.219</b>: the same direction, the same
+      conclusion, but a much thinner margin. That metric is a threshold count over 32
+      samples, so it throws away magnitude and inherits the noise of a small binomial.
+      The continuous measure separates cleanly; the thresholded one barely clears.
+      Both are on this page because reporting only the flattering one is how you fool
+      yourself.
+    </p>
+  </div>
+
+  <h3>What the difference actually sounds like</h3>
+  <p class="small muted">Same prompt, both models, at 60,000 steps.</p>
+
+  <p><span class="gen-tag"><b style="color:var(--clay)">FILTERED</b> — <em>tl 0.46</em> · <i>en 0.27</i></span></p>
+  <blockquote class="clay">
+    Kahapon nag-iinom ako ng buko juice. Alam mo naman kasi yung feeling na gusto mo ng
+    pakulo before ka mag-hard reservation. Napagdesisyunan ko na lang na mag-care ako,
+    ang dami ko nang gustong terminate. […] Maybe this time I'm going to be better off.
+    I'm not worried about it. Gets ko na lang, and I know I'm just hoping for that.
+  </blockquote>
+
+  <p><span class="gen-tag"><b style="color:var(--tide)">UNFILTERED</b> — <em>tl 0.73</em> · <i>en 0.01</i></span></p>
+  <blockquote class="tide">
+    Kahapon nag-usap sila ni Jimmy sa telepono. Nang tanungin kung anong oras na ang
+    kanilang komunikasyon para sa Skype, tinanong sila ni Jimmy kung ano ang sagot.
+    Sabi ni Jimmy, "Puwede na ulit nating sabihin na hindi natin naayos ang problema."
+  </blockquote>
+
+  <p>
+    The difference is register, not just vocabulary. The filtered model writes the way
+    someone texts — <em>"Gets ko na lang"</em>, <em>"Alam mo naman kasi yung feeling"</em>,
+    switching to English for a whole clause and back. The unfiltered model writes clean
+    reported speech in a news register. Both are fluent Filipino. Only one of them is
+    Taglish.
+  </p>
+</section>
+
+<section class="wrap" id="trap">
+  <p class="kicker">07 — The number that looks like an answer and isn't</p>
+  <h2 data-mode="plain">The "worse" model is the one that worked</h2>
+  <h2 data-mode="expert">Cross-arm validation loss is not comparable, by construction</h2>
+
+  <p>
+    The unfiltered models reach a validation loss of <b>2.635</b>. The filtered models
+    sit at <b>2.745</b>. Lower is better, so the control arm looks like the better
+    model — and that reading is meaningless.
+  </p>
+  <p>
+    <b>Each model is evaluated on a held-out slice of its own corpus.</b> They are
+    sitting different exams. Filtered Taglish is intrinsically harder to predict: two
+    languages' worth of vocabulary, and a switch point that can fall anywhere. A lower
+    score on an easier exam says nothing about which model is better at the thing I
+    care about.
+  </p>
+  <p>
+    The only apples-to-apples measurement is the one in section 06: identical prompts,
+    identical scorer, comparing outputs rather than losses. It would have been very easy
+    to put "2.635 vs 2.745" in a results table and let a reader draw the wrong
+    conclusion.
+  </p>
+</section>
+
+<section class="wrap" id="limits">
+  <p class="kicker">08 — What it cannot do</p>
+  <h2 data-mode="plain">Fluent, confident, and frequently wrong</h2>
+  <h2 data-mode="expert">Failure probes, deliberately out of domain</h2>
+
+  <p>
+    A 32.8M-parameter model trained on ~2B tokens of web text has grammar and register.
+    It does not have knowledge, arithmetic, or code, and it will not tell you so.
+  </p>
+
+  <p><span class="gen-tag">PROMPT · <code>Ang kabuuang populasyon ng Pilipinas noong 2020 ay</code></span></p>
+  <blockquote class="fail">
+    …umabot sa 3.5 milyon.
+  </blockquote>
+  <p class="small muted">
+    The real figure is about 109 million. The sentence is grammatical, plausibly
+    shaped, and off by a factor of thirty.
+  </p>
+
+  <p><span class="gen-tag">PROMPT · <code>1 + 1 =</code></span></p>
+  <blockquote class="fail">
+    0.04 – 5.05 = 0.48 – 0.8 – 0.8 – 0.2 – 0.8 – 0.05 = 0.8 – 0.8 – 0.10 – 0.3…
+  </blockquote>
+
+  <p><span class="gen-tag">PROMPT · <code>def fibonacci(n):</code></span></p>
+  <blockquote class="fail">
+    Southern California, Mexico, CA 9003, Mexico, Mexico, Mexico, Ltd. (Nobel/Five: 1)…
+  </blockquote>
+
+  <ul>
+    <li data-mode="plain"><b>It repeats itself.</b> Longer generations fall into loops —
+      the same hashtag or phrase over and over.</li>
+    <li data-mode="expert"><b>Degenerate repetition</b> at longer horizons; no repetition
+      penalty is applied at sampling time.</li>
+    <li><b>It invents facts fluently.</b> Names, dates and figures are shaped correctly
+      and almost always wrong.</li>
+    <li><b>It has no instruction following.</b> There is no fine-tuning stage. It
+      continues text; it does not answer questions.</li>
+    <li><b>Its idea of Taglish is the internet's.</b> The corpus is web text, so the
+      register skews toward blogs, news comments and entertainment copy.</li>
+    <li><b>It is under-trained, and the curve says so.</b> Validation loss was still
+      descending at step 60,000 in all four runs — nothing had flattened or turned up.
+      More compute would have produced better models. The runs stopped because the
+      weekly GPU quota did, not because training had converged. Both arms stopped at
+      the same step, so the comparison is unaffected; the absolute quality is not.</li>
+  </ul>
+</section>
+
+<section class="wrap" id="broke">
+  <p class="kicker">09 — What broke</p>
+  <h2 data-mode="plain">Five ways this reported success while handing me the wrong thing</h2>
+  <h2 data-mode="expert">Failures that produced plausible output instead of an error</h2>
+
+  <p>
+    None of these crashed. Every one of them ran to completion and gave me something
+    that looked like a result.
+  </p>
+
+  <h3>A deduplication step that deleted the corpus</h3>
+  <p>
+    Documents were deduplicated by hashing their first 200 characters. Web pages share
+    navigation boilerplate, so thousands of distinct articles hashed identically. A
+    20,000-token target came out as <b>109 tokens</b>. Hashing the whole document fixed
+    it. A unit test caught this, not a person.
+  </p>
+
+  <h3>A config I edited but never uploaded</h3>
+  <p>
+    I changed the training length, then launched two 11-hour runs — from the copy that
+    was still sitting on the server. Both runs used the old schedule. They are still
+    <em>valid</em>, because both arms were equally affected, but the config file in the
+    repo no longer described what ran. Editing a file is not deploying it.
+  </p>
+  <p class="small muted">
+    The fix was to set the configs to what actually ran rather than what I meant, and
+    write a comment explaining why the obvious-looking value must not be "corrected".
+    Seed 2 then had to reproduce the same schedule exactly, or the seed-to-seed spread
+    would have absorbed a config change and stopped measuring noise.
+  </p>
+
+  <h3>…and then a second bug caused by fixing the first</h3>
+  <p>
+    That config field was read by two different things: the learning-rate schedule and
+    the runner's "is this run finished?" test. Pinning it for the schedule made a
+    completed 60,000-step run look 12,000 steps short, and the runner launched a
+    pointless continuation. An assert at the top of the training notebook caught it in
+    <b>55 seconds</b> instead of after hours of compute.
+  </p>
+
+  <h3>A file pattern that matched two files</h3>
+  <p>
+    Every saved run contains a full copy of the repository, so a search for
+    <code>pyproject.toml</code> found both the repo and the previous run's embedded copy.
+    The fix was to scope each lookup to where the thing legitimately lives, making the
+    ambiguity impossible rather than merely detected.
+  </p>
+
+  <h3>A wrong diagnosis, stated confidently</h3>
+  <p>
+    When mounted files first went missing I blamed a race condition and said so. It was
+    a wrong path. Running one command that listed the directory would have shown that
+    immediately. A confident wrong diagnosis costs more than saying "checking."
+  </p>
+</section>
+
+<section class="wrap" id="repro">
+  <p class="kicker">10 — Reproduce it</p>
+  <h2>Run it yourself</h2>
+  <p>
+    The correctness gate runs on a CPU in about a minute and must pass before any GPU
+    time is spent — it is the reason a bad generation can be blamed on data rather than
+    on a broken attention mask.
+  </p>
+  <pre><code>git clone &lt;repo&gt; &amp;&amp; cd LiitLLM
+pip install -e .
+
+python test_liitllm.py          # transformer + training loop correctness
+python test_taglish.py          # the code-switch scorer
+python test_data.py             # corpus parity and dedup
+python test_resume.py           # a killed session can resume
+
+python -m liitllm.data prepare  # stream, filter, tokenize (CPU, hours)
+python -m liitllm.train --config configs/liit-33m.yaml
+python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt.pt</code></pre>
+  <p class="small muted">
+    <b>Stack:</b> Python, PyTorch, HuggingFace <code>tokenizers</code> and
+    <code>datasets</code> (streaming only), Kaggle free T4s. No pretrained weights, no
+    paid services, no API keys.
+  </p>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>
+    <b>LiitLLM</b> — a 32.8M-parameter Taglish language model built from scratch.
+    Sibling project to <a href="../../Munti/docs/index.html">Munti</a>.
+  </p>
+  <p class="small">
+    Every figure on this page is generated from the run artifacts in
+    <code>results/</code>. Corpora: FineWeb-2 <code>fil_Latn</code> and HPLT 2.0
+    <code>tgl_Latn</code>, both openly licensed, streamed rather than redistributed.
+  </p>
+</footer>
+
+<script>
+const D = /*%%DATA%%*/;
+
+/* ---------- the scorer, ported from liitllm/taglish.py ---------- */
+const TL = new Set(D.tl), EN = new Set(D.en);
+const WORD_RE = /[a-z]+(?:-[a-z]+)*/g;
+
+function tokens(text) {
+  const out = [];
+  for (const m of text.toLowerCase().match(WORD_RE) || [])
+    for (const p of m.split("-")) if (p) out.push(p);
+  return out;
+}
+
+function isTagalog(w) {
+  if (TL.has(w)) return true;
+  if (w.length < 4) return false;
+  for (const p of D.pre) {
+    if (w.startsWith(p) && w.length - p.length >= 3) {
+      const stem = w.slice(p.length);
+      if (TL.has(stem)) return true;
+      // reduplication: nagcocommute -> cocommute -> commute
+      if (stem.length > 2 && stem.slice(0, 2) === stem.slice(2, 4) && TL.has(stem.slice(2))) return true;
+      for (const s of D.suf)
+        if (stem.endsWith(s) && TL.has(stem.slice(0, -s.length))) return true;
+    }
+  }
+  for (const s of D.suf)
+    if (w.endsWith(s) && w.length - s.length >= 3 && TL.has(w.slice(0, -s.length))) return true;
+  return false;
+}
+
+/* Tagalog is tested first: the lists overlap on a few short strings and
+   Tagalog membership is the more specific claim. */
+function classify(w) { return isTagalog(w) ? "tl" : (EN.has(w) ? "en" : ""); }
+
+function score(text) {
+  const toks = tokens(text);
+  if (!toks.length) return { tl: 0, en: 0, n: 0 };
+  let tl = 0, en = 0;
+  for (const w of toks) { const c = classify(w); if (c === "tl") tl++; else if (c === "en") en++; }
+  return { tl: tl / toks.length, en: en / toks.length, n: toks.length };
+}
+
+/* ---------- hero widget ---------- */
+const EXAMPLES = {
+  taglish: "Kahapon nag-commute ako papuntang office kasi grabe ang traffic sa EDSA, tapos late pa rin ako sa meeting. Sabi ng boss ko, next time daw mag-work from home na lang ako kung ganito rin naman. Grabe, sobrang pagod na pagod na talaga ako sa commute every single day.",
+  tagalog: "Ang kabuuang populasyon ng bansa ay lumaki nang malaki sa nakalipas na dekada. Ayon sa pananaliksik, ang mga naninirahan sa lungsod ay mas marami kaysa sa mga nasa lalawigan. Ipinapakita rin ng datos na patuloy ang paglipat ng mga tao mula sa kanayunan patungo sa mga sentro ng kalakalan.",
+  english: "Yesterday I commuted to the office because the traffic on the main road was terrible, and I was still late for the meeting. My boss said that next time I should just work from home if it is going to be like this anyway. I am completely exhausted from commuting every single day.",
+  gen: "Kahapon nag-iinom ako ng buko juice. Alam mo naman kasi yung feeling na gusto mo ng pakulo before ka mag-hard reservation. Napagdesisyunan ko na lang na mag-care ako, ang dami ko nang gustong terminate. Maybe this time I'm going to be better off. Gets ko na lang, and I know I'm just hoping for that."
+};
+
+const box = document.getElementById("text");
+
+function paint() {
+  const text = box.innerText;
+  const s = score(text);
+  const pct = x => Math.round(x * 100) + "%";
+  document.getElementById("v-tl").textContent = pct(s.tl);
+  document.getElementById("v-en").textContent = pct(s.en);
+  // Scaled so a typical document fills the bar rather than hugging the left edge.
+  document.getElementById("f-tl").style.width = Math.min(100, s.tl * 140) + "%";
+  document.getElementById("f-en").style.width = Math.min(100, s.en * 140) + "%";
+
+  const v = document.getElementById("verdict");
+  const keep = s.tl >= D.minTl && s.en >= D.minEn && s.n >= D.minWords;
+  v.className = "verdict " + (keep ? "keep" : "drop");
+  v.textContent = s.n < D.minWords ? "TOO SHORT" : (keep ? "KEPT — Taglish" : "DROPPED");
+}
+
+function render(text) {
+  const frag = document.createDocumentFragment();
+  // Split on word boundaries but keep the separators, so punctuation and
+  // spacing survive round-tripping through the highlighter.
+  for (const piece of text.split(/([A-Za-z]+(?:-[A-Za-z]+)*)/)) {
+    if (!piece) continue;
+    if (/^[A-Za-z]/.test(piece)) {
+      // A hyphenated compound is scored per part, so it is painted per part.
+      const parts = piece.split(/(-)/);
+      for (const p of parts) {
+        if (p === "-" || !p) { frag.appendChild(document.createTextNode(p)); continue; }
+        const c = classify(p.toLowerCase());
+        if (c) { const el = document.createElement("w"); el.className = c; el.textContent = p; frag.appendChild(el); }
+        else frag.appendChild(document.createTextNode(p));
+      }
+    } else frag.appendChild(document.createTextNode(piece));
+  }
+  box.replaceChildren(frag);
+  paint();
+}
+
+function setExample(k) { render(EXAMPLES[k]); }
+document.querySelectorAll(".chip").forEach(b =>
+  b.addEventListener("click", () => setExample(b.dataset.ex)));
+
+// While typing, only update the numbers — re-rendering would move the caret.
+box.addEventListener("input", paint);
+box.addEventListener("blur", () => render(box.innerText));
+setExample("taglish");
+
+/* ---------- charts ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function svg(tag, attrs) {
+  const el = document.createElementNS(NS, tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+
+function lossChart() {
+  const W = 760, H = 300, PL = 52, PR = 14, PT = 14, PB = 34;
+  const all = [].concat(...Object.values(D.curves));
+  const ys = all.map(p => p[1]), xs = all.map(p => p[0]);
+  const y0 = Math.min(...ys) - 0.05, y1 = Math.max(...ys) + 0.05;
+  const x1 = Math.max(...xs);
+  const X = s => PL + (s / x1) * (W - PL - PR);
+  const Y = v => PT + (1 - (v - y0) / (y1 - y0)) * (H - PT - PB);
+
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+    "aria-label": "Validation loss over 60,000 steps for four training runs" });
+
+  for (let i = 0; i <= 4; i++) {
+    const v = y0 + (i / 4) * (y1 - y0);
+    s.appendChild(svg("line", { x1: PL, x2: W - PR, y1: Y(v), y2: Y(v),
+      stroke: "var(--rule)", "stroke-width": 1 }));
+    const t = svg("text", { x: PL - 9, y: Y(v) + 4, "text-anchor": "end",
+      fill: "var(--ink-3)", "font-size": 11, "font-family": "var(--mono)" });
+    t.textContent = v.toFixed(2); s.appendChild(t);
+  }
+  for (const st of [0, 20000, 40000, 60000]) {
+    const t = svg("text", { x: X(st), y: H - 11, "text-anchor": "middle",
+      fill: "var(--ink-3)", "font-size": 11, "font-family": "var(--mono)" });
+    t.textContent = st === 0 ? "0" : (st / 1000) + "k"; s.appendChild(t);
+  }
+  const colour = { b1: "var(--clay)", b2: "var(--clay)", a1: "var(--tide)", a2: "var(--tide)" };
+  for (const k of ["b1", "b2", "a1", "a2"]) {
+    const d = D.curves[k].map((p, i) => (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1)).join(" ");
+    s.appendChild(svg("path", { d, fill: "none", stroke: colour[k], "stroke-width": 2,
+      "stroke-linejoin": "round", opacity: k.endsWith("2") ? 0.55 : 1 }));
+  }
+  document.getElementById("chart-loss").appendChild(s);
+}
+
+function gapChart() {
+  const arms = D.verdict.arms;
+  const rows = [
+    { label: "Filtered", vals: arms.baseline_filtered.map(a => a.en_mean), c: "var(--clay)" },
+    { label: "Unfiltered", vals: arms.ablation_unfiltered.map(a => a.en_mean), c: "var(--tide)" }
+  ];
+  const W = 760, H = 190, PL = 104, PR = 30, PT = 26, PB = 40;
+  const max = 0.25;   // 5 divisions land on 0.05 steps; 0.26 gives ragged ticks
+  const X = v => PL + (v / max) * (W - PL - PR);
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img",
+    "aria-label": "English word fraction per run, filtered versus unfiltered" });
+
+  for (let i = 0; i <= 5; i++) {
+    const v = (i / 5) * max;
+    s.appendChild(svg("line", { x1: X(v), x2: X(v), y1: PT - 8, y2: H - PB + 4,
+      stroke: "var(--rule)", "stroke-width": 1 }));
+    const t = svg("text", { x: X(v), y: H - PB + 22, "text-anchor": "middle",
+      fill: "var(--ink-3)", "font-size": 11, "font-family": "var(--mono)" });
+    t.textContent = v.toFixed(2); s.appendChild(t);
+  }
+
+  rows.forEach((r, i) => {
+    const y = PT + i * 58;
+    const t = svg("text", { x: PL - 14, y: y + 5, "text-anchor": "end", fill: "var(--ink)",
+      "font-size": 13, "font-weight": 700 });
+    t.textContent = r.label; s.appendChild(t);
+    const lo = Math.min(...r.vals), hi = Math.max(...r.vals);
+    s.appendChild(svg("line", { x1: X(lo), x2: X(hi), y1: y, y2: y,
+      stroke: r.c, "stroke-width": 3, opacity: .3, "stroke-linecap": "round" }));
+    for (const v of r.vals)
+      s.appendChild(svg("circle", { cx: X(v), cy: y, r: 6, fill: r.c }));
+    const lab = svg("text", { x: X(hi) + 14, y: y + 4, fill: r.c, "font-size": 12,
+      "font-family": "var(--mono)", "font-weight": 700 });
+    lab.textContent = lo.toFixed(3) + "–" + hi.toFixed(3); s.appendChild(lab);
+  });
+
+  const g = svg("text", { x: PL, y: H - 6, fill: "var(--ink-3)", "font-size": 11.5,
+    "font-family": "var(--mono)" });
+  g.textContent = "English fraction of generated words";
+  s.appendChild(g);
+  document.getElementById("chart-gap").appendChild(s);
+}
+
+lossChart();
+gapChart();
+
+/* ---------- controls ---------- */
+const root = document.documentElement;
+function setView(v) {
+  root.dataset.view = v;
+  document.getElementById("m-plain").setAttribute("aria-pressed", v === "plain");
+  document.getElementById("m-expert").setAttribute("aria-pressed", v === "expert");
+  try { localStorage.setItem("liit-view", v); } catch (e) {}
+}
+document.getElementById("m-plain").addEventListener("click", () => setView("plain"));
+document.getElementById("m-expert").addEventListener("click", () => setView("expert"));
+
+document.getElementById("theme").addEventListener("click", () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = root.dataset.theme || (dark ? "dark" : "light");
+  const next = cur === "dark" ? "light" : "dark";
+  root.dataset.theme = next;
+  try { localStorage.setItem("liit-theme", next); } catch (e) {}
+});
+
+try {
+  const v = localStorage.getItem("liit-view"); if (v) setView(v);
+  const t = localStorage.getItem("liit-theme"); if (t) root.dataset.theme = t;
+} catch (e) {}
+</script>
+</body>
+</html>

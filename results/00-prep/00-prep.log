@@ -1,0 +1,720 @@
+[{"stream_name":"stderr","time":8.284844923,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":8.284912457,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":9.430485769,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.430520004,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.430526039,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.430530714,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":10.216895859,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.216939122,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.216943465,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.216947145,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.803225821,"data":"repo: /kaggle/input/datasets/zeref824/liitllm-repo -\u003e /kaggle/working/liitllm-repo\n"}
+,{"stream_name":"stderr","time":25.212334475,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":25.212370992,"data":"\n"}
+,{"stream_name":"stderr","time":25.212378409,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":194.470605629,"data":"fineweb2: 18,985/50,000 docs kept (38.0%), 10,100,435 Taglish words\n"}
+,{"stream_name":"stdout","time":436.545117143,"data":"hplt: 19,775/50,000 docs kept (39.5%), 17,425,828 Taglish words\n"}
+,{"stream_name":"stdout","time":436.54516098,"data":"\n"}
+,{"stream_name":"stdout","time":436.545167036,"data":"most Taglish per 50,000 docs sampled: hplt\n"}
+,{"stream_name":"stdout","time":483.015826671,"data":"\n"}
+,{"stream_name":"stdout","time":483.22979415,"data":"\n"}
+,{"stream_name":"stdout","time":484.162015573,"data":"\n"}
+,{"stream_name":"stdout","time":484.364525195,"data":"\n"}
+,{"stream_name":"stdout","time":489.267149153,"data":"\n"}
+,{"stream_name":"stdout","time":489.570425064,"data":"\n"}
+,{"stream_name":"stdout","time":498.651020286,"data":"tokenizer: vocab=8192 compression=3.54 chars/token\n"}
+,{"stream_name":"stdout","time":597.601386532,"data":"  filtered: 9,135,076/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":687.214078868,"data":"  filtered: 17,906,454/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":770.837731573,"data":"  filtered: 26,520,565/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":855.950107438,"data":"  filtered: 35,155,293/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":938.083403571,"data":"  filtered: 43,604,872/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1022.065462909,"data":"  filtered: 52,283,620/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1107.756710313,"data":"  filtered: 60,916,569/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1189.581215726,"data":"  filtered: 69,142,373/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1271.807705554,"data":"  filtered: 77,710,705/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1358.331427129,"data":"  filtered: 86,237,471/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1439.047967292,"data":"  filtered: 94,519,044/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1519.807215349,"data":"  filtered: 103,021,256/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1600.43834411,"data":"  filtered: 111,294,173/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1679.522114756,"data":"  filtered: 119,385,202/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1761.01729497,"data":"  filtered: 127,776,369/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1841.044790829,"data":"  filtered: 135,994,076/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":1921.128979816,"data":"  filtered: 144,020,077/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2001.87043737,"data":"  filtered: 152,061,811/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2087.826266205,"data":"  filtered: 160,392,923/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2169.154175377,"data":"  filtered: 168,399,823/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2252.799360083,"data":"  filtered: 176,745,338/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2334.929250392,"data":"  filtered: 185,024,910/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2415.003582675,"data":"  filtered: 193,319,712/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2496.854720739,"data":"  filtered: 201,524,587/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2581.607728692,"data":"  filtered: 210,041,445/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2663.088817164,"data":"  filtered: 218,445,707/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2746.687307597,"data":"  filtered: 226,387,136/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2834.379685297,"data":"  filtered: 234,776,652/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2916.42794212,"data":"  filtered: 242,878,880/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":2998.18168958,"data":"  filtered: 251,023,594/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3080.871685701,"data":"  filtered: 259,210,338/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3164.752526623,"data":"  filtered: 267,614,656/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3248.680236479,"data":"  filtered: 275,952,454/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3331.308458729,"data":"  filtered: 284,420,282/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3415.109960796,"data":"  filtered: 292,828,350/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3504.485264886,"data":"  filtered: 301,262,485/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3589.120740897,"data":"  filtered: 309,992,775/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3675.137359343,"data":"  filtered: 318,400,478/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3759.413705624,"data":"  filtered: 326,843,209/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3845.59723332,"data":"  filtered: 335,246,865/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":3931.933780963,"data":"  filtered: 343,732,231/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4019.276418294,"data":"  filtered: 352,135,192/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4106.055112088,"data":"  filtered: 360,749,067/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4195.704674675,"data":"  filtered: 369,209,168/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4284.750134136,"data":"  filtered: 377,884,082/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4372.156597714,"data":"  filtered: 386,375,273/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4460.656215102,"data":"  filtered: 395,007,077/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4548.911885888,"data":"  filtered: 403,739,148/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4637.735641079,"data":"  filtered: 412,406,579/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4725.667781011,"data":"  filtered: 420,753,365/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4814.900128428,"data":"  filtered: 429,743,453/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4910.221400461,"data":"  filtered: 438,736,674/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":4999.490053071,"data":"  filtered: 447,586,837/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5089.71138918,"data":"  filtered: 456,548,462/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5180.507212568,"data":"  filtered: 465,327,684/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5270.914872483,"data":"  filtered: 474,145,729/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5360.497909903,"data":"  filtered: 482,942,427/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5454.239599686,"data":"  filtered: 492,065,609/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5547.803171092,"data":"  filtered: 501,242,729/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5647.877171956,"data":"  filtered: 510,528,128/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5740.723401258,"data":"  filtered: 519,610,424/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5834.097150197,"data":"  filtered: 528,877,418/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":5928.070102762,"data":"  filtered: 538,262,090/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6022.190352794,"data":"  filtered: 547,350,578/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6113.319937914,"data":"  filtered: 556,406,852/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6206.955545567,"data":"  filtered: 565,717,103/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6301.819311823,"data":"  filtered: 575,096,316/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6398.011784394,"data":"  filtered: 584,609,295/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6491.254639983,"data":"  filtered: 594,295,562/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6585.846494631,"data":"  filtered: 603,890,568/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6679.264238287,"data":"  filtered: 613,538,365/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6772.482204683,"data":"  filtered: 623,145,275/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6866.679363378,"data":"  filtered: 632,778,543/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":6958.433835759,"data":"  filtered: 642,266,973/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7057.974692031,"data":"  filtered: 652,110,604/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7152.6225014,"data":"  filtered: 661,952,501/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7248.437320171,"data":"  filtered: 671,844,331/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7342.021198219,"data":"  filtered: 681,340,644/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7436.310823657,"data":"  filtered: 691,203,820/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7529.486105454,"data":"  filtered: 701,181,379/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7621.15630055,"data":"  filtered: 710,998,709/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7715.373854186,"data":"  filtered: 720,914,375/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7811.854409711,"data":"  filtered: 730,626,671/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7901.068319761,"data":"  filtered: 740,418,373/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":7990.65041665,"data":"  filtered: 750,378,321/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8083.083310553,"data":"  filtered: 760,167,328/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8176.976849573,"data":"  filtered: 770,387,132/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8293.38959945,"data":"  filtered: 783,714,059/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8421.669277189,"data":"  filtered: 802,179,300/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8577.756565422,"data":"  filtered: 821,745,519/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8647.020172308,"data":"  filtered: 831,653,137/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8715.825524804,"data":"  filtered: 841,825,760/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8778.693573483,"data":"  filtered: 851,249,292/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8844.297296651,"data":"  filtered: 860,475,990/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8907.63114437,"data":"  filtered: 870,214,689/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":8968.229957314,"data":"  filtered: 879,598,051/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9040.252759894,"data":"  filtered: 891,377,493/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9151.761311203,"data":"  filtered: 904,019,557/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9285.20217396,"data":"  filtered: 918,647,324/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9419.486732047,"data":"  filtered: 932,681,985/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9540.835542895,"data":"  filtered: 945,866,832/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9649.471751668,"data":"  filtered: 958,507,086/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9763.123430109,"data":"  filtered: 970,560,915/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9871.340195248,"data":"  filtered: 982,675,713/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":9956.956065872,"data":"  filtered: 993,942,953/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10020.846620359,"data":"  filtered: 1,000,000,000/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10021.040640654,"data":"filtered: 1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10037.806744699,"data":"  unfiltered: 10,643,475/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10050.650372543,"data":"  unfiltered: 20,919,862/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10062.666282162,"data":"  unfiltered: 30,718,422/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10074.074263977,"data":"  unfiltered: 40,723,169/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10085.480370571,"data":"  unfiltered: 50,789,722/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10096.263948101,"data":"  unfiltered: 60,446,704/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10107.088486535,"data":"  unfiltered: 70,144,685/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10118.204475623,"data":"  unfiltered: 80,010,369/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10129.541744067,"data":"  unfiltered: 90,092,958/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10140.832404998,"data":"  unfiltered: 99,854,479/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10152.106094048,"data":"  unfiltered: 109,576,839/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10164.264928618,"data":"  unfiltered: 118,973,274/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10175.495307668,"data":"  unfiltered: 128,415,693/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10186.940684974,"data":"  unfiltered: 138,364,145/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10198.041277057,"data":"  unfiltered: 148,048,162/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10209.449223778,"data":"  unfiltered: 157,780,459/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10221.229580625,"data":"  unfiltered: 167,642,775/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10232.472965632,"data":"  unfiltered: 177,207,080/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10243.483159657,"data":"  unfiltered: 186,544,255/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10255.098237049,"data":"  unfiltered: 196,168,853/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10266.520970098,"data":"  unfiltered: 205,631,279/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10277.499246954,"data":"  unfiltered: 215,098,487/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10288.393271387,"data":"  unfiltered: 224,555,686/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10299.262838119,"data":"  unfiltered: 233,664,265/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10311.116094908,"data":"  unfiltered: 243,284,985/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10322.899222906,"data":"  unfiltered: 252,651,275/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10333.574026809,"data":"  unfiltered: 261,922,735/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10344.412978778,"data":"  unfiltered: 271,360,325/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10355.11758485,"data":"  unfiltered: 280,766,152/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10366.234445272,"data":"  unfiltered: 290,598,566/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10376.719159995,"data":"  unfiltered: 299,885,643/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10386.974503497,"data":"  unfiltered: 308,936,484/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10397.698009985,"data":"  unfiltered: 318,304,938/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10408.275101363,"data":"  unfiltered: 327,577,352/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10418.82572957,"data":"  unfiltered: 336,781,346/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10429.235566061,"data":"  unfiltered: 345,969,961/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10439.652937113,"data":"  unfiltered: 355,105,318/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10450.705450358,"data":"  unfiltered: 364,544,519/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10461.52509276,"data":"  unfiltered: 374,072,659/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10472.055724617,"data":"  unfiltered: 383,256,780/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10482.760809462,"data":"  unfiltered: 392,729,200/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10493.439407468,"data":"  unfiltered: 402,108,426/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10503.880418308,"data":"  unfiltered: 411,120,549/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10514.504173946,"data":"  unfiltered: 420,449,162/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10525.146992699,"data":"  unfiltered: 429,743,963/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10535.670822699,"data":"  unfiltered: 439,018,252/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10546.082065475,"data":"  unfiltered: 448,055,842/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10558.095145939,"data":"  unfiltered: 457,237,434/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10569.254639057,"data":"  unfiltered: 466,566,719/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10580.110961046,"data":"  unfiltered: 475,644,606/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10590.722968121,"data":"  unfiltered: 484,808,649/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10601.100804423,"data":"  unfiltered: 493,896,582/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10611.854991117,"data":"  unfiltered: 503,082,993/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10622.381584429,"data":"  unfiltered: 512,329,544/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10633.178307925,"data":"  unfiltered: 521,754,212/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10644.357939214,"data":"  unfiltered: 531,537,126/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10654.729941101,"data":"  unfiltered: 540,549,098/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10665.418208385,"data":"  unfiltered: 549,906,671/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10675.793135552,"data":"  unfiltered: 559,041,141/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10686.697350732,"data":"  unfiltered: 568,570,051/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10697.26298995,"data":"  unfiltered: 577,705,684/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10708.052106507,"data":"  unfiltered: 587,046,986/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10718.514233365,"data":"  unfiltered: 596,207,837/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10729.326693176,"data":"  unfiltered: 605,640,054/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10740.190224013,"data":"  unfiltered: 615,077,913/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10750.987573011,"data":"  unfiltered: 624,563,175/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10761.906598188,"data":"  unfiltered: 634,129,288/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10772.526513555,"data":"  unfiltered: 643,371,374/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10783.360016678,"data":"  unfiltered: 652,680,927/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10793.928553871,"data":"  unfiltered: 661,970,865/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10805.213633043,"data":"  unfiltered: 671,383,018/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10817.427824343,"data":"  unfiltered: 680,819,225/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10828.409824831,"data":"  unfiltered: 690,205,953/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10839.319336392,"data":"  unfiltered: 699,761,587/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10849.759193608,"data":"  unfiltered: 708,938,869/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10860.751175751,"data":"  unfiltered: 718,335,423/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10872.086192976,"data":"  unfiltered: 728,100,427/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10882.743450892,"data":"  unfiltered: 737,219,299/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10893.225202599,"data":"  unfiltered: 746,412,735/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10904.026537101,"data":"  unfiltered: 755,764,352/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10914.870156059,"data":"  unfiltered: 764,850,134/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10925.685478486,"data":"  unfiltered: 774,202,854/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10936.526384203,"data":"  unfiltered: 783,652,513/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10947.318396203,"data":"  unfiltered: 793,055,448/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10958.298330586,"data":"  unfiltered: 802,511,310/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10969.098370222,"data":"  unfiltered: 811,954,594/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10979.892528385,"data":"  unfiltered: 821,329,858/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":10990.795962895,"data":"  unfiltered: 830,716,269/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11001.69128128,"data":"  unfiltered: 840,100,678/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11012.571642743,"data":"  unfiltered: 849,601,010/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11023.345727472,"data":"  unfiltered: 859,007,566/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11034.626359242,"data":"  unfiltered: 868,746,765/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11045.499566542,"data":"  unfiltered: 877,997,892/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11057.640596529,"data":"  unfiltered: 887,513,045/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11068.965096616,"data":"  unfiltered: 896,949,619/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11080.075905133,"data":"  unfiltered: 906,587,219/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11090.854061097,"data":"  unfiltered: 915,974,011/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11101.51875294,"data":"  unfiltered: 925,221,256/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11112.737174717,"data":"  unfiltered: 934,962,105/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11123.891823616,"data":"  unfiltered: 944,728,735/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11134.730353628,"data":"  unfiltered: 953,950,604/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11146.052289296,"data":"  unfiltered: 963,613,637/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11157.335138128,"data":"  unfiltered: 973,174,938/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11168.880068095,"data":"  unfiltered: 982,757,924/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11180.791617833,"data":"  unfiltered: 992,339,579/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11191.757317788,"data":"  unfiltered: 1,000,000,000/1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11191.757366792,"data":"unfiltered: 1,000,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11222.296444031,"data":"filtered/train.bin: 995,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11222.29658951,"data":"unfiltered/train.bin: 995,000,000 tokens\n"}
+,{"stream_name":"stdout","time":11227.263701072,"data":"[KEEP tl=0.24 en=0.31] problema nga talaga kapag di nasisira sis\n"}
+,{"stream_name":"stdout","time":11227.263744209,"data":"Sa VAS stage ng amp mostly merong ceramic cap na nakakabit from base to collector ng transistor, it is there to protec\n"}
+,{"stream_name":"stdout","time":11227.26375059,"data":"[KEEP tl=0.33 en=0.27] Charice Pempengco will be having her first major concert titled “Charice: The Journey Begins” on June 27, 2009, 8PM at the SMX Convention Center, Mall of Asia c\n"}
+,{"stream_name":"stdout","time":11227.263817445,"data":"[KEEP tl=0.37 en=0.18] kahit ano sabihin mahahalata talaga if wala pa karanasan babae- kahit mahilig pa yan magbasa ng pocket buk\n"}
+,{"stream_name":"stdout","time":11227.263825395,"data":"walang karanasan effectmuahahahha\n"}
+,{"stream_name":"stdout","time":11227.263829218,"data":"basahin mo na lang \n"}
+,{"stream_name":"stdout","time":11227.263834141,"data":"[KEEP tl=0.37 en=0.23] Fast and Furious 6 is a high-octane action-packed ride that will make the most hardened action movie fans blushread more\n"}
+,{"stream_name":"stdout","time":11227.263838228,"data":"The ADMU Lady Eagles displayed champion\n"}
+,{"stream_name":"stdout","time":11227.26384208,"data":"[KEEP tl=0.29 en=0.30] thanks sir Myas110, hopefully maging ok ang application....\n"}
+,{"stream_name":"stdout","time":11227.263846311,"data":"thanks sir Myas110, hopefully maging ok ang application....\n"}
+,{"stream_name":"stdout","time":11227.263850034,"data":"I will join the ACP... kailan ba po ba a\n"}
+,{"stream_name":"stdout","time":11227.263853778,"data":"[KEEP tl=0.43 en=0.23] February 14,2013. Valentine’s Day. First Valentines I celebrate not as a single but with a love one. Akala ko dati di ko na mararanasan ma-celebrate ang Valenti\n"}
+,{"stream_name":"stdout","time":11227.263858127,"data":"[KEEP tl=0.54 en=0.10] pahelp po sa Sony KV 2187MT mababa po B+ inalis ko na po load ganun pa rin bago po yung reg. STRS 6307 nagpalit na rin po ako ng capacitor na 47/16v nasira po k\n"}
+,{"stream_name":"stdout","time":11227.263862441,"data":"[KEEP tl=0.42 en=0.16] ako ok lang sa akin ang distorted kasi puro distortion naman ang rock music na pinapatugtog ko lol...\n"}
+,{"stream_name":"stdout","time":11227.263867157,"data":"ok naman ang quality ng booster, base iyan sa mga na assem\n"}
+,{"stream_name":"stdout","time":11227.263871592,"data":"[drop tl=0.52 en=0.02] Ang alipunga o Athlete’s foot ay isang sakit sa balat ng paa na sanhi ng fungal infection mula sa organism na Trichophyton. Ito’y nahahawa sa mga mabasa-basang \n"}
+,{"stream_name":"stdout","time":11227.263876413,"data":"[drop tl=0.57 en=0.02] at ito na ang pinaka hihintay ng mga Maricelian.. ang pagbabalik ng Reyna.. hope mag tuloy tuloy na itong magandang nagaganap ngayon.. let's pray na umpisa na i\n"}
+,{"stream_name":"stdout","time":11227.263881115,"data":"[drop tl=0.61 en=0.00] Sa sinasabi mong ang argumento mo sa mga ATEISTA tungkol sa moralidad, na ito ang makapagpapatunay na may Dios, napatunayan mo ba sa kanila ang sinasabi mong it\n"}
+,{"stream_name":"stdout","time":11227.263888309,"data":"[drop tl=0.55 en=0.00] Pambansang Liwasan ng Teide\n"}
+,{"stream_name":"stdout","time":11227.263892838,"data":"Ang Pambansang Liwasan ng Teide ay ang isa sa pinakamatandang pambansang liwasan sa Espanya na matatagpugan sa pulo ng Tenerife sa K\n"}
+,{"stream_name":"stdout","time":11227.263897025,"data":"[KEEP tl=0.23 en=0.38] Tercüme - İngilizce-Tagalogça - I need the opinion of the communityŞu anki durum Tercüme\n"}
+,{"stream_name":"stdout","time":11227.26390129,"data":"Talep edilen çeviriler:\n"}
+,{"stream_name":"stdout","time":11227.263905061,"data":"I need the opinion of the community\n"}
+,{"stream_name":"stdout","time":11227.263909102,"data":"Kaynak dil:\n"}
+,{"stream_name":"stdout","time":11227.263913216,"data":"[KEEP tl=0.37 en=0.23] Yes. Mgkaroon ks ba namn ng ahas na kaibigan eh\n"}
+,{"stream_name":"stdout","time":11227.263917092,"data":"naman, laosyan deep natong maja na walang delikadeza;;;;;\n"}
+,{"stream_name":"stdout","time":11227.263921128,"data":"Pano naging ahas 3 years nang break move on! Eh si zor\n"}
+,{"stream_name":"stdout","time":11227.263945765,"data":"[drop tl=0.56 en=0.04] Ang Hari ng Komedya na si Dolphy ay isang ng higit 40 years kung kaya malalim ang kanyang history sa Kapamilya Network.\n"}
+,{"stream_name":"stdout","time":11227.263951201,"data":"Kaya naman sa bagong henerasyon ng manon\n"}
+,{"stream_name":"stdout","time":11227.263955295,"data":"[KEEP tl=0.36 en=0.26] Ano problema?? Pagbigyan na at bayaran na siya! Magaling siyan artista!\n"}
+,{"stream_name":"stdout","time":11227.263959584,"data":"kamag-anak mo yung Sarah no. me mga projects pala sya, pero di ko sya kilala talaga.\n"}
+,{"stream_name":"stdout","time":11227.263963794,"data":"O, \n"}
+,{"stream_name":"stdout","time":11227.263967711,"data":"[drop tl=0.59 en=0.05] THE STORY OF MY MOM’S LIFE\n"}
+,{"stream_name":"stdout","time":11227.263972032,"data":"This article is an official entry to PEBA Blog Awards 2010.\n"}
+,{"stream_name":"stdout","time":11227.263976231,"data":"OFW Supporter Category\n"}
+,{"stream_name":"stdout","time":11227.263980278,"data":"I purposely wrote this article in Filipino as an e\n"}
+,{"stream_name":"stdout","time":11227.263984477,"data":"[drop tl=0.50 en=0.00] Panitikang Britaniko\n"}
+,{"stream_name":"stdout","time":11227.263988279,"data":"Sa kabuoan, pinakamalaking bahagi ng panitikang Britaniko (Ingles: British literature) ang nasusulat sa wikang Ingles, subalit mayroon ding\n"}
+,{"stream_name":"stdout","time":11227.263992824,"data":"[KEEP tl=0.31 en=0.27] i dunno why i'm obsessed with JC.\n"}
+,{"stream_name":"stdout","time":11227.263996962,"data":"i think it's more appropriate to call it 2nd Annual Pop-boards Awards or 2nd Annual JT-Britney Fans Awards...\n"}
+,{"stream_name":"stdout","time":11227.264001326,"data":"i'm so honored.\n"}
+,{"stream_name":"stdout","time":11227.264005365,"data":"\n"}
+,{"stream_name":"stdout","time":11227.264009058,"data":"[KEEP tl=0.32 en=0.30] PBA historian Jay P. Mercado chronicles some of the most notoriously celebrated crowd-clearing brawls in PBA history.read more\n"}
+,{"stream_name":"stdout","time":11227.26401362,"data":"Fast and Furious 6 is a high-octa\n"}
+,{"stream_name":"stdout","time":11227.264017847,"data":"[KEEP tl=0.59 en=0.17] Ang tao ay nilikha ng dios na mahina, Ito ang magiging dahilan para tumawag tayo sa kanya. Ngunit paano nya tayo pakikinggan kung hindi naman natin na susunod a\n"}
+,{"stream_name":"stdout","time":11227.264022402,"data":"[drop tl=0.68 en=0.00] KABANATA 4\n"}
+,{"stream_name":"stdout","time":11227.264026859,"data":"Ipinagpatuloy ni Haring Benjamin ang kanyang talumpati—Ang kaligtasan ay dumarating dahil sa Pagbabayad-sala—Maniwala sa Diyos upang maligtas—Panatil\n"}
+,{"stream_name":"stdout","time":11227.264032144,"data":"[KEEP tl=0.59 en=0.12] Hello to all\n"}
+,{"stream_name":"stdout","time":11227.264036077,"data":"Kukuha na po ako ng UPCAT next year at nakapili na po ako ng course, BA Philosophy po ang napili ko. Nagresearch po ako ng kaunti tungkol po sa mga\n"}
+,{"stream_name":"stdout","time":11227.506265851,"data":"[KEEP tl=0.31 en=0.27] Natuwa ang maraming Pinoy dahil kinunan sa Pilipinas ang mga importanteng eksena sa The Bourne Legacy, ang Hollywood film na pinagbibidahan nina Jeremy Renner, \n"}
+,{"stream_name":"stdout","time":11227.50633219,"data":"[drop tl=0.41 en=0.04] Hinde lang ito for girls pati sa BOYS na rin.\n"}
+,{"stream_name":"stdout","time":11227.506338488,"data":"dati natatandaan ko nung mga grade 3 ako lagi ak onakaupo malapit sa driver ng school bus. malimit makipagbiruan s\n"}
+,{"stream_name":"stdout","time":11227.506343271,"data":"[KEEP tl=0.37 en=0.18] May cameo daw ang DivTin sa Kimmy Dora 2 :D\n"}
+,{"stream_name":"stdout","time":11227.506347792,"data":"i love DIVTIN....ung tipong kahit sobrang pangit na araw mo tpos pag napapanood mu ung mga MV nila mapapansin mo n l\n"}
+,{"stream_name":"stdout","time":11227.506393834,"data":"[KEEP tl=0.43 en=0.20] Sa ika-144 na kaarawan ni Gat Andres Bonifacio, watak-watak pa rin ang kanyang mga tagasunod.\n"}
+,{"stream_name":"stdout","time":11227.506399076,"data":"Kahapon, ang mga rebeldeng sundalong tagahanga niya’y nagprotesta.\n"}
+,{"stream_name":"stdout","time":11227.506404193,"data":"[drop tl=0.45 en=0.04] wala bang wires yan sir?\n"}
+,{"stream_name":"stdout","time":11227.506408513,"data":"wala na akong makitang schematic nitomedyo luma na kasipwede naman ma trace itokahit walang schematicnakasulat sa pcb ang function ng b\n"}
+,{"stream_name":"stdout","time":11227.506413099,"data":"[KEEP tl=0.44 en=0.12] nangugulo ka na naman sis ultra\n"}
+,{"stream_name":"stdout","time":11227.5064173,"data":"TS check mo din yung tutorial ni sir paranz sa PIC programming, hindi lang running lights ang magagawa mo, kahit ibat ibang patt\n"}
+,{"stream_name":"stdout","time":11227.506422082,"data":"[KEEP tl=0.22 en=0.49] Because it’s summer and the memories are just waiting to happen.\n"}
+,{"stream_name":"stdout","time":11227.506426453,"data":"Super enjoy ang PIC Summer Outing :”\u003e kahit 1 day lang eh nakapagrelax na din kami sa mga traba\n"}
+,{"stream_name":"stdout","time":11227.50643132,"data":"[KEEP tl=0.31 en=0.28] you deserve better?\n"}
+,{"stream_name":"stdout","time":11227.506435398,"data":"dagdagan ko lng You're too good for me, I think you deserve someone better, so I don't think we should see each other anymore.\n"}
+,{"stream_name":"stdout","time":11227.506439963,"data":"eto brutal na\n"}
+,{"stream_name":"stdout","time":11227.50644404,"data":"[KEEP tl=0.26 en=0.26] Nothing special, very common ang design.\n"}
+,{"stream_name":"stdout","time":11227.506448231,"data":"Ayoko yung bangs ni Michelle. Hindi nakakaganda. Nagmukha syang cheap.\n"}
+,{"stream_name":"stdout","time":11227.506453463,"data":"i really dont know haha! pretty v.\n"}
+,{"stream_name":"stdout","time":11227.506457743,"data":"Like. Maganda\n"}
+,{"stream_name":"stdout","time":11227.506461808,"data":"[KEEP tl=0.28 en=0.32] I don't have reason to LIKE the show and no reason to HATE also:) parang wala lang!!!\n"}
+,{"stream_name":"stdout","time":11227.506466231,"data":"The Alamang housewives\n"}
+,{"stream_name":"stdout","time":11227.50647024,"data":"alabang housemaids?\n"}
+,{"stream_name":"stdout","time":11227.506474231,"data":"isama nyo na din dyan si Madam \n"}
+,{"stream_name":"stdout","time":11227.506478285,"data":"[KEEP tl=0.36 en=0.25] any idea po kung ano po IOM seminars need parin po ba umatend nito bukod sa PDOS?\n"}
+,{"stream_name":"stdout","time":11227.506482643,"data":"Hi noelcezh! IOM ang may handle sa COA (Canadian Orientation Abroad) and CIIP \n"}
+,{"stream_name":"stdout","time":11227.506488472,"data":"[drop tl=0.61 en=0.01] Hindi Diyos ang gumawa ng mga tao, tao ang gumagawa ng mga Diyos.\n"}
+,{"stream_name":"stdout","time":11227.506492799,"data":"“Totoo bang may Diyos? Kung meron nga, eh bakit hindi Nya binigyan ng tugon ang mga panalangin\n"}
+,{"stream_name":"stdout","time":11227.50649734,"data":"[KEEP tl=0.55 en=0.08] Pagkatapos lumabas dito sa PEP.ph (Philippine Entertainment Portal) ang diumano’y muling namumuong alitan sa pagitan ng My Beloved co-stars na sina Marian River\n"}
+,{"stream_name":"stdout","time":11227.506502153,"data":"[KEEP tl=0.44 en=0.16] HI....nakarelate ako dun sa personality ni czarina kasi minsan ganun ako...sinasarili ko yung mga problema ko at pinipili ko yung sasabihin ko...\n"}
+,{"stream_name":"stdout","time":11227.506506784,"data":"Hi @RedinLove \n"}
+,{"stream_name":"stdout","time":11227.506510944,"data":"[drop tl=0.60 en=0.00] Ating nakagisnan ang pamilya ay isang pangunahing balangkas ng isang lipunan. Ang pamilya ay aking unang guro at ang aming tahanan ay nagsilbing paaralan. Ang a\n"}
+,{"stream_name":"stdout","time":11227.50653153,"data":"[KEEP tl=0.52 en=0.20] Question guys, sabi sa aking ng Smart approve na daw ako and I have to wait for a week kasi dadalhin pa ang stock sa store nila. Mag-antay na lang daw ako tawag\n"}
+,{"stream_name":"stdout","time":11227.506536743,"data":"[KEEP tl=0.55 en=0.07] This is my first time to write a story here in PSE all do I'm an avid fan of this site. sorry if my story is not enough to satisfy your lust..\n"}
+,{"stream_name":"stdout","time":11227.506541483,"data":"This story happen\n"}
+,{"stream_name":"stdout","time":11227.506545664,"data":"[drop tl=0.58 en=0.03] Ako ay isang simple at ordinaryong blogger na my simpleng pangarap at sariling mundo. Hyper ako pag nasa mood. Mabaet, makulit, SELOSA, at masayahin. Huwag niyo\n"}
+,{"stream_name":"stdout","time":11227.506550361,"data":"[drop tl=0.67 en=0.00] ANG UNANG AKLAT NI NEPHI\n"}
+,{"stream_name":"stdout","time":11227.506554518,"data":"ANG KANYANG PANUNUNGKULAN AT MINISTERYO\n"}
+,{"stream_name":"stdout","time":11227.506558951,"data":"KABANATA 14\n"}
+,{"stream_name":"stdout","time":11227.506563054,"data":"Sinabi ng isang anghel kay Nephi ang tungkol sa mga pagpapala at pagsusumpang ipapa\n"}
+,{"stream_name":"stdout","time":11227.50656737,"data":"[KEEP tl=0.53 en=0.09] Vice Ganda, ‘di pa sigurado sa The Buzz!\n"}
+,{"stream_name":"stdout","time":11227.506571686,"data":"SO, PARANG BITIN pa pala kung sino talaga ang papalit kay Ruffa Gutierrez sa The Buzz. Although, nagkaroon na ng tipong\n"}
+,{"stream_name":"stdout","time":11228.008750669,"data":"[drop tl=0.39 en=0.06] José Protasio Rizal Mercado\n"}
+,{"stream_name":"stdout","time":11228.008801591,"data":"Maicling casaysan nang canyang buhay\n"}
+,{"stream_name":"stdout","time":11228.008806975,"data":"Ipinang̃anac si Gat Jose Protasio Rizal Mercado, sa báyan ng̃ Calambâ, sacóp ng̃ lalawigang Lag\n"}
+,{"stream_name":"stdout","time":11228.008811868,"data":"[drop tl=0.58 en=0.02] Written by: Brian Oconnor\n"}
+,{"stream_name":"stdout","time":11228.00881642,"data":"Magandang araw mga taga-PL tagal ko ding hindi nasundan ang aking mga storya. Kaya eto ikukuwento ko na mga bagong adventure naming ma\n"}
+,{"stream_name":"stdout","time":11228.008821075,"data":"[drop tl=0.52 en=0.00] Maagang Panahong Pangdinastiya ng Ehipto\n"}
+,{"stream_name":"stdout","time":11228.008825374,"data":"Ang Arkaiko o Maagang Panahong Pangdinastiya ng Ehipto ay agad na sumunod sa pagkakaisa ng Mababa at Mataas na Ehipto c\n"}
+,{"stream_name":"stdout","time":11228.008830452,"data":"[KEEP tl=0.40 en=0.06] What is HALIMBAWA NG TULANG BLANGKO BERSO NA MAY SUKAT PERO WALANG TUGMA?\n"}
+,{"stream_name":"stdout","time":11228.008835063,"data":"What is HALIMBAWA NG TULANG BLANGKO BERSO NA MAY SUKAT PERO WALANG TUGMA? Mr What will\n"}
+,{"stream_name":"stdout","time":11228.008839217,"data":"[KEEP tl=0.21 en=0.34] ^ Asaness! :P\n"}
+,{"stream_name":"stdout","time":11228.008843381,"data":"Hmmmmm may naaamoy akong matinding pasabog na sorpresa sa xmas party.\n"}
+,{"stream_name":"stdout","time":11228.008847625,"data":"Fast and Furious 6 is a high-octane action-packed ride that will make the mo\n"}
+,{"stream_name":"stdout","time":11228.008852003,"data":"[KEEP tl=0.38 en=0.27] Consensus ito ng lahat ng members na nasa EB nung Saturday... Katuwiran kasi nila eh kung talagang gusto mong mapabilang sa grupo ay mag eexert ka ng effort... \n"}
+,{"stream_name":"stdout","time":11228.00885671,"data":"[KEEP tl=0.41 en=0.22] I think I like you but you wouldn’t know until I spit it out in your face. You’ll remain clueless for now but time will come you’ll know everything. =)) You jus\n"}
+,{"stream_name":"stdout","time":11228.008861635,"data":"[KEEP tl=0.53 en=0.14] Maraming salamat po.. pero nahirapan po ako maghanap ng link ng starcraft at left for dead. Wala na kasi yung paboreto kong katz.cd.\n"}
+,{"stream_name":"stdout","time":11228.008890012,"data":"Ok lang po yung specs ko si\n"}
+,{"stream_name":"stdout","time":11228.008894581,"data":"[drop tl=0.55 en=0.05] Kagabi mga alas-diyes na ata ako nakauwi galing sa pangalawang work ko sa Manila. Naalala ko wala pala sa apartment ko kinabukasan si Mama e birthday nya rin pa\n"}
+,{"stream_name":"stdout","time":11228.008899213,"data":"[KEEP tl=0.35 en=0.25] Written by: angelique111\n"}
+,{"stream_name":"stdout","time":11228.008903298,"data":"I woke up in the morning , di ko napansin na kakauwi lng nag husband ko, he was at the shower.\n"}
+,{"stream_name":"stdout","time":11228.008907899,"data":"then lumabas sya naka higa ako, then we \n"}
+,{"stream_name":"stdout","time":11228.008912141,"data":"[KEEP tl=0.27 en=0.30] dislike! too much editing, sinayang ang ganda ni mikee.\n"}
+,{"stream_name":"stdout","time":11228.008916307,"data":"minsan uber n magazines sa kaka edit ng mukha... alien n lumalabas\n"}
+,{"stream_name":"stdout","time":11228.008920838,"data":"as much as we hate editing... magazin\n"}
+,{"stream_name":"stdout","time":11228.008926179,"data":"[KEEP tl=0.54 en=0.07] Naimbitahan ang PEP (Philippine Entertainment Portal) sa Black Magic: The Denim Show ng Jag Jeans Philippines na part ng Fashion Week at ginawa sa Main Atrium n\n"}
+,{"stream_name":"stdout","time":11228.008931004,"data":"[drop tl=0.45 en=0.02] Tinambangan ng Bagong Hukbong Bayan (BHB) sa ilalim ng Domingo Erlano Command (DEC-BHB) sa Aurora ang mga tropa ng 48th IB noong Nobyembre 22 sa Maria Aurora, l\n"}
+,{"stream_name":"stdout","time":11228.008935659,"data":"[drop tl=0.53 en=0.04] Dati sa pahinang ito ay nakasaad ang mga pangalan ng sumusoporta at ang mga laban sa pagtatayo ng basurahan sa bayan\n"}
+,{"stream_name":"stdout","time":11228.00894018,"data":"ng Ternate. Sa kadahilanan na nag-iba ang i\n"}
+,{"stream_name":"stdout","time":11228.008944381,"data":"[drop tl=0.46 en=0.01] Pandaigdigang Kasaysayan\n"}
+,{"stream_name":"stdout","time":11228.008948563,"data":"- Tungkol ito sa larangan ng pag-aaral na pangkasaysayan na nakikilala bilang Pandaigdigang Kasaysayan. Para sa mga kaganapang pangkasa\n"}
+,{"stream_name":"stdout","time":11228.008953292,"data":"[KEEP tl=0.39 en=0.20] related ba ang almoranas sa colon cancer?\n"}
+,{"stream_name":"stdout","time":11228.008957528,"data":"related ba ang almoranas sa colon cancer?\n"}
+,{"stream_name":"stdout","time":11228.008961806,"data":"^^^\n"}
+,{"stream_name":"stdout","time":11228.008965841,"data":"hindi naman, minsan constipated lang talaga kaya masakit at dumudugo.\n"}
+,{"stream_name":"stdout","time":11228.008970165,"data":"la\n"}
+,{"stream_name":"stdout","time":11228.008974371,"data":"[KEEP tl=0.31 en=0.24] Bulk Export Of Sugar To Blame For ‘Shortfall’ In Local Supply\n"}
+,{"stream_name":"stdout","time":11228.008978852,"data":"IBON Media Release | 8 February 2010 - Off-season export aimed to exploit high global price at exp\n"}
+,{"stream_name":"stdout","time":11228.008982946,"data":"[KEEP tl=0.29 en=0.30] maganda ba sa vietnam? parang gusto ko bumisita\n"}
+,{"stream_name":"stdout","time":11228.008987329,"data":"Alaska survived a late-game rally by Ginebra to win 104-90, leading the series at 2-0 and now one win away from \n"}
+,{"stream_name":"stdout","time":11228.008995598,"data":"[KEEP tl=0.29 en=0.36] How long does Pag-ibig take to approve a housing loan once the requirements are submitted?\n"}
+,{"stream_name":"stdout","time":11228.009000309,"data":"Is there any way to speed up the process?\n"}
+,{"stream_name":"stdout","time":11228.009004603,"data":"I have attended the seminar\n"}
+,{"stream_name":"stdout","time":11228.009008675,"data":"[KEEP tl=0.31 en=0.36] John Estrada, pinatutunayan ang pagiging mabuting ama\n"}
+,{"stream_name":"stdout","time":11228.009016655,"data":"John is very close to his kids at parang magkakaibigan ang turingan nila sa isa’t isa. Puring-puri ng magk\n"}
+,{"stream_name":"stdout","time":11228.009021997,"data":"[KEEP tl=0.53 en=0.07] Kaylayo Na Ng Kahapon\n"}
+,{"stream_name":"stdout","time":11228.009026281,"data":"Read This Book Online\n"}
+,{"stream_name":"stdout","time":11228.009030734,"data":"Publish Date:\n"}
+,{"stream_name":"stdout","time":11228.009034768,"data":"Print Publisher\n"}
+,{"stream_name":"stdout","time":11228.009038969,"data":"ISBN:\n"}
+,{"stream_name":"stdout","time":11228.009043054,"data":"Si Arnel ang nobyo ni Marivic. Si Arnel ang tunay na mahal ni Marivic. Si Arnel \n"}
+,{"stream_name":"stdout","time":11228.00904746,"data":"[drop tl=0.59 en=0.00] 26.) Pag-aayuno (Fasting)\n"}
+,{"stream_name":"stdout","time":11228.009051832,"data":"\n"}
+,{"stream_name":"stdout","time":11228.009055888,"data":"\n"}
+,{"stream_name":"stdout","time":11228.009059858,"data":"Kabanata 13\n"}
+,{"stream_name":"stdout","time":11228.009063979,"data":"Paghihiwalay at Muling Pag-aasawa (Divorce and Remarriage)\n"}
+,{"stream_name":"stdout","time":11228.009068232,"data":"Ang paghihiwalay at muling pag-aasawa ay isang paksang laging\n"}
+,{"stream_name":"stdout","time":11228.009072535,"data":"[drop tl=0.51 en=0.00] Sayaw\n"}
+,{"stream_name":"stdout","time":11228.009077091,"data":"Ang sayaw ay pangkalahatang tumutukoy sa lahat ng galaw ng tao na ginagamit bilang isang anyo ng pagpapahayag ng saloobin o tinatanghal sa isang tagpuang \n"}
+,{"stream_name":"stdout","time":11228.009108784,"data":"[KEEP tl=0.39 en=0.14] Bitin pero nakakatuwa kasi meron din si Princess ng picture ni Calvin. Aba! Kung seswertihen nga naman oh. Hahaha\n"}
+,{"stream_name":"stdout","time":11228.009113434,"data":"Ang sweet! Tinadhana sila sa isa't isa. Pareho\n"}
+,{"stream_name":"stdout","time":11228.009117765,"data":"[KEEP tl=0.39 en=0.32] I hate this feeling. Nakakaiinis., yung feeling na akala mo wala na tapos ngaun hinahanap hanap mo, at alam mo na di na muli pang dadating. Yeah di na. At feeli\n"}
+,{"stream_name":"stdout","time":11228.009122556,"data":"[KEEP tl=0.42 en=0.18] on a serious note, si Jobs meron na siyang kapalit, si Tim Cook, COO ng Apple. most of the times, si Cook talaga ang nagpapatakbo ng Apple dahil madalas mag-lea\n"}
+,{"stream_name":"stdout","time":11228.009127127,"data":"[KEEP tl=0.50 en=0.11] \"Masama lang po ang loob ko dahil nabaligtad na po ang sitwasyon.\"\n"}
+,{"stream_name":"stdout","time":11228.009132,"data":"Ito ang naging pahayag ni Heart Evangelista sa isinasagawang presscon ngayong tanghali, July \n"}
+,{"stream_name":"stdout","time":11228.009136464,"data":"[KEEP tl=0.55 en=0.07] Pagkatapos ng 13 taon, nabigyan na rin ng big break si JM de Guzman, patunay na bawat artista ay may kani-kaniyang panahon ng pagsikat basta may talino at deter\n"}
+,{"stream_name":"stdout","time":11228.241587267,"data":"[KEEP tl=0.36 en=0.20] kahit pa anong sabihin ni angel locsin, wala ng magagawa para isalba pa ang kanyang SIR salut!\n"}
+,{"stream_name":"stdout","time":11228.241632447,"data":"One word to describe Angel after reading her tweet - IPOKRITA!\n"}
+,{"stream_name":"stdout","time":11228.241639357,"data":"Ba\n"}
+,{"stream_name":"stdout","time":11228.241644994,"data":"[drop tl=0.58 en=0.01] ,gusto ka naring mamatay mauna kana otor?\n"}
+,{"stream_name":"stdout","time":11228.241675526,"data":"nalang...walang taong nais mamatay unless handa o magpatiwakal siya..medyo seryoso ka ah,mali yata pagkapost mo dapat,\n"}
+,{"stream_name":"stdout","time":11228.24168172,"data":"[KEEP tl=0.37 en=0.23] If your palette can't tell the difference, you obviously only eat cardboard all throughout your life.\n"}
+,{"stream_name":"stdout","time":11228.241688182,"data":"PBA historian Jay P. Mercado chronicles some of the most n\n"}
+,{"stream_name":"stdout","time":11228.241729211,"data":"[KEEP tl=0.33 en=0.25] The exclusive list of stars who can make monstrous hit movies across all three big film companies!\n"}
+,{"stream_name":"stdout","time":11228.241735822,"data":"- Judy Ann Santos\n"}
+,{"stream_name":"stdout","time":11228.241741343,"data":"- Maricel Soriano\n"}
+,{"stream_name":"stdout","time":11228.241746841,"data":"- Aga Muhlach\n"}
+,{"stream_name":"stdout","time":11228.241752247,"data":"- Vilma San\n"}
+,{"stream_name":"stdout","time":11228.241757729,"data":"[KEEP tl=0.29 en=0.34] Ang “confrontation scene” nina Mario Bautista, isang respected veteran columnist, at Carla Abellana ang nagging highlight ng presscon kagabi, August 22, ng My N\n"}
+,{"stream_name":"stdout","time":11228.241764734,"data":"[KEEP tl=0.26 en=0.21] ^ mukha nga, tuwang tuwa sa galak eh\n"}
+,{"stream_name":"stdout","time":11228.241770469,"data":"^ mukha nga, tuwang tuwa sa galak eh\n"}
+,{"stream_name":"stdout","time":11228.241784962,"data":"saan ba galing yan si Erika? naka bathing suit na eh\n"}
+,{"stream_name":"stdout","time":11228.241790832,"data":"tanda ko pa dati.. trabaho ni rom\n"}
+,{"stream_name":"stdout","time":11228.241796311,"data":"[KEEP tl=0.28 en=0.40] hdd\n"}
+,{"stream_name":"stdout","time":11228.24180182,"data":"may WD Elements 500gb ko... di sya mrecognize pag kinakabit ko sa laptop or pcs.. sinubukan ko na din gamitan ng ibang wire, wala pa din...\n"}
+,{"stream_name":"stdout","time":11228.241807881,"data":"posible pa ba to\n"}
+,{"stream_name":"stdout","time":11228.241813277,"data":"[KEEP tl=0.26 en=0.42] Ay, ang tagal na nang huli akong sumali sa Litratong Pinoy. New Year na kaya sisikapin kong maging aktibo muli.\n"}
+,{"stream_name":"stdout","time":11228.241819266,"data":"Heto ang aking lahok para sa tema ngayon na lata\n"}
+,{"stream_name":"stdout","time":11228.241825102,"data":"[drop tl=0.52 en=0.03] Ang isang kilusan pag-aaral - ANG COUTURE TOP naiwan sa puno ng kahoy NG KAIBIGAN SA PAMAMAGITAN Courtney pag-ibigSa pamamagitan ng Jeff Linett | May 3, 2012 | \n"}
+,{"stream_name":"stdout","time":11228.241831247,"data":"[KEEP tl=0.53 en=0.07] Nakalista dito ang mga airline na bumibiyahe patungo sa Hong Kong International. Makikita mo dito ang ruta ng mga airline na bumibyahe sa Hong Kong Internationa\n"}
+,{"stream_name":"stdout","time":11228.241837287,"data":"[KEEP tl=0.35 en=0.22] hi RedbeD! parang tao lang ang online pag madaling araw\n"}
+,{"stream_name":"stdout","time":11228.241842966,"data":"Join now and get a chance to win advanced screening tickets to The Hangover 3!read more\n"}
+,{"stream_name":"stdout","time":11228.241848712,"data":"Alaska beat Gine\n"}
+,{"stream_name":"stdout","time":11228.241855824,"data":"[KEEP tl=0.43 en=0.26] Puso ang ginagamit, hindi mata.\n"}
+,{"stream_name":"stdout","time":11228.241861492,"data":"Huwag mong laitin ang bago ko, tandaan mo ako rin ang pumili sayo.\n"}
+,{"stream_name":"stdout","time":11228.241867203,"data":"- Inuutusan\n"}
+,{"stream_name":"stdout","time":11228.241872636,"data":"- Sinesermonan\n"}
+,{"stream_name":"stdout","time":11228.241878077,"data":"- Laging mainit ulo\n"}
+,{"stream_name":"stdout","time":11228.241883609,"data":"- Halos paulit\n"}
+,{"stream_name":"stdout","time":11228.241889084,"data":"[drop tl=0.66 en=0.02] Ang tunay na tulong sa sarili ay nangangahulugan ng pagtulong sa iyong sarili.\n"}
+,{"stream_name":"stdout","time":11228.241894895,"data":"Ito ay nangangahulugan na ang pagtataas ng mga daliri upang ang ideya ng karapata\n"}
+,{"stream_name":"stdout","time":11228.241900631,"data":"[KEEP tl=0.45 en=0.08] ANG KULET NI JASON SA PRESS CONFERENCE!\n"}
+,{"stream_name":"stdout","time":11228.241906177,"data":"ANG GANDA KO SA PRESS CONFERENCE!\n"}
+,{"stream_name":"stdout","time":11228.241924707,"data":"ANG CRUSH KONG SI WOOYOUNG SA PRESS CONFERENCE.\n"}
+,{"stream_name":"stdout","time":11228.241930856,"data":"tumblrbot asked: WHAT IS YOUR EARLIEST\n"}
+,{"stream_name":"stdout","time":11228.241936532,"data":"[KEEP tl=0.29 en=0.23] October Peasant Month: The remoteness of real land reform\n"}
+,{"stream_name":"stdout","time":11228.241942325,"data":"IBON Features | October 2010 | The bitter plight of Filipino farmers continues past the Aquino adminis\n"}
+,{"stream_name":"stdout","time":11228.241948644,"data":"[KEEP tl=0.36 en=0.13] bawal ba magpost ng pictures dito?\n"}
+,{"stream_name":"stdout","time":11228.241954349,"data":"haiz sa wakas nakakintindi at nakakapagsalita pala xa ng wikang Pinoy..\n"}
+,{"stream_name":"stdout","time":11228.241959979,"data":"dumugo ang ilong ko dun...\n"}
+,{"stream_name":"stdout","time":11228.241965287,"data":"pwede nmng magpost ng pict\n"}
+,{"stream_name":"stdout","time":11228.241970924,"data":"[KEEP tl=0.34 en=0.07] Pa help naman regarding this laptop.\n"}
+,{"stream_name":"stdout","time":11228.241976822,"data":"Walang wifi at bluetooth nakainstall naman drivers. Pano ba iswitch yung wifi adapter neto. Wala din siyang Wifi Hardware s\n"}
+,{"stream_name":"stdout","time":11228.241982774,"data":"[drop tl=0.53 en=0.00] Pagtuklas sa sarili ang buod ng nobelang Ang Mundong Ito ay Lupa (2005, C\u0026E Publishing) ni Edgardo M. Reyes. Si Ned, ang probinsiyanang muslak ngunit mapagsapal\n"}
+,{"stream_name":"stdout","time":11228.241989488,"data":"[drop tl=0.67 en=0.00] ANG UNANG AKLAT NI NEPHI\n"}
+,{"stream_name":"stdout","time":11228.241995125,"data":"ANG KANYANG PANUNUNGKULAN AT MINISTERYO\n"}
+,{"stream_name":"stdout","time":11228.24200074,"data":"KABANATA 16\n"}
+,{"stream_name":"stdout","time":11228.242006103,"data":"11\n"}
+,{"stream_name":"stdout","time":11228.242011418,"data":"At ito ay nangyari na, na tinipon naming sama-sama ang anumang bagay na nararapa\n"}
+,{"stream_name":"stdout","time":11228.242017148,"data":"[KEEP tl=0.24 en=0.30] damn wala talaga replay ng ros vs smcm ..\n"}
+,{"stream_name":"stdout","time":11228.24202291,"data":"anyway goodluck bukas ba vs air21 .\n"}
+,{"stream_name":"stdout","time":11228.242028427,"data":"go ROS!\n"}
+,{"stream_name":"stdout","time":11228.242033887,"data":"Join now and get a chance to win advanced screening tickets to The Hangove\n"}
+,{"stream_name":"stdout","time":11228.242039586,"data":"[KEEP tl=0.30 en=0.26] Isang makabagong paraan ng pagpapakilala ng brand ang inilunsad ng local clothing brand na Bench noong July 25, sa Center Stage cinema ng SM Mall of Asia, sa Pa\n"}
+,{"stream_name":"stdout","time":11228.242045743,"data":"[KEEP tl=0.34 en=0.33] Been out of the dating loop for quite sometime now. My last serious date was over a year ago and the circumstances behind it are better left to the trash bin of\n"}
+,{"stream_name":"stdout","time":11228.242052229,"data":"[KEEP tl=0.27 en=0.27] kamusta naman ang new graduates now?\n"}
+,{"stream_name":"stdout","time":11228.242057983,"data":"PBA historian Jay P. Mercado chronicles some of the most notoriously celebrated crowd-clearing brawls in PBA history.read m\n"}
+,{"stream_name":"stdout","time":11228.242063803,"data":"[drop tl=0.57 en=0.00] Isinalin ng: Rebolusyonaryong Grupo ng mga Komunista — Pilipinas\n"}
+,{"stream_name":"stdout","time":11228.242069754,"data":"Ang rebolusyong ng 1905 ay sumulpot hindi lang bilang “pangkalahatang paghahanda” ng 1917, kund\n"}
+,{"stream_name":"stdout","time":11228.242075732,"data":"[drop tl=0.43 en=0.05] kinopya lang yan mula sa ibat ibang tv brands. sa totoo lang ung iba parepreho ang codes kaso sa freq lang ngkaiba\n"}
+,{"stream_name":"stdout","time":11228.242081703,"data":"agreed kaya nga pag hindi sakto ang pag encod\n"}
+,{"stream_name":"stdout","time":11228.450640956,"data":"[drop tl=0.51 en=0.01] Panayam Profesoryal Cecilio M. Lopez sa Wika at Panitikang Filipino\n"}
+,{"stream_name":"stdout","time":11228.45069051,"data":"ni Dr. Rhod V. Nuncio\n"}
+,{"stream_name":"stdout","time":11228.450697774,"data":"(Sipi mula sa babasahing papel ng panayam sa Y407 Pamantasang De La Sa\n"}
+,{"stream_name":"stdout","time":11228.450710317,"data":"[KEEP tl=0.32 en=0.35] one word: Israel.\n"}
+,{"stream_name":"stdout","time":11228.45072217,"data":"before israel, arabs and muslims could care less about what america does. but since NATO supports israel, they hate all nato countries... not \n"}
+,{"stream_name":"stdout","time":11228.450727745,"data":"[KEEP tl=0.42 en=0.23] OFW denies bashing Baguio, Igorots on Facebook\n"}
+,{"stream_name":"stdout","time":11228.450739203,"data":"Posted at 04/26/2012 3:10 PM | Updated as of 04/26/2012 3:10 PM\n"}
+,{"stream_name":"stdout","time":11228.450744037,"data":"MANILA, Philippines – A Filipino based in Italy w\n"}
+,{"stream_name":"stdout","time":11228.450755866,"data":"[KEEP tl=0.41 en=0.15] Pangako.. Ano nga ba ang salitang pangako? Ano nga ba ang pagkakaintindi ng tao sa salitang pangako? Isa na ata ito sa mga overrated na mga salita bukod sa “Mah\n"}
+,{"stream_name":"stdout","time":11228.450767773,"data":"[KEEP tl=0.33 en=0.26] Super liked! Ang cute nila sa cover. Nag evolve na rin itsura nila as Miggy and Laida! This tandem is proof that you dont have to be together to exude chemistry\n"}
+,{"stream_name":"stdout","time":11228.450779682,"data":"[drop tl=0.50 en=0.05] Angel Locsin at Marian Rivera, magsasama sa isang pelikula?\n"}
+,{"stream_name":"stdout","time":11228.450784707,"data":"Ito ngayon ang maugong na usap-usapan sa umpukan ng mga taga-showbiz, na pagsasamahin daw sa pelikul\n"}
+,{"stream_name":"stdout","time":11228.450788908,"data":"[drop tl=0.65 en=0.03] Follow up ito sa nangyaring live show ng Bubble Gang sa Dubai, UAE. May isa na namang Pusang Gala (Salamat, Kuh. Mas maganda nga ito kaysa sa Palakang Kokak) an\n"}
+,{"stream_name":"stdout","time":11228.450800861,"data":"[KEEP tl=0.57 en=0.11] Sharon Cuneta at Helen Gamboa, nagkaayos na pagkatapos ng naging hidwaan\n"}
+,{"stream_name":"stdout","time":11228.450812265,"data":"Nagkaayos na ang aktres na si Helen Gamboa at ang kanyang pamangkin na si Megastar Shar\n"}
+,{"stream_name":"stdout","time":11228.450817305,"data":"[drop tl=0.66 en=0.03] Nung isang gabi nag usap kami ni papa tungkol sa aking pagiging ESEP.\n"}
+,{"stream_name":"stdout","time":11228.450843548,"data":"Sabi niya sakin, okay lang daw na maalis ako sa ESEP kasi daw simula pa lang ayaw na niya.\n"}
+,{"stream_name":"stdout","time":11228.450855308,"data":"[KEEP tl=0.25 en=0.22] Recommended Headshop\n"}
+,{"stream_name":"stdout","time":11228.450860149,"data":"MGA LALAKING BAYARAN\n"}
+,{"stream_name":"stdout","time":11228.450870316,"data":"Yata yung lalaking posted by basti lalaking bayaranthe lalaking bayaran search. Magdamagwith the regular doses and ara\n"}
+,{"stream_name":"stdout","time":11228.450875389,"data":"[KEEP tl=0.32 en=0.27] Nilinaw ng chairman ng TV5 na si Manny V. Pangilinan, o MVP, ang report na magkakaroon na ng \"merger\" sa pagitan ng Kapatid network at ng GMA-7.\n"}
+,{"stream_name":"stdout","time":11228.450887156,"data":"Lumabas sa kolu\n"}
+,{"stream_name":"stdout","time":11228.450899817,"data":"[KEEP tl=0.49 en=0.15] Sa aking pagbubukas ng Pinoy xXxtreme Blog. Nais kong i-share ko sa inyo ang mga video links ng mga nakita ko sa internet. Sobrang ikinagulat ko kung gaano na k\n"}
+,{"stream_name":"stdout","time":11228.450911321,"data":"[drop tl=0.51 en=0.01] Ang kamakailang buzz sa sa pempigus at pemphigoid na komunidad stems mula sa mga publikasyon ng “Populasyon-Tiyak na Association pagitan ng Polymorphic na iba s\n"}
+,{"stream_name":"stdout","time":11228.450917017,"data":"[drop tl=0.52 en=0.05] Wage and Hour Division (WHD)\n"}
+,{"stream_name":"stdout","time":11228.45097725,"data":"Press Releases\n"}
+,{"stream_name":"stdout","time":11228.450992616,"data":"\n"}
+,{"stream_name":"stdout","time":11228.45100296,"data":"\n"}
+,{"stream_name":"stdout","time":11228.451007798,"data":"U.S. Department of Labor\n"}
+,{"stream_name":"stdout","time":11228.451012283,"data":"\n"}
+,{"stream_name":"stdout","time":11228.451022965,"data":"\n"}
+,{"stream_name":"stdout","time":11228.451027245,"data":"Ang Dibisyon ng Sahod at Oras ng Kagawaran ng Paggawa (Wage and hour Division of the De\n"}
+,{"stream_name":"stdout","time":11228.451037568,"data":"[KEEP tl=0.31 en=0.22] Hi Guys, help naman..I was hit by a taxi tapos natanggal yung side spoiler ng car ko..san ko kaya pwede ipa-kabit and ipa-repair yung spoiler? also, may mga dee\n"}
+,{"stream_name":"stdout","time":11228.451048623,"data":"[drop tl=0.62 en=0.00] Malamig na simoy ng hangin ang sumasalat sa aming paglalakbay at masukal na daan ang aming tinatahak patungo sa baryo ng San Roque. Madilim ang buong paligid. K\n"}
+,{"stream_name":"stdout","time":11228.451054286,"data":"[KEEP tl=0.40 en=0.33] Anong gagawin mo kung yung taong nasa nakaraan mo ay biglang bumalik? Yung tipong para sabihin sayo na ikaw pala yung mahal niya, pero ang masaklap lang nito ay\n"}
+,{"stream_name":"stdout","time":11228.451066108,"data":"[drop tl=0.48 en=0.02] Inilapat Materyales, Inc, ang pinakamalaking supplier sa mundo ng mga kagamitan sa semiconductor, flat panel display (FPD) at solar photovoltaic (PV) na mga ind\n"}
+,{"stream_name":"stdout","time":11228.451071571,"data":"[KEEP tl=0.38 en=0.19] Malaking balita sa showbiz nitong weekend ang tungkol sa annulment case ni Ruffa Gutierrez sa kanyang dating asawa na si Yilmaz Bektas.\n"}
+,{"stream_name":"stdout","time":11228.451083607,"data":"Matapos nga ang tatlong \n"}
+,{"stream_name":"stdout","time":11228.451098485,"data":"[KEEP tl=0.42 en=0.15] Dahon ng Pagpapatibay\n"}
+,{"stream_name":"stdout","time":11228.451109273,"data":"Ang pananaliksik na ito na pinamagatang Ang internet tungo sa krimen ay isinagawa bilang kahingian sa asignaturang FILI02-Pagbasa at Pagsu\n"}
+,{"stream_name":"stdout","time":11228.674820085,"data":"[KEEP tl=0.43 en=0.14] thank you to those who ARE willing teh...\n"}
+,{"stream_name":"stdout","time":11228.674854294,"data":"KALERKY! WAG K NGANG MAGKALAT GIRL, ASAN NA C BUBOY NGAUN? BUTI SANA KUNG IKW ANG PINILI EH WLA RIN TALIPAPA PRIN ANG \n"}
+,{"stream_name":"stdout","time":11228.674860325,"data":"[drop tl=0.65 en=0.02] Ang mga gastos ng gamot ay mataas na at maraming mga tao ay may problema sa pagbabayad para sa kanila kung hindi sila magkaroon ng medical insurance. Kailangan \n"}
+,{"stream_name":"stdout","time":11228.674865337,"data":"[KEEP tl=0.47 en=0.11] Lubos akong nagagalak na makasama ang mga young stars na sina Erich Gonzales, JM de Guzman, at John Wayne Sace sa isang napakaganda at “world-class” na pelikula\n"}
+,{"stream_name":"stdout","time":11228.674870813,"data":"[KEEP tl=0.28 en=0.34] Vote na kung sino sa tingin niyo ang matatanggal sa Unlinight\n"}
+,{"stream_name":"stdout","time":11228.674875056,"data":"Reigning champs the DLSU Lady Spikers continued their romp as they demolished the NU Lady Bulldogs\n"}
+,{"stream_name":"stdout","time":11228.674879153,"data":"[KEEP tl=0.34 en=0.27] And they is going to the Philippines! OMG as in Oo May Ganun – Talaga! From Philadelphia-New York-Korea-Pinas. Tinalo ang from Paris to Pinas ni KC as in KClyn \n"}
+,{"stream_name":"stdout","time":11228.67488354,"data":"[KEEP tl=0.29 en=0.37] ang pinakamaliit na bulkan yan buong mundo?Advertisement\n"}
+,{"stream_name":"stdout","time":11228.6748877,"data":"Possible Answer:\n"}
+,{"stream_name":"stdout","time":11228.674891516,"data":"The smallest volcano in the world can be found in Cholula. Ang pinakamaliit na bulkan \n"}
+,{"stream_name":"stdout","time":11228.674936503,"data":"[drop tl=0.57 en=0.04] Napakamaalindog ng babaeng nakatuwad ngayon sa harap ni Rex David Hernandez, isang mag-aaral ng arkitektura sa isang malapit na paaralan. Katatapos nilang magni\n"}
+,{"stream_name":"stdout","time":11228.674940528,"data":"[KEEP tl=0.39 en=0.21] Ingat si Megan sa panga ni Mikael. Baka mahiwa sya. Lol\n"}
+,{"stream_name":"stdout","time":11228.67494357,"data":"Wahaha! Kapanga nga siya ni Toni g\n"}
+,{"stream_name":"stdout","time":11228.674946304,"data":"Hindi mo pa kasi sya nakikita sa personal. Sa tv lang naiemphasize an\n"}
+,{"stream_name":"stdout","time":11228.674949032,"data":"[KEEP tl=0.44 en=0.22] Naging leading man siya agad ni Marian Rivera sa horror-comedy series na Ang Spooky Mo Presents Bampirella.\n"}
+,{"stream_name":"stdout","time":11228.674951883,"data":"Nasundan ito agad ng epic-serye na Amaya kung saan i\n"}
+,{"stream_name":"stdout","time":11228.67495463,"data":"[drop tl=0.67 en=0.00] Sining ng mga gawaing-kamay\n"}
+,{"stream_name":"stdout","time":11228.674957304,"data":"Ang sining ng mga gawaing-kamay (handicraft, craftwork o craft sa wikang Ingles) ay isang uri ng gawain na ginagamit ang mga mapapak\n"}
+,{"stream_name":"stdout","time":11228.67496017,"data":"[KEEP tl=0.47 en=0.25] Hi, I'm a newbie here. Ask ko lang po kung sino may alam na magandang store na mabibilhan ng gown sa divisoria, *** ready made na po para less hassle sympre dap\n"}
+,{"stream_name":"stdout","time":11228.674964411,"data":"[KEEP tl=0.30 en=0.11] What is MAG BIGAY NG HALIMBAWA NG TULANG TRADISYUNAL?\n"}
+,{"stream_name":"stdout","time":11228.674967374,"data":"Ads\n"}
+,{"stream_name":"stdout","time":11228.674969956,"data":"What Is Magbigay Ng Halimbawa Ng Tradisyunal? - Find Questions and Answers at Askives, the first start\n"}
+,{"stream_name":"stdout","time":11228.674972865,"data":"[drop tl=0.67 en=0.02] Madalas akong maghanap ng sinehan na double pictures, kasi naman kadalasan may nangyayari sa loob. Isa sa sinehan sa nakita ko hindi puro me edad na callboy, ku\n"}
+,{"stream_name":"stdout","time":11228.67497574,"data":"[drop tl=0.53 en=0.03] Nakakamiss yung mga sitcoms sa ibat-ibang TV network. Dati araw-araw pa yun eh. Ngayon halatang pilit na lang yung mga palabas nila. Tapos ang masagwa pa doon e\n"}
+,{"stream_name":"stdout","time":11228.674978688,"data":"[KEEP tl=0.42 en=0.21] From “Hindi Ka Nag-iisa” music video, Noynoy Aquino now has a new TV commercial. This time, he is alone talking to us.\n"}
+,{"stream_name":"stdout","time":11228.674981603,"data":"He laid out his plans and at the end, mad\n"}
+,{"stream_name":"stdout","time":11228.674984227,"data":"[KEEP tl=0.57 en=0.08] May natapos na gawing indie film si Precious Lara Quigaman: ang Babangluksa na isinulat at idinerehe ng first-time director na si Yuan Santiago. Ito ang unang h\n"}
+,{"stream_name":"stdout","time":11228.674987153,"data":"[KEEP tl=0.43 en=0.20] mga lalawigan sa mindana?Advertisement\n"}
+,{"stream_name":"stdout","time":11228.674989904,"data":"Possible Answer:\n"}
+,{"stream_name":"stdout","time":11228.674992511,"data":"Ang Mindanao ay ang ikalawang pinakamalaking pulo sa Pilipinas at isa sa tatlong grupo ng mga isla sa ba\n"}
+,{"stream_name":"stdout","time":11228.674995252,"data":"[KEEP tl=0.39 en=0.31] hahaha!!! ang layo ng napuntahan ng usapan. to think ngumpisa sa paghahanap ng sperm whale...\n"}
+,{"stream_name":"stdout","time":11228.674998014,"data":"Quote:\n"}
+,{"stream_name":"stdout","time":11228.675000547,"data":"\n"}
+,{"stream_name":"stdout","time":11228.675003041,"data":"\n"}
+,{"stream_name":"stdout","time":11228.675005542,"data":"Originally Posted by Xei\n"}
+,{"stream_name":"stdout","time":11228.675008244,"data":"ano ka ba ate, syempre hindi na \n"}
+,{"stream_name":"stdout","time":11228.675029176,"data":"[KEEP tl=0.49 en=0.10] ayon sa nakausap ko na fellow alumni last night. (hindi ko naintindihan masyado yung mga sinabi niya kasi ang ingay at maraming tao sa bar na pinuntahan namin.)\n"}
+,{"stream_name":"stdout","time":11228.675032713,"data":"[drop tl=0.32 en=0.05] Una ang likod na bumagsak si Robinson Cano (kanan) ng New York Yankees matapos i-tag sa 2nd base si Rajai Davis ng Toronto Blue Jays sa ninth inning ng kanilang\n"}
+,{"stream_name":"stdout","time":11228.675035709,"data":"[drop tl=0.64 en=0.00] Totoo ba ang Diyos? Papaano ako lubos na makakasiguro na totoo ang Diyos?\n"}
+,{"stream_name":"stdout","time":11228.675038473,"data":"Tanong: \"Totoo ba ang Diyos? Papaano ako lubos na makakasiguro na totoo ang Diyos?\"\n"}
+,{"stream_name":"stdout","time":11228.675041324,"data":"Sa\n"}
+,{"stream_name":"stdout","time":11228.675043865,"data":"[drop tl=0.56 en=0.01] Disyembre 4, 2013\n"}
+,{"stream_name":"stdout","time":11228.675046502,"data":"Kamakailan lamang, tinanghal ng Travel + Leisure Magazine ang Palawan bilang pinakamagandang isla sa buong mundo. Hindi na tayo magtataka dahi\n"}
+,{"stream_name":"stdout","time":11228.675049796,"data":"[KEEP tl=0.45 en=0.06] Submitted poem - tula tungkol sa buwan ng wika, Maraming salamat sa pagbisita sa blog na mga tagalog na tula sa pilipinas. ang blog na ito ay naglalaman ng mga \n"}
+,{"stream_name":"stdout","time":11228.675052817,"data":"[KEEP tl=0.38 en=0.24] The absence of Maruja Banaticla from the lineup of the UST Golden Tigresses has made ripples in the volleyball world.read more\n"}
+,{"stream_name":"stdout","time":11228.67505566,"data":"While we don't espouse violence, \n"}
+,{"stream_name":"stdout","time":11228.675058255,"data":"[drop tl=0.62 en=0.00] “Ako ang daan, at ang katotohanan, at ang buhay” (Juan 14:6) sinabi ni Cristo sa kanyang mga disipulo sa kanyang maikli ngunit makapangyarihang pagmiministeryo \n"}
+,{"stream_name":"stdout","time":11228.675061202,"data":"[drop tl=0.61 en=0.05] Hello again Big Boy. This is Carlos at ikwekwento ko pala ngayon yung experience ko before nangyari yung experience ko with the Chinese businessman in Pampanga.\n"}
+,{"stream_name":"stdout","time":11228.675064155,"data":"[KEEP tl=0.30 en=0.26] B) The only crossdresser even straight guys could respect.\n"}
+,{"stream_name":"stdout","time":11228.675066858,"data":"Ashes to Ashes\n"}
+,{"stream_name":"stdout","time":11228.67506945,"data":"Space Oddity\n"}
+,{"stream_name":"stdout","time":11228.675072014,"data":"Moonage Daydream\n"}
+,{"stream_name":"stdout","time":11228.675074663,"data":"Five Years\n"}
+,{"stream_name":"stdout","time":11228.675077178,"data":"Ziggy Stardust\n"}
+,{"stream_name":"stdout","time":11228.675079726,"data":"Lady Stardust\n"}
+,{"stream_name":"stdout","time":11228.675082257,"data":"\"Nope, but I kno\n"}
+,{"stream_name":"stdout","time":11228.675084968,"data":"[KEEP tl=0.33 en=0.27] them is a more better much :)\n"}
+,{"stream_name":"stdout","time":11228.675087656,"data":"This is a rebound match! :D\n"}
+,{"stream_name":"stdout","time":11228.675090314,"data":"your write... LOL!\n"}
+,{"stream_name":"stdout","time":11228.67509293,"data":"ano daw???\n"}
+,{"stream_name":"stdout","time":11228.675095533,"data":"more better much. Sobrang boto mo ah?\n"}
+,{"stream_name":"stdout","time":11228.675098696,"data":"Ang panget ni maja! Parang walang \n"}
+,{"stream_name":"stdout","time":11228.675101396,"data":"[KEEP tl=0.30 en=0.32] im a nursing graduate too, and as we all know ang daming pumasa din sa recent board exam, my mom told me na mag uk na lang ako, i tried many consultancy and age\n"}
+,{"stream_name":"stdout","time":11228.675104299,"data":"[KEEP tl=0.29 en=0.31] bastos talaga yang babaeng yan! hindi na nakakatuwa!!!\n"}
+,{"stream_name":"stdout","time":11228.675118627,"data":"Hindi ako catholic, I'm a born again Christian pero I am hurt sa picture na Ito. Nabastos ang mga madre. \n"}
+,{"stream_name":"stdout","time":11228.900883976,"data":"[KEEP tl=0.40 en=0.36] I have always believed that there are moments when you only have to think of a thought to make it happen. If only that were true at all times, you could paint y\n"}
+,{"stream_name":"stdout","time":11228.900923186,"data":"[KEEP tl=0.34 en=0.31] Going strong pa rin ang relasyon ng Prince of R\u0026B na si Jay-R at ng 2010 Bb. Pilipinas-International Krista Kleiner.\n"}
+,{"stream_name":"stdout","time":11228.900929443,"data":"Sa panayam kay Jay-R sa press launch ng bag\n"}
+,{"stream_name":"stdout","time":11228.900933846,"data":"[drop tl=0.53 en=0.01] Noli Me Tangere Kabanata 64 – Katapusan.\n"}
+,{"stream_name":"stdout","time":11228.900939202,"data":"Posted by Paurong sa Martes, Setyembre 4, 2007\n"}
+,{"stream_name":"stdout","time":11228.900951521,"data":"Kabanata LXIV\n"}
+,{"stream_name":"stdout","time":11228.900955971,"data":"Katapusan\n"}
+,{"stream_name":"stdout","time":11228.900960054,"data":"Buod\n"}
+,{"stream_name":"stdout","time":11228.90096408,"data":"Magmula ng pumasok sa kumbento si Maria, na\n"}
+,{"stream_name":"stdout","time":11228.900968362,"data":"[KEEP tl=0.30 en=0.41] I love myself\n"}
+,{"stream_name":"stdout","time":11228.900972561,"data":"I want you to love me\n"}
+,{"stream_name":"stdout","time":11228.900976669,"data":"When I'm feelin' down\n"}
+,{"stream_name":"stdout","time":11228.900980755,"data":"I want you above me\n"}
+,{"stream_name":"stdout","time":11228.900984847,"data":"(...)\n"}
+,{"stream_name":"stdout","time":11228.900988851,"data":"I don't want anybody else\n"}
+,{"stream_name":"stdout","time":11228.900992846,"data":"When I think about you\n"}
+,{"stream_name":"stdout","time":11228.900996993,"data":"I touch myself\n"}
+,{"stream_name":"stdout","time":11228.901001346,"data":"(...)\n"}
+,{"stream_name":"stdout","time":11228.90100532,"data":"Isulat\n"}
+,{"stream_name":"stdout","time":11228.901009834,"data":"[KEEP tl=0.51 en=0.18] I don't think I'm good at this. Hindi ko alam kung pano suyuin ang babae pag galit na. yung mapapangiti mo na lang sya bigla.\n"}
+,{"stream_name":"stdout","time":11228.901014654,"data":"Palagi na lang sinasabi sa akin na\n"}
+,{"stream_name":"stdout","time":11228.901018747,"data":"[KEEP tl=0.33 en=0.19] Books and calendars...\n"}
+,{"stream_name":"stdout","time":11228.901022931,"data":"\n"}
+,{"stream_name":"stdout","time":11228.901026775,"data":"\n"}
+,{"stream_name":"stdout","time":11228.901030722,"data":"greeting cards\n"}
+,{"stream_name":"stdout","time":11228.901034876,"data":"Free shipping\n"}
+,{"stream_name":"stdout","time":11228.901038876,"data":"\n"}
+,{"stream_name":"stdout","time":11228.901042775,"data":"\n"}
+,{"stream_name":"stdout","time":11228.901046727,"data":"(even for a single card)!\n"}
+,{"stream_name":"stdout","time":11228.901050862,"data":"|2014 daily calendar Order on Amazon||mo' urban dictionary Order on Amazon||ur\n"}
+,{"stream_name":"stdout","time":11228.90105521,"data":"[KEEP tl=0.34 en=0.38] Simon: Wow, I sure am glad I have been a part of this ensemble for the past several years. It really is an honor\n"}
+,{"stream_name":"stdout","time":11228.901059671,"data":"Isulat ang iyong imeyl adres sa ibaba upang mak\n"}
+,{"stream_name":"stdout","time":11228.901063804,"data":"[KEEP tl=0.39 en=0.17] whatever! :))\n"}
+,{"stream_name":"stdout","time":11228.901067985,"data":"Drab. sl*t\n"}
+,{"stream_name":"stdout","time":11228.901072024,"data":"ang weird ng scene! from calm to agressive, then calm again the agressive again! parang may pause in between para lang mag eye to eye! \n"}
+,{"stream_name":"stdout","time":11228.901116444,"data":"[drop tl=0.49 en=0.03] Ang heometriyang Riemanniano (Ingles: Riemannian geometry; Espanyol: geometría de Riemann) ay sangay ng diperensiyal na heometriya na nag-aaral ng mga manipoldo\n"}
+,{"stream_name":"stdout","time":11228.901124032,"data":"[KEEP tl=0.35 en=0.22] Bagay!!!! I like\n"}
+,{"stream_name":"stdout","time":11228.901128282,"data":"i agree,bagay na bagay sila! i also like them.\n"}
+,{"stream_name":"stdout","time":11228.901132426,"data":"mas bagay pa rin sila ni maja...kahit \"maja\"rot pa sya...lol\n"}
+,{"stream_name":"stdout","time":11228.901136926,"data":"Tapos si Budoy at Jackie? Hahaha\n"}
+,{"stream_name":"stdout","time":11228.901140999,"data":"An\n"}
+,{"stream_name":"stdout","time":11228.901145166,"data":"[drop tl=0.50 en=0.02] Inilapat katumpakan, kasama sa Indiana University, Nasasabik upang ipahayag ang pag-install ng isang bagong DeltaVision | OMX imaging sistema sa Banayad Center \n"}
+,{"stream_name":"stdout","time":11228.901151042,"data":"[KEEP tl=0.53 en=0.07] Naka-confine pa rin si Hayden Kho, Jr. sa Manila Doctor’s Hospital sa U.N. Avenue, Ermita, Manila.\n"}
+,{"stream_name":"stdout","time":11228.901155622,"data":"Resident doctor ng Manila Doctor’s Hospital si Dr. Hayden Kho\n"}
+,{"stream_name":"stdout","time":11228.901159963,"data":"[drop tl=0.50 en=0.02] Paganahin ang IPC Corporation (PINKSHEETS: EIPC) ngayon inihayag nito subsidiary, SolRayo, Inc, ay iginawad ng isang $ 149.935 Phase ko Maliit na Negosyo Techno\n"}
+,{"stream_name":"stdout","time":11228.901164618,"data":"[KEEP tl=0.40 en=0.16] Can someone please summarize what's happening? Can't seem to understand and see who says what.. thank you!\n"}
+,{"stream_name":"stdout","time":11228.901169183,"data":"Pinagmamalaki nung Krista yung mga binigay sa kanya n\n"}
+,{"stream_name":"stdout","time":11228.901173358,"data":"[KEEP tl=0.45 en=0.22] Painting the Pain Away\n"}
+,{"stream_name":"stdout","time":11228.901177579,"data":"Naalala ko noon, tuwing uuwi yung tito ko galing Saudi , sabi ko sa sarili ko ” Balang araw mag-aabroad din ako para maiahon ko ang pamil\n"}
+,{"stream_name":"stdout","time":11228.901182208,"data":"[KEEP tl=0.43 en=0.24] GOOD MORNING!!\n"}
+,{"stream_name":"stdout","time":11228.901186353,"data":"Gusto ko lang ishare sainyo itong opportunity na nakita ko.\n"}
+,{"stream_name":"stdout","time":11228.901190607,"data":"I am a nurse and I am an advocate of wellness. Naniniwala ako na lahat ng tao, merong\n"}
+,{"stream_name":"stdout","time":11228.901194921,"data":"[KEEP tl=0.54 en=0.06] ...........................................sorry wrong thread\n"}
+,{"stream_name":"stdout","time":11228.901199202,"data":"...........................................sorry wrong thread\n"}
+,{"stream_name":"stdout","time":11228.901203451,"data":"Last edited by JOJI BINAY; August 28\n"}
+,{"stream_name":"stdout","time":11228.901207557,"data":"[KEEP tl=0.33 en=0.41] Last night I chiefed my face off...ya, it was purmore.\n"}
+,{"stream_name":"stdout","time":11228.901211963,"data":"I just got in the zone and did work man, I just felt so purmore.\n"}
+,{"stream_name":"stdout","time":11228.901216117,"data":"Isulat ang iyong imeyl adres sa ibaba up\n"}
+,{"stream_name":"stdout","time":11228.901220266,"data":"[KEEP tl=0.47 en=0.22] 1998 since magkaroon ako ng license to drive a motor vehicle. But before i got my license, marunong na akong mag drive. A friend of mine taught me how to drive \n"}
+,{"stream_name":"stdout","time":11228.901224887,"data":"[drop tl=0.51 en=0.00] Alhebrang multilinyar\n"}
+,{"stream_name":"stdout","time":11228.901229063,"data":"Sa matematika, ang multilinyar na alhebra, alhebrang maramihan ang guhit, o alhebrang may maramihang guhit (Ingles: multilinear algebra) a\n"}
+,{"stream_name":"stdout","time":11228.901233495,"data":"[drop tl=0.70 en=0.01] Napapagod na ako, at wag na wag nyong sasabihing naiitindihan niyo ako, kasi hindi naman talaga! Layuan nyo akong lahat\n"}
+,{"stream_name":"stdout","time":11228.90125314,"data":"Mga gabing malungkot ka nanaman, hindi m\n"}
+,{"stream_name":"stdout","time":11228.901257744,"data":"[drop tl=0.56 en=0.01] Pagkakaibang pangkasarian sa tao\n"}
+,{"stream_name":"stdout","time":11228.901262063,"data":"Ang pagkakaibang pangkasarian o kaibahang pangkasarian ay isang kaibahan ng mga katangiang pambiyolohiya at/o pisyolohikal na m\n"}
+,{"stream_name":"stdout","time":11228.901266496,"data":"[drop tl=0.56 en=0.01] Nov 29, 2012\n"}
+,{"stream_name":"stdout","time":11228.90127118,"data":"Ang Muling Pagtatagpo (Ang Babae sa FX 2)\n"}
+,{"stream_name":"stdout","time":11228.901275444,"data":"Kapag sinuswerte ka nga naman!\n"}
+,{"stream_name":"stdout","time":11228.901279556,"data":"Muling nag krus ang landas namin ng babae sa FX.\n"}
+,{"stream_name":"stdout","time":11228.901283706,"data":"Papila na ako sa terminal\n"}
+,{"stream_name":"stdout","time":11228.901287845,"data":"[KEEP tl=0.34 en=0.11] sir red hackle eto pa isang kapatid..Originally Posted by red hackle\n"}
+,{"stream_name":"stdout","time":11228.90129224,"data":"sir red hackle eto pa isang kapatid..Originally Posted by red hackle\n"}
+,{"stream_name":"stdout","time":11228.901296433,"data":"up natin mga bro......\n"}
+,{"stream_name":"stdout","time":11228.901300635,"data":"[drop tl=0.55 en=0.05] |Nag-aaral na si James nang lumipat silang mag-ama dito sa Pilipinas. Sa isang regular school siya pumasok, pero nahirapan siyang makapag-adjust academically ka\n"}
+,{"stream_name":"stdout","time":11228.90130539,"data":"[drop tl=0.61 en=0.01] Noli Me Tangere Kabanata 3 – Ang Hapunan.\n"}
+,{"stream_name":"stdout","time":11228.901309634,"data":"Posted by Paurong sa Martes, Setyembre 4, 2007\n"}
+,{"stream_name":"stdout","time":11228.901313893,"data":"Kabanata III\n"}
+,{"stream_name":"stdout","time":11228.901317911,"data":"Ang Hapunan\n"}
+,{"stream_name":"stdout","time":11228.901321983,"data":"Buod\n"}
+,{"stream_name":"stdout","time":11228.90132591,"data":"Isa-isang nagtungo ang mga panauhin sa ha\n"}
+,{"stream_name":"stdout","time":11228.901330167,"data":"[drop tl=0.55 en=0.02] Ibunyag ang lumalabas na ulat sa posibleng kinalaman ng mga sundalo't pulis sa pagpaslang ng aktibista\n"}
+,{"stream_name":"stdout","time":11228.901334831,"data":"Ang pag-aresto sa suspek sa pagpatay kay Fr. William Tade\n"}
+,{"stream_name":"stdout","time":11228.901339096,"data":"[KEEP tl=0.35 en=0.30] Lam-ang\n"}
+,{"stream_name":"stdout","time":11228.901343244,"data":"(an Iloko epic)\n"}
+,{"stream_name":"stdout","time":11228.901347314,"data":"Bilingual (Tagalog-English) version - Page 2 of 3\n"}
+,{"stream_name":"stdout","time":11228.901351506,"data":"Sa kanyang pag-uwi sa Nalbuan ay napadaan siya sa ilog ng Amburayan. Doon ay naligo si\n"}
+,{"stream_name":"stdout","time":11228.901355792,"data":"[drop tl=0.58 en=0.00] Tila kahapon lang nang ika’y lumisan;\n"}
+,{"stream_name":"stdout","time":11228.901360026,"data":"Subalit sa akin ang tanging naiwan,\n"}
+,{"stream_name":"stdout","time":11228.901364109,"data":"Mga alaalang di – malilimutan.\n"}
+,{"stream_name":"stdout","time":11228.901368266,"data":"Kung ako’y nasa pook na limit dalawin\n"}
+,{"stream_name":"stdout","time":11228.90137245,"data":"Naaalala ko ang a\n"}
+,{"stream_name":"stdout","time":11228.901385689,"data":"[drop tl=0.74 en=0.03] Ilang gabi na rin akong hindi pinatutulog ng maayos ng isang problemang hindi ko naman masabing problema. Ilang subjects na rin ang apektado. Malakas naman ang \n"}
+,{"stream_name":"stdout","time":11228.901390574,"data":"[KEEP tl=0.34 en=0.22] Free printable worksheets - free printable worksheets, Free kids, teacher school worksheets in printable format. Karapatang pambata - slideshare, Karapatang pam\n"}
+,{"stream_name":"stdout","time":11228.901413975,"data":"[KEEP tl=0.47 en=0.13] Excited ang Queen of All Media na si Kris Aquino sa pagbabalik taping niya para sa pinakabagong serye na \"Kailangan Ko'y Ikaw.\"\n"}
+,{"stream_name":"stdout","time":11228.901419157,"data":"Sa kanyang morning show na \"Kris\n"}
+,{"stream_name":"stdout","time":11228.901423378,"data":"[KEEP tl=0.26 en=0.35] - some bullshit thing one's mom would write on Facebook, if she made a Facebook for one's identity only, not necessarily one's character - something that hasn't\n"}
+,{"stream_name":"stdout","time":11228.901428508,"data":"[KEEP tl=0.31 en=0.35] Alam mo masarap yung pakiramadam na may taong handa kang tanggapin sa Kung ano ka , Yung ugali mong mahirap intindihin at pakisamahan. You’re lucky para makahan\n"}
+,{"stream_name":"stdout","time":11228.901433397,"data":"[KEEP tl=0.32 en=0.33] 2) Its modern use is more likely to refer to a smack (heroin) addict and is usually a term of abuse.\n"}
+,{"stream_name":"stdout","time":11228.901437812,"data":"2) Some dirty bag heads left needles on the school playing \n"}
+,{"stream_name":"stdout","time":11228.901441965,"data":"[KEEP tl=0.36 en=0.09] Pagkatapos i-reveal ni Ruffa Guttierez sa Paparazzi sa TV5 na nakipagkita siya kay John Lloyd Cruz isang gabi, may tsika ring na-praning bigla si Shaina Magdaya\n"}
+,{"stream_name":"stdout","time":11228.90144642,"data":"[drop tl=0.63 en=0.02] Tue\n"}
+,{"stream_name":"stdout","time":11228.901450252,"data":"01\n"}
+,{"stream_name":"stdout","time":11228.901454301,"data":"Feb\n"}
+,{"stream_name":"stdout","time":11228.901458269,"data":"2011\n"}
+,{"stream_name":"stdout","time":11228.901462201,"data":"ni Paula Gail I. Torres\n"}
+,{"stream_name":"stdout","time":11228.901466221,"data":"Sa hayskul ko unang naranasan ang hindi pagbabalik-aral sa tuwing inaanunsyo ng guro na may mahabang pagsusulit sa makal\n"}
+,{"stream_name":"stdout","time":11228.901470747,"data":"[KEEP tl=0.49 en=0.13] Lahat ng may picture sa camera ko andito na po yung mga Pictures and Albums. Pahanap na lang ng mga mukha niyo ha? Hindi ko na inayos. Nakakatamad na.\n"}
+,{"stream_name":"stdout","time":11228.901475368,"data":"Salamat k\n"}
+,{"stream_name":"stdout","time":11229.119861536,"data":"[drop tl=0.58 en=0.02] Insured Ka Ba?\n"}
+,{"stream_name":"stdout","time":11229.119898341,"data":"Lindol. Bagyo. Sunog. Aksidente.\n"}
+,{"stream_name":"stdout","time":11229.119903619,"data":"Ilan lang yan sa mga peligrong kinahaharap natin araw-araw. Dahil sa mga peligrong ito, maaaring malugi ang nego\n"}
+,{"stream_name":"stdout","time":11229.1199083,"data":"[KEEP tl=0.48 en=0.15] I love you too preeeeeeee. :-**\n"}
+,{"stream_name":"stdout","time":11229.11991315,"data":"\u003c3\n"}
+,{"stream_name":"stdout","time":11229.119917884,"data":"HAHAHAHAHA. OH EM. SEE PIPOL? I AM CUTE LIKE WHAT ATE SHEEZY SAID. SHE IS A TRUSTWORTHY PERSON SO PLEASE. HAHAHAH ANG CUTE KO\n"}
+,{"stream_name":"stdout","time":11229.119922369,"data":"[drop tl=0.56 en=0.02] A. INTRODUKSYON\n"}
+,{"stream_name":"stdout","time":11229.119926509,"data":"Ang pagbasa ay isang mahalagang aspekto ng wika. Ito ay pinangungunahan ng pakikinig at sinusundan ng pagsulat. At bilang bahagi ng papa-unlad n\n"}
+,{"stream_name":"stdout","time":11229.11993124,"data":"[KEEP tl=0.37 en=0.15] The Philippines' National Book Development Board (Filipino: Pambansang Lupon sa Pagpapaunlad ng Aklat), abbreviated as NBDB, is an agency of the Philippine gove\n"}
+,{"stream_name":"stdout","time":11229.119935873,"data":"[drop tl=0.55 en=0.00] Aksidente\n"}
+,{"stream_name":"stdout","time":11229.119939964,"data":"- Mga Teknikal na Kahulugan: aksidente (pilosopiya)\n"}
+,{"stream_name":"stdout","time":11229.119944174,"data":"Ang aksidente ay isang pangyayari na may mali at hindi inaasahan ang kaganapan. Kabilang sa mga pi\n"}
+,{"stream_name":"stdout","time":11229.120001682,"data":"[KEEP tl=0.30 en=0.32] Steven and Mark can be such dundatta's sometimes talking about sports.\n"}
+,{"stream_name":"stdout","time":11229.120007076,"data":"Moss and Solok are two opposite breeds of dundatta.\n"}
+,{"stream_name":"stdout","time":11229.120011234,"data":"Boris is a fucking dundatta for not k\n"}
+,{"stream_name":"stdout","time":11229.120015344,"data":"[KEEP tl=0.46 en=0.06] Kamakailan lang, isang pinaka-engrandeng dugong bughaw na kasalan (Royal Wedding) ang naganap sa Englatera, ang Prinsipeng (Prince) si William at Kate Midleton.\n"}
+,{"stream_name":"stdout","time":11229.120020086,"data":"[KEEP tl=0.46 en=0.19] ***Jesus is the only way to heaven (GOD IS SPIRIT!)***\n"}
+,{"stream_name":"stdout","time":11229.1200244,"data":"80% of the people here won't read and share this... why? because many people DON'T REALLY KNOW AND LOVE G\n"}
+,{"stream_name":"stdout","time":11229.120028782,"data":"[drop tl=0.42 en=0.03] MEMSIC, Inc (NASDAQ: MEMS) , isang nangungunang provider ng solusyon ng MEMS, pinagsasama-sama ang pagmamay-ari MEMS teknolohiya sa advanced mixed signal proces\n"}
+,{"stream_name":"stdout","time":11229.120033434,"data":"[KEEP tl=0.38 en=0.19] Pormal nang pinakilala ng ABS-CBN ang mga artista na magiging bida ng Pinoy remake ng ’90s Mexicanovela na Maria la del Barrio, na pinagbidahan noon nina Thalia\n"}
+,{"stream_name":"stdout","time":11229.120039124,"data":"[drop tl=0.56 en=0.04] \"Anong oras tayo magkikita mamaya? Malamang ay tulog ka pa kahit tapos na 'yun class ko mamayang 3pm. Puyat ka na naman ba? Baka di ka na naman magparamdam ngay\n"}
+,{"stream_name":"stdout","time":11229.442790159,"data":"[drop tl=0.55 en=0.01] Hi! itago nyo na lang ako sa pangalang \"MARK\" isa akong 4th yr. college student at kumukuha ng kursong nursing, mahilig ako sumali sa mga clan noon dahil guston\n"}
+,{"stream_name":"stdout","time":11229.442829021,"data":"[drop tl=0.60 en=0.02] Teka sa pagpapatuloy na aking Kwentong Jollibee, heto ikukuwento ko ang aking karanasan dyan.\n"}
+,{"stream_name":"stdout","time":11229.442834096,"data":"Natanggap ako sa Grill Area, bilang dakilang tagaprito ng patty pa\n"}
+,{"stream_name":"stdout","time":11229.442838272,"data":"[drop tl=0.48 en=0.05] Break na sina John Lloyd Cruz at Shaina Magdayao.\n"}
+,{"stream_name":"stdout","time":11229.442842358,"data":"Ito ay kinumpirma ng isang reliable source sa PEP.ph (Philippine Entertainment Portal) ngayong umaga, October \n"}
+,{"stream_name":"stdout","time":11229.44284665,"data":"[drop tl=0.58 en=0.01] Narito ang maikling buod ng Noli Me Tangere Kabanata 48 Ang Talinghaga.\n"}
+,{"stream_name":"stdout","time":11229.442850895,"data":"Buod:\n"}
+,{"stream_name":"stdout","time":11229.442854728,"data":"Dumating ng araw na iyon si Ibarra at masayang dinalaw si Maria Clara at Kapitan T\n"}
+,{"stream_name":"stdout","time":11229.442858698,"data":"[KEEP tl=0.54 en=0.06] Dito sa amin sa Indang, Cavite.. Tuwing december ay may naggagala na taga munisipyo. Lahat ng tindahan ay inililista nila, may signage or wala, kahit gaano kali\n"}
+,{"stream_name":"stdout","time":11248.85426919,"data":"filtered/train.bin  1990.0 MB\n"}
+,{"stream_name":"stdout","time":11248.854315463,"data":"filtered/val.bin  10.0 MB\n"}
+,{"stream_name":"stdout","time":11248.85432272,"data":"lexicons/english.txt  0.0 MB\n"}
+,{"stream_name":"stdout","time":11248.854328661,"data":"lexicons/tagalog.txt  0.0 MB\n"}
+,{"stream_name":"stdout","time":11248.85433451,"data":"tokenizer.json  0.5 MB\n"}
+,{"stream_name":"stdout","time":11248.85434031,"data":"unfiltered/train.bin  1990.0 MB\n"}
+,{"stream_name":"stdout","time":11248.854345275,"data":"unfiltered/val.bin  10.0 MB\n"}
+,{"stream_name":"stderr","time":11266.799074688,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":11266.799168086,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":11267.069441494,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":11267.069475375,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":11267.883910908,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":11268.339614907,"data":"[NbConvertApp] Writing 113724 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":11271.522769642,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11272.692196005,"data":"[NbConvertApp] Writing 377150 bytes to __results__.html\n"}
+]

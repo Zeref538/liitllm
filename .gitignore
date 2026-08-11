@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Data + weights: regenerable or too big for git.
+data/*.bin
+data/*.arrow
+/out*/          # anchored: an unanchored out*/ also swallows results/*/out/,
+                # which holds the loss curves the case study is built from
+*.pt
+.cache/
+
+# Run artifacts. The small ones are committed on purpose — docs/build_site.py
+# reads loss.csv and results/verdict/ to generate the case study, so the page
+# stays reproducible from the repo alone. Checkpoints and corpora are not.
+results/**/*.bin
+.kernel-staging/
+run_pipeline.log
+.run_pipeline.lock
+
+# The tokenizer is regenerable (`python -m liitllm.data prepare`) and the dev-slice
+# one has the same vocab size as the real one, so committing it now just invites
+# a silent mismatch. Phase 2 force-adds the tokenizer from the actual run:
+#   git add -f data/tokenizer.json
+data/tokenizer.json
+
+# Corpora produced by data.prepare (rebuild via notebooks/00_prep.ipynb).
+data/filtered/
+data/unfiltered/
+data/*.raw
+data/*.trim

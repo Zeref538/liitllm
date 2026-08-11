@@ -1,0 +1,35 @@
+# LiitLLM ablation — identical to liit-29m.yaml except for data_dir.
+#
+# This is the experiment the project exists to run: same architecture, same seed,
+# same token budget, same tokenizer, same number of steps — the ONLY difference
+# is whether the corpus was filtered for code-switching. If the filtered model
+# code-switches more, the filter is why. Any other difference between these two
+# files would be a confound, so change both or neither.
+out_dir: out-unfiltered
+data_dir: data/unfiltered
+tokenizer_path: data/tokenizer.json    # shared, and trained on the UNFILTERED
+                                       # corpus so neither arm gets a tokenizer
+                                       # tuned to its own distribution
+seed: 1337
+device: null
+
+model:
+  vocab_size: 8192
+  block_size: 512
+  n_layer: 8
+  n_head: 8
+  n_embd: 512
+  dropout: 0.1
+  bias: false
+  learned_pos: true
+  fast_attn: true
+
+batch_size: 64
+grad_accum: 1
+max_steps: 18000
+lr: 0.0006
+warmup_steps: 500
+weight_decay: 0.1
+grad_clip: 1.0
+eval_every: 500
+log_every: 100

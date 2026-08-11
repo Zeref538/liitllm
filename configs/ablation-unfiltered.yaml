@@ -1,0 +1,52 @@
+# LiitLLM ablation (UNFILTERED corpus), seed 1
+#
+# Scaled-up run: ~1B-token corpus, 32.8M params (the largest config under
+# HANDOFF's 35M cap), 72,000 steps = 2.36B tokens processed = ~2.4 epochs.
+#
+# 2.4 epochs is deliberate. Repeated passes stay useful up to roughly 4; beyond
+# that a model memorises instead of learning. This sits inside that window while
+# using the compute budget properly — training a small model well past the
+# Chinchilla-optimal 20 tokens/param is standard practice and buys real quality.
+#
+# Identical to the baseline config except data_dir and seed. Any other
+# difference between the arms is a confound — change both or neither.
+out_dir: out-unfiltered
+data_dir: data/unfiltered
+tokenizer_path: data/tokenizer.json
+seed: 1337
+device: null
+
+model:
+  vocab_size: 8192
+  block_size: 512       # code-switching is a discourse-level pattern: a writer
+                        # flips register across clauses, so the longer context is
+                        # where the behaviour actually lives
+  n_layer: 9            # 32,777,728 params — 10 layers would be 35.9M, over cap
+  n_head: 8
+  n_embd: 512
+  dropout: 0.1          # Munti used 0.0 because TinyStories was large relative to
+                        # the model. Here the run makes ~2.4 passes, so the same
+                        # reasoning inverts.
+  bias: false
+  learned_pos: true
+  fast_attn: true
+
+batch_size: 64
+grad_accum: 1           # drop batch to 32 and set this to 2 if a T4 OOMs;
+                        # effective batch is batch_size * grad_accum
+max_steps: 72000        # DEVIATION, deliberately preserved. The seed-1 runs were
+                        # launched from a stale copy of this file that said 72000,
+                        # so the cosine LR schedule was sized for 72k steps. Both
+                        # arms stop at 60000 (--stop-at in the notebooks), reaching
+                        # LR 9.67e-05 rather than annealing to zero.
+                        # This value must NOT be "fixed" to 60000: seed 2 has to run
+                        # the identical schedule, or the within-arm spread that is
+                        # supposed to measure seed noise also absorbs a config change.
+                        # 60000 * 64 * 512 = 1.97B tokens over a ~1B corpus, ~2 epochs.
+lr: 0.0006
+warmup_steps: 500
+weight_decay: 0.1
+grad_clip: 1.0
+eval_every: 1000        # ~50s each (100 fwd passes + 3 generations). Same
+
+log_every: 200

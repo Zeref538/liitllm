@@ -1,0 +1,20 @@
+[project]
+name = "liitllm"
+version = "0.1.0"
+description = "A tiny Taglish language model built from scratch in pure PyTorch."
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.4",
+    "tokenizers>=0.20",
+    "datasets>=3.0",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "matplotlib>=3.8",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["liitllm"]

@@ -1,0 +1,24 @@
+# Tiny CPU config — for the correctness gate and local smoke runs only.
+out_dir: out-tiny
+seed: 1337
+device: cpu
+
+model:
+  vocab_size: 4096
+  block_size: 64
+  n_layer: 2
+  n_head: 2
+  n_embd: 64
+  dropout: 0.0
+  bias: false
+  learned_pos: true
+  fast_attn: false
+
+batch_size: 8
+max_steps: 200
+lr: 0.001
+warmup_steps: 20
+weight_decay: 0.1
+grad_clip: 1.0
+eval_every: 100
+log_every: 50

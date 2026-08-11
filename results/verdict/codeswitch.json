@@ -1,0 +1,56 @@
+{
+  "arms": {
+    "baseline_filtered": [
+      {
+        "n": 32,
+        "en_mean": 0.2061562657529797,
+        "en_median": 0.10810810810810811,
+        "tl_mean": 0.5151885971739507,
+        "taglish_share": 0.71875,
+        "ckpt": "C:\\Users\\johna\\OneDrive\\Documents\\Portfolio\\LiitLLM\\results\\baseline-part1\\out\\ckpt.pt",
+        "step": 60000,
+        "val_loss": 2.744492769241333
+      },
+      {
+        "n": 32,
+        "en_mean": 0.1639325419035996,
+        "en_median": 0.07058823529411765,
+        "tl_mean": 0.5368329086981317,
+        "taglish_share": 0.5,
+        "ckpt": "C:\\Users\\johna\\OneDrive\\Documents\\Portfolio\\LiitLLM\\results\\baseline2-part1\\out\\ckpt.pt",
+        "step": 60000,
+        "val_loss": 2.755134344100952
+      }
+    ],
+    "ablation_unfiltered": [
+      {
+        "n": 32,
+        "en_mean": 0.06063601640306678,
+        "en_median": 0.023255813953488372,
+        "tl_mean": 0.6341077274035948,
+        "taglish_share": 0.1875,
+        "ckpt": "C:\\Users\\johna\\OneDrive\\Documents\\Portfolio\\LiitLLM\\results\\ablation-part2\\out\\ckpt.pt",
+        "step": 60000,
+        "val_loss": 2.652836561203003
+      },
+      {
+        "n": 32,
+        "en_mean": 0.06969471846248408,
+        "en_median": 0.03571428571428571,
+        "tl_mean": 0.6580967381711855,
+        "taglish_share": 0.375,
+        "ckpt": "C:\\Users\\johna\\OneDrive\\Documents\\Portfolio\\LiitLLM\\results\\ablation2-part2\\out\\ckpt.pt",
+        "step": 60000,
+        "val_loss": 2.635232448577881
+      }
+    ]
+  },
+  "taglish_share_gap": 0.328125,
+  "within_arm_spread": 0.21875,
+  "seeds_per_arm": [
+    2,
+    2
+  ],
+  "conclusive": true,
+  "reading": "filtering increased code-switching beyond run-to-run noise"
+}
