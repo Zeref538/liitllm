@@ -619,6 +619,17 @@
     mask: conic-gradient(from var(--angle), #000 1.5%, transparent 7%, transparent 93%, #000 98.5%); }
   .console > .edge-light::before { inset: 24px;
     box-shadow: 0 0 2px 0 rgb(176 64 31 / 35%), 0 0 8px 0 rgb(176 64 31 / 18%), 0 0 18px 1px rgb(176 64 31 / 8%); }
+
+  /* footer author block: photo beside name, one line about him, one link */
+  .author { display: flex; gap: 16px; align-items: flex-start; max-width: 420px; }
+  .author img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; flex: none;
+                border: 1px solid var(--rule-2); }
+  .author p { margin: 0; }
+  .author-name { font-weight: 700; font-size: 16px; color: var(--ink); }
+  .author-role { font-size: 14px; color: var(--ink-3); margin: 4px 0 10px !important; line-height: 1.5; }
+  .site-foot a.author-link { font-size: 14px; font-weight: 600; color: var(--ink);
+    text-decoration: underline; text-decoration-color: var(--clay); text-underline-offset: 4px; }
+  .site-foot a.author-link:hover { text-decoration-thickness: 2px; }
 </style>
 </head>
 <body>
@@ -628,7 +639,6 @@
   <div class="wrap">
     <a class="mark" href="https://johnandrei.vercel.app" aria-label="zeref. portfolio home">zeref<span>.</span></a>
     <div class="brand"><span class="sep">/</span> LiitLLM</div>
-    <a class="visit" href="https://johnandrei.vercel.app"><span class="visit-long">Visit portfolio</span><span class="visit-short">Portfolio</span></a>
     <div class="seg" role="group" aria-label="Reading level">
       <button type="button" id="m-plain" aria-pressed="true">Simple</button>
       <button type="button" id="m-expert" aria-pressed="false">Technical</button>
@@ -1343,9 +1353,14 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div>
-      <a class="mark mark-lg" href="https://johnandrei.vercel.app">zeref<span>.</span></a>
-      <a class="byline" href="https://johnandrei.vercel.app"><img src="img/john.jpg" alt="" width="40" height="40">Case studies by John Andrei Martinez</a>
-      <p><a class="pill pill-sm" href="https://johnandrei.vercel.app">Visit my portfolio</a></p>
+      <div class="author">
+        <img src="img/john.jpg" alt="" width="56" height="56">
+        <div>
+          <p class="author-name">John Andrei Martinez</p>
+          <p class="author-role">Builds and measures small language models. This page is one of his case studies.</p>
+          <a class="author-link" href="https://johnandrei.vercel.app">Visit my portfolio</a>
+        </div>
+      </div>
     </div>
     <nav aria-label="More">
       <p class="foot-h">This project</p>
