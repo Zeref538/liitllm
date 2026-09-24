@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LiitLLM — A Small Model That Speaks Taglish</title>
-<meta name="description" content="Case study: every large web corpus filters code-switching out as noise. This one filters for it — a 32.8M-parameter Taglish language model trained from scratch, with a two-seed ablation proving the filter is what causes the code-switching.">
+<title>LiitLLM: A Small Model That Speaks Taglish</title>
+<meta name="description" content="Case study: every large web corpus filters code-switching out as noise. This one filters for it: a 32.8M-parameter Taglish language model trained from scratch, with a two-seed ablation proving the filter is what causes the code-switching.">
 <style>
   /* Self-hosted (SIL OFL, fonts/OFL.txt): no request to Google Fonts. */
   @font-face { font-family: "Instrument Sans"; font-weight: 400; font-display: swap;
@@ -20,13 +20,13 @@
   @font-face { font-family: "Instrument Sans"; font-weight: 700; font-display: swap;
     src: url("fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
   /* ============================================================
-     LIITLLM — visual identity
+     LIITLLM: visual identity
 
      The subject is two languages inside one sentence, so the page
      is built on a pair, not a spectrum. Every hue is one of three:
 
-       clay   = Tagalog — the matrix language, the grammar
-       tide   = English — the words borrowed into it
+       clay   = Tagalog, the matrix language, the grammar
+       tide   = English, the words borrowed into it
        switch = where they meet: the code-switch itself, and
                 anything the reader can touch
        ash    = failure, and what the model cannot do
@@ -36,8 +36,8 @@
 
      Typeset in humanist sans with a heavy display cut. Munti used
      monospace as its display face because its subject was tokens;
-     this project's subject is register — how people actually write
-     — so the page is set the way writing is set, and monospace is
+     this project's subject is register, how people actually write
+    , so the page is set the way writing is set, and monospace is
      demoted back to what it is: the face for numbers and code.
      ============================================================ */
   :root {
@@ -571,7 +571,7 @@
       <h1>LiitLLM</h1>
       <p class="spec it">32.8M parameters &middot; 2 &times; 2 runs</p>
   <p class="lede side-lede" data-mode="plain">
-    Filipinos online don't write pure Tagalog or pure English — they switch between
+    Filipinos online don't write pure Tagalog or pure English. They switch between
     them mid-sentence. The tools that assemble training data for large language
     models treat that mixing as garbage and delete it. I built the opposite: a
     filter that keeps <em>only</em> the mixed writing, trained a small model on it,
@@ -628,7 +628,7 @@
         <div class="lbl"><span>English</span><b id="v-en">0%</b></div>
         <div class="bar-track"><div class="bar-fill" id="f-en"></div></div>
       </div>
-      <div class="verdict drop" id="verdict">—</div>
+      <div class="verdict drop" id="verdict"></div>
     </div>
   </div>
     </div>
@@ -677,16 +677,16 @@
   <div class="tw"><table>
     <thead><tr><th>Arm</th><th class="num">Seed 1</th><th class="num">Seed 2</th><th class="num">Spread</th></tr></thead>
     <tbody>
-      <tr><td><b style="color:var(--clay)">Filtered</b> — English fraction</td>
+      <tr><td><b style="color:var(--clay)">Filtered</b>: English fraction</td>
           <td class="num">0.206</td><td class="num">0.164</td><td class="num">0.042</td></tr>
-      <tr><td><b style="color:var(--tide)">Unfiltered</b> — English fraction</td>
+      <tr><td><b style="color:var(--tide)">Unfiltered</b>: English fraction</td>
           <td class="num">0.061</td><td class="num">0.070</td><td class="num">0.009</td></tr>
     </tbody>
   </table></div>
 
   <p>
-    The arms do not overlap. The gap between them is <b>0.120</b> — the filtered models
-    put roughly <b>three times</b> as much English into their output — and that gap is
+    The arms do not overlap. The gap between them is <b>0.120</b>. The filtered models
+    put roughly <b>three times</b> as much English into their output, and that gap is
     <b>2.8&times; the widest within-arm spread</b>. Filtering for code-switching produced
     a model that code-switches.
   </p>
@@ -699,7 +699,7 @@
   <div class="note">
     <p class="kicker">The headline metric is noisier than that, and I am reporting both</p>
     <p style="margin:0">
-      My pre-registered metric was <em>taglish share</em> — the fraction of generations
+      My pre-registered metric was <em>taglish share</em>: the fraction of generations
       passing the full <code>is_taglish</code> test. It gives a gap of <b>0.328</b>
       against a within-arm spread of <b>0.219</b>: the same direction, the same
       conclusion, but a much thinner margin. That metric is a threshold count over 32
@@ -715,7 +715,7 @@
 
   <div class="two pair">
   <div>
-  <p><span class="gen-tag"><b style="color:var(--clay)">FILTERED</b> — <em>tl 0.46</em> · <i>en 0.27</i></span></p>
+  <p><span class="gen-tag"><b style="color:var(--clay)">FILTERED</b>: <em>tl 0.46</em> · <i>en 0.27</i></span></p>
   <blockquote class="clay">
     Kahapon nag-iinom ako ng buko juice. Alam mo naman kasi yung feeling na gusto mo ng
     pakulo before ka mag-hard reservation. Napagdesisyunan ko na lang na mag-care ako,
@@ -725,7 +725,7 @@
 
   </div>
   <div>
-  <p><span class="gen-tag"><b style="color:var(--tide)">UNFILTERED</b> — <em>tl 0.73</em> · <i>en 0.01</i></span></p>
+  <p><span class="gen-tag"><b style="color:var(--tide)">UNFILTERED</b>: <em>tl 0.73</em> · <i>en 0.01</i></span></p>
   <blockquote class="tide">
     Kahapon nag-usap sila ni Jimmy sa telepono. Nang tanungin kung anong oras na ang
     kanilang komunikasyon para sa Skype, tinanong sila ni Jimmy kung ano ang sagot.
@@ -737,7 +737,7 @@
 
   <p>
     The difference is register, not just vocabulary. The filtered model writes the way
-    someone texts — <em>"Gets ko na lang"</em>, <em>"Alam mo naman kasi yung feeling"</em>,
+    someone texts: <em>"Gets ko na lang"</em>, <em>"Alam mo naman kasi yung feeling"</em>,
     switching to English for a whole clause and back. The unfiltered model writes clean
     reported speech in a news register. Both are fluent Filipino. Only one of them is
     Taglish.
@@ -771,22 +771,19 @@
     </p>
     <p>
       So the register that millions of people actually write in is systematically
-      absent from the data that language models learn from. Not by anyone's decision —
-      as a side effect of a sorting step nobody thinks about.
+      absent from the data that language models learn from. Not by anyone's decision, but as a side effect of a sorting step nobody thinks about.
     </p>
   </div>
   <div data-mode="expert">
     <p>
       CC-100, OSCAR, FineWeb-2 and friends all route documents through a fastText
-      langid classifier with a confidence floor. Intra-sentential code-switching —
-      English content words inserted into Tagalog morphosyntax — produces exactly the
+      langid classifier with a confidence floor. Intra-sentential code-switching (English content words inserted into Tagalog morphosyntax) produces exactly the
       low-confidence, split-posterior documents that floor is designed to remove.
     </p>
     <p>
       The consequence is a systematic register gap. The Filipino text that survives
       collection skews formal and monolingual: news copy, encyclopedic prose, official
-      statements. The conversational register — the one with the code-switching in it —
-      is thinned out at the point of collection, before any model sees it.
+      statements. The conversational register, the one with the code-switching in it, is thinned out at the point of collection, before any model sees it.
     </p>
     <p>
       Tagalog Wikipedia is excluded here for the same reason, deliberately. It is
@@ -822,21 +819,20 @@
     <p>
       <code>score(text)</code> returns the fraction of word tokens matching each
       lexicon; <code>is_taglish</code> keeps a document when both fractions clear a
-      floor. No new dependencies, no model, and explainable in a paragraph — which
-      matters, because this same function decides the training corpus, the ablation,
+      floor. No new dependencies, no model, and explainable in a paragraph, which matters, because this same function decides the training corpus, the ablation,
       <em>and</em> the headline metric.
     </p>
   </div>
 
   <h3>The two lists are not symmetric</h3>
   <p>
-    The Tagalog list is almost all <b>function words</b> — <code>ang</code>,
+    The Tagalog list is almost all <b>function words</b>: <code>ang</code>,
     <code>ng</code>, <code>sa</code>, <code>kasi</code>, <code>naman</code>. Those are
     a closed class: you cannot write Tagalog syntax without them, and English text
     will not accidentally produce them.
   </p>
   <p>
-    The English list deliberately includes <b>content words</b> — <code>office</code>,
+    The English list deliberately includes <b>content words</b>: <code>office</code>,
     <code>traffic</code>, <code>meeting</code>. That asymmetry is forced by the
     phenomenon itself: in <em>"nag-commute ako sa office"</em> there is not a single
     English function word. Score English by function words and the most
@@ -845,7 +841,7 @@
 
   <h3>Hyphens get split, or the most Taglish word scores nothing</h3>
   <p>
-    <code>nag-commute</code> matches neither list as a single token — and neither does
+    <code>nag-commute</code> matches neither list as a single token, and neither does
     <code>nagcommute</code>, because the affix stripper only finds a stem that is itself
     in the Tagalog list, and <code>commute</code> is English. So the single most
     characteristically Taglish word in the sentence would contribute <b>zero</b> to
@@ -854,8 +850,7 @@
   <p>
     Splitting on the hyphen fixes half of that: <code>commute</code> lands in the
     English list. The <code>nag-</code> half still scores nothing, since bare affixes
-    are not lexicon entries. That is a real limitation, not a design choice — but it
-    only ever <em>under</em>-counts, and it under-counts the Tagalog side of a word
+    are not lexicon entries. That is a real limitation, not a design choice, but it only ever <em>under</em>-counts, and it under-counts the Tagalog side of a word
     already surrounded by Tagalog function words, so the document is not at risk of
     being misread as English.
   </p>
@@ -867,7 +862,7 @@
       <code>trabahuhan</code>, <code>pinagtrabahuhan</code>. A bare root list misses all
       of those and under-counts the Tagalog side. The scorer peels one prefix and one
       suffix, and handles reduplication (<code>nagcocommute</code> &rarr;
-      <code>commute</code>). It stops at one layer on purpose — two layers reduces
+      <code>commute</code>). It stops at one layer on purpose: two layers reduces
       <code>nasa</code> to <code>sa</code> and starts inventing matches.
     </p>
   </div>
@@ -889,8 +884,7 @@
   <p data-mode="plain">
     My whole pitch was that code-switching gets filtered out of web corpora. So I
     measured how much survives, expecting very little. Across 50,000 documents from
-    each of two sources, <b>38% and 39.5%</b> already passed the Taglish test —
-    untouched, straight out of the corpus.
+    each of two sources, <b>38% and 39.5%</b> already passed the Taglish test, untouched, straight out of the corpus.
   </p>
   <p data-mode="expert">
     Bake-off across FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>,
@@ -913,7 +907,7 @@
     <p class="kicker">This weakens the control arm, and it stays in</p>
     <p style="margin:0">
       The "unfiltered" model is supposed to be the contrast. But if its corpus is
-      already ~40% code-switched, it is not a clean negative — it is a weaker dose,
+      already ~40% code-switched, it is not a clean negative. It is a weaker dose,
       not a zero dose. The honest framing is not "filtering creates code-switching
       from nothing." It is: <b>Filipino web text is already heavily code-switched, and
       filtering the rest of the way still measurably changes the model.</b> That is a
@@ -923,8 +917,7 @@
 
   <h3>An earlier version of this page would have said something false</h3>
   <p>
-    I first ran that bake-off on <b>2,000</b> documents and got 46.8% versus 34.4% —
-    a clear win for FineWeb-2, and I wrote it down as one. At 50,000 documents it is
+    I first ran that bake-off on <b>2,000</b> documents and got 46.8% versus 34.4%, a clear win for FineWeb-2, and I wrote it down as one. At 50,000 documents it is
     38.0% versus 39.5%: the two sources are equivalent and the ranking had
     <em>inverted</em>. Small samples do not give you a quiet, proportional error.
     They give you a confident answer that is backwards.
@@ -951,7 +944,7 @@
   </p>
   <p data-mode="expert">
     Architecture is inherited unchanged from <a href="https://zeref538.github.io/munti/">Munti</a>,
-    a prior from-scratch model proven on TinyStories — deliberately, so that any
+    a prior from-scratch model proven on TinyStories, deliberately, so that any
     difference in output is attributable to data rather than code. What changed is
     scale and context.
   </p>
@@ -970,7 +963,7 @@
 
   <p>
     The <b>512-token context is a deliberate choice for this subject</b>. Code-switching
-    is a discourse-level behaviour — a writer flips register across clauses and
+    is a discourse-level behaviour: a writer flips register across clauses and
     sentences, not within a three-word window. At 256 tokens the model would rarely see
     a full switch cycle.
   </p>
@@ -1026,7 +1019,7 @@
       choosing mid-write.</li>
     <li><b>A runner that assumes it will die.</b> Re-running the entrypoint skips
       finished work and resumes partial work. It also detects the specific case where a
-      run finished on the server but its output was never downloaded — which is what
+      run finished on the server but its output was never downloaded, which is what
       happens every time the laptop sleeps.</li>
     <li><b>A lockfile.</b> Two runners once raced and pushed the same job 18 seconds
       apart, burning double the GPU on identical work.</li>
@@ -1035,7 +1028,7 @@
   <p>
     The last run made the case for all of it: it stopped at step 55,000 instead of
     60,000. The runner noticed, pushed a continuation from the last checkpoint,
-    finished the remaining 5,000 steps, and moved on to scoring — with nobody awake.
+    finished the remaining 5,000 steps, and moved on to scoring, with nobody awake.
   </p>
 
   <figure>
@@ -1046,8 +1039,7 @@
     </div>
     <div id="chart-loss"></div>
     <figcaption>
-      Validation loss, 60,000 steps. Both seeds of each arm sit on top of each other —
-      the runs are reproducible. <b>The two arms cannot be compared on this chart</b>,
+      Validation loss, 60,000 steps. Both seeds of each arm sit on top of each other, so the runs are reproducible. <b>The two arms cannot be compared on this chart</b>,
       and section 07 explains why.
     </figcaption>
   </figure>
@@ -1068,8 +1060,7 @@
 
   <p>
     The unfiltered models reach a validation loss of <b>2.635</b>. The filtered models
-    sit at <b>2.745</b>. Lower is better, so the control arm looks like the better
-    model — and that reading is meaningless.
+    sit at <b>2.745</b>. Lower is better, so the control arm looks like the better model, and that reading is meaningless.
   </p>
   <p>
     <b>Each model is evaluated on a held-out slice of its own corpus.</b> They are
@@ -1124,8 +1115,7 @@
   </blockquote>
 
   <ul>
-    <li data-mode="plain"><b>It repeats itself.</b> Longer generations fall into loops —
-      the same hashtag or phrase over and over.</li>
+    <li data-mode="plain"><b>It repeats itself.</b> Longer generations fall into loops: the same hashtag or phrase over and over.</li>
     <li data-mode="expert"><b>Degenerate repetition</b> at longer horizons; no repetition
       penalty is applied at sampling time.</li>
     <li><b>It invents facts fluently.</b> Names, dates and figures are shaped correctly
@@ -1135,7 +1125,7 @@
     <li><b>Its idea of Taglish is the internet's.</b> The corpus is web text, so the
       register skews toward blogs, news comments and entertainment copy.</li>
     <li><b>It is under-trained, and the curve says so.</b> Validation loss was still
-      descending at step 60,000 in all four runs — nothing had flattened or turned up.
+      descending at step 60,000 in all four runs. Nothing had flattened or turned up.
       More compute would have produced better models. The runs stopped because the
       weekly GPU quota did, not because training had converged. Both arms stopped at
       the same step, so the comparison is unaffected; the absolute quality is not.</li>
@@ -1170,7 +1160,7 @@
 
   <h3>A config I edited but never uploaded</h3>
   <p>
-    I changed the training length, then launched two 11-hour runs — from the copy that
+    I changed the training length, then launched two 11-hour runs from the copy that
     was still sitting on the server. Both runs used the old schedule. They are still
     <em>valid</em>, because both arms were equally affected, but the config file in the
     repo no longer described what ran. Editing a file is not deploying it.
@@ -1225,12 +1215,9 @@
     <code>weights_only=True</code> mode and run on a laptop CPU.
   </p>
   <ul>
-    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-taglish.pt"><b>liitllm-taglish.pt</b></a>
-      — the Taglish model (131 MB)</li>
-    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-control-unfiltered.pt">liitllm-control-unfiltered.pt</a>
-      — the control it is compared against (131 MB)</li>
-    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/tokenizer.json">tokenizer.json</a>
-      — needed by both (0.5 MB)</li>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-taglish.pt"><b>liitllm-taglish.pt</b></a>: the Taglish model (131 MB)</li>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-control-unfiltered.pt">liitllm-control-unfiltered.pt</a>: the control it is compared against (131 MB)</li>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/tokenizer.json">tokenizer.json</a>: needed by both (0.5 MB)</li>
   </ul>
   <pre><code>git clone https://github.com/Zeref538/liitllm &amp;&amp; cd liitllm
 pip install -e .
@@ -1242,8 +1229,7 @@ python -m liitllm.sample --ckpt liitllm-taglish.pt --tokenizer tokenizer.json --
 
   <h3>Train it from zero</h3>
   <p>
-    The correctness gate runs on a CPU in about a minute and must pass before any GPU
-    time is spent — it is the reason a bad generation can be blamed on data rather than
+    The correctness gate runs on a CPU in about a minute and must pass before any GPU time is spent. It is the reason a bad generation can be blamed on data rather than
     on a broken attention mask.
   </p>
   <pre><code>git clone https://github.com/Zeref538/liitllm &amp;&amp; cd liitllm
@@ -1368,7 +1354,7 @@ function paint() {
   const v = document.getElementById("verdict");
   const keep = s.tl >= D.minTl && s.en >= D.minEn && s.n >= D.minWords;
   v.className = "verdict " + (keep ? "keep" : "drop");
-  v.textContent = s.n < D.minWords ? "TOO SHORT" : (keep ? "KEPT — Taglish" : "DROPPED");
+  v.textContent = s.n < D.minWords ? "TOO SHORT" : (keep ? "KEPT: Taglish" : "DROPPED");
 }
 
 function render(text) {
@@ -1396,7 +1382,7 @@ function setExample(k) { render(EXAMPLES[k]); }
 document.querySelectorAll(".chip").forEach(b =>
   b.addEventListener("click", () => setExample(b.dataset.ex)));
 
-// While typing, only update the numbers — re-rendering would move the caret.
+// While typing, only update the numbers; re-rendering would move the caret.
 box.addEventListener("input", paint);
 box.addEventListener("blur", () => render(box.innerText));
 setExample("taglish");
