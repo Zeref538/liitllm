@@ -318,7 +318,6 @@
   .mark { font-family: "Sora", var(--sans); font-weight: 700; font-size: 17px;
           color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
   .mark span { color: var(--clay); } /* the dot takes each project's colour */
-  .mark-lg { font-size: 30px; display: inline-block; margin-bottom: 10px; }
   .brand { margin-right: auto; font-weight: 700; }
   .brand .sep { color: var(--rule-2); margin: 0 6px 0 2px; font-weight: 400; }
 
@@ -592,18 +591,6 @@
   body { background-image: none; }
   .dot-field { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 
-  .byline { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); text-decoration: none; }
-  .byline:hover { color: var(--ink); }
-  .byline { margin-top: 16px; }
-  .byline img { width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--rule-2); object-fit: cover; }
-
-  .visit { font-size: 13.5px; font-weight: 600; color: var(--ink); text-decoration: none; padding: 6px 12px;
-           border: 1px solid var(--rule-2); border-radius: 999px; white-space: nowrap; }
-  .visit:hover { border-color: var(--ink); }
-  .visit-short { display: none; }
-  .site-foot a.pill { color: var(--paper); }
-  @media (max-width: 560px) { .visit-long { display: none; } .visit-short { display: inline; } .visit { padding: 5px 10px; font-size: 12.5px; } }
-  .pill-sm { min-height: 40px; padding: 0 20px; font-size: 14px; margin-top: 16px; }
   .fig-open { display: block; }
   @media (max-width: 700px) { .fig-open::after { content: "Tap to open full size"; display: block;
     font-size: 12.5px; color: var(--ink-3); margin-top: 6px; } }
