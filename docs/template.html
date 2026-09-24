@@ -490,6 +490,35 @@
     .bar .wrap { padding: 0 12px; gap: 8px; }
     .console-head .status { display: none; }
   }
+
+  /* ---------------- every section is a console panel ---------------- */
+  .rail { display: none !important; }
+  .panel-sec { padding: 0 24px 24px; border-top: 0; }
+  .panel-sec .console-side { display: block; }
+  .side-stick { position: sticky; top: 88px; }
+  .panel-sec .console-side h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.02; margin: 0; }
+  .console-main > p, .console-main > ul, .console-main > h3, .console-main > .note,
+  .console-main > blockquote { max-width: 68ch; }
+  .console-main > h3:first-child, .console-main > p:first-child { margin-top: 0; }
+
+  /* cards: notes, quotes, tables and code share the steps' bordered look */
+  .note, blockquote, .card, pre, .tw, .doc-fig img {
+    background: var(--card); border: 1px solid var(--rule-2); border-radius: 12px; }
+  .note { border-left: 1px solid var(--rule-2); padding: 20px 24px; }
+  blockquote { border-left: 3px solid var(--rule-2); border-radius: 0 12px 12px 0; }
+  blockquote.clay { border-left-color: var(--clay); }
+  blockquote.tide { border-left-color: var(--tide); }
+  .tw { padding: 4px 16px; }
+  .tw table { margin: 0; }
+  .doc-fig img { display: block; width: 100%; height: auto; padding: 12px; }
+
+  #broke h3::before { position: static; display: block; margin-bottom: 4px; font-size: 32px;
+    font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-3); }
+
+  @media (max-width: 900px) {
+    .panel-sec { padding: 0 12px 16px; }
+    .side-stick { position: static; }
+  }
 </style>
 </head>
 <body>
@@ -586,11 +615,15 @@
 <nav class="rail" aria-label="Chapters"></nav>
 <main>
 
-<section class="band" id="result">
-<div class="wrap">
-  <p class="kicker">01 — The result</p>
-  <h2 data-mode="plain">The filtered model borrows about three times as much English</h2>
-  <h2 data-mode="expert">en_mean 0.185 vs 0.065, with no overlap between arms</h2>
+<section class="panel-sec" id="result">
+<div class="console">
+  <div class="console-head"><span class="step-no">01</span><span class="caps">The result</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">The filtered model borrows about three times as much English</h2>
+    <h2 data-mode="expert">en_mean 0.185 vs 0.065, with no overlap between arms</h2>
+    </div></div>
+    <div class="console-main">
 
   <div class="headline-num">
     <span class="x">2.8&times;</span>
@@ -632,6 +665,11 @@
     <b>2.8&times; the widest within-arm spread</b>. Filtering for code-switching produced
     a model that code-switches.
   </p>
+
+  <figure class="doc-fig">
+    <img src="img/runs.png" alt="Table of all four training runs: English share, Tagalog share, Taglish pass rate and validation loss per seed" loading="lazy">
+    <figcaption>Drawn from the committed run results by <code>docs/make_figures.py</code>.</figcaption>
+  </figure>
 
   <div class="note">
     <p class="kicker">The headline metric is noisier than that, and I am reporting both</p>
@@ -679,13 +717,20 @@
     reported speech in a news register. Both are fluent Filipino. Only one of them is
     Taglish.
   </p>
+    </div>
+  </div>
 </div>
 </section>
 
-<section class="wrap" id="why">
-  <p class="kicker">02 — The premise</p>
-  <h2 data-mode="plain">A filter that calls the real language "noise"</h2>
-  <h2 data-mode="expert">Language ID is a document-level classifier, and Taglish is a sentence-level phenomenon</h2>
+<section class="panel-sec" id="why">
+<div class="console">
+  <div class="console-head"><span class="step-no">02</span><span class="caps">The premise</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">A filter that calls the real language "noise"</h2>
+    <h2 data-mode="expert">Language ID is a document-level classifier, and Taglish is a sentence-level phenomenon</h2>
+    </div></div>
+    <div class="console-main">
 
   <div data-mode="plain">
     <p>
@@ -723,12 +768,20 @@
       clean, well-formed, and almost entirely free of the phenomenon under study.
     </p>
   </div>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="filter">
-  <p class="kicker">03 — The scorer</p>
-  <h2 data-mode="plain">Two word lists and a rule about prefixes</h2>
-  <h2 data-mode="expert">Lexicon-ratio scoring, and why the two lists are built differently</h2>
+<section class="panel-sec" id="filter">
+<div class="console">
+  <div class="console-head"><span class="step-no">03</span><span class="caps">The scorer</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">Two word lists and a rule about prefixes</h2>
+    <h2 data-mode="expert">Lexicon-ratio scoring, and why the two lists are built differently</h2>
+    </div></div>
+    <div class="console-main">
 
   <div data-mode="plain">
     <p>
@@ -793,12 +846,20 @@
       <code>nasa</code> to <code>sa</code> and starts inventing matches.
     </p>
   </div>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="corpus">
-  <p class="kicker">04 — The finding that dented my own premise</p>
-  <h2 data-mode="plain">The web text was already 40% Taglish</h2>
-  <h2 data-mode="expert">Measured keep-rate: 38.0% and 39.5%, not the ~10% the thesis assumed</h2>
+<section class="panel-sec" id="corpus">
+<div class="console">
+  <div class="console-head"><span class="step-no">04</span><span class="caps">The finding that dented my own premise</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">The web text was already 40% Taglish</h2>
+    <h2 data-mode="expert">Measured keep-rate: 38.0% and 39.5%, not the ~10% the thesis assumed</h2>
+    </div></div>
+    <div class="console-main">
 
   <p data-mode="plain">
     My whole pitch was that code-switching gets filtered out of web corpora. So I
@@ -843,12 +904,20 @@
     <em>inverted</em>. Small samples do not give you a quiet, proportional error.
     They give you a confident answer that is backwards.
   </p>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="build">
-  <p class="kicker">05 — The model</p>
-  <h2 data-mode="plain">What it is, and what "from scratch" means</h2>
-  <h2 data-mode="expert">32.8M-parameter decoder-only transformer, no pretrained weights</h2>
+<section class="panel-sec" id="build">
+<div class="console">
+  <div class="console-head"><span class="step-no">05</span><span class="caps">The model</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">What it is, and what "from scratch" means</h2>
+    <h2 data-mode="expert">32.8M-parameter decoder-only transformer, no pretrained weights</h2>
+    </div></div>
+    <div class="console-main">
 
   <p data-mode="plain">
     No downloaded model, no fine-tuning. The tokenizer, the transformer, the training
@@ -893,12 +962,20 @@
       merely intended to be.
     </p>
   </div>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="training">
-  <p class="kicker">06 — Surviving the clock</p>
-  <h2 data-mode="plain">Four 11-hour runs on a service that kills you at 12</h2>
-  <h2 data-mode="expert">Crash-safe checkpointing, a wall-clock guard, and a chained runner across two accounts</h2>
+<section class="panel-sec" id="training">
+<div class="console">
+  <div class="console-head"><span class="step-no">06</span><span class="caps">Surviving the clock</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">Four 11-hour runs on a service that kills you at 12</h2>
+    <h2 data-mode="expert">Crash-safe checkpointing, a wall-clock guard, and a chained runner across two accounts</h2>
+    </div></div>
+    <div class="console-main">
 
   <p data-mode="plain">
     The free GPU I used stops every session at 12 hours, whether or not you are done.
@@ -949,12 +1026,20 @@
       and section 07 explains why.
     </figcaption>
   </figure>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="trap">
-  <p class="kicker">07 — The number that looks like an answer and isn't</p>
-  <h2 data-mode="plain">The "worse" model is the one that worked</h2>
-  <h2 data-mode="expert">Cross-arm validation loss is not comparable, by construction</h2>
+<section class="panel-sec" id="trap">
+<div class="console">
+  <div class="console-head"><span class="step-no">07</span><span class="caps">The number that looks like an answer and isn't</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">The "worse" model is the one that worked</h2>
+    <h2 data-mode="expert">Cross-arm validation loss is not comparable, by construction</h2>
+    </div></div>
+    <div class="console-main">
 
   <p>
     The unfiltered models reach a validation loss of <b>2.635</b>. The filtered models
@@ -974,12 +1059,20 @@
     to put "2.635 vs 2.745" in a results table and let a reader draw the wrong
     conclusion.
   </p>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="limits">
-  <p class="kicker">08 — What it cannot do</p>
-  <h2 data-mode="plain">Fluent, confident, and frequently wrong</h2>
-  <h2 data-mode="expert">Failure probes, deliberately out of domain</h2>
+<section class="panel-sec" id="limits">
+<div class="console">
+  <div class="console-head"><span class="step-no">08</span><span class="caps">What it cannot do</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">Fluent, confident, and frequently wrong</h2>
+    <h2 data-mode="expert">Failure probes, deliberately out of domain</h2>
+    </div></div>
+    <div class="console-main">
 
   <p>
     A 32.8M-parameter model trained on ~2B tokens of web text has grammar and register.
@@ -1022,12 +1115,20 @@
       weekly GPU quota did, not because training had converged. Both arms stopped at
       the same step, so the comparison is unaffected; the absolute quality is not.</li>
   </ul>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="broke">
-  <p class="kicker">09 — What broke</p>
-  <h2 data-mode="plain">Five ways this reported success while handing me the wrong thing</h2>
-  <h2 data-mode="expert">Failures that produced plausible output instead of an error</h2>
+<section class="panel-sec" id="broke">
+<div class="console">
+  <div class="console-head"><span class="step-no">09</span><span class="caps">What broke</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2 data-mode="plain">Five ways this reported success while handing me the wrong thing</h2>
+    <h2 data-mode="expert">Failures that produced plausible output instead of an error</h2>
+    </div></div>
+    <div class="console-main">
 
   <p>
     None of these crashed. Every one of them ran to completion and gave me something
@@ -1079,11 +1180,19 @@
     a wrong path. Running one command that listed the directory would have shown that
     immediately. A confident wrong diagnosis costs more than saying "checking."
   </p>
+    </div>
+  </div>
+</div>
 </section>
 
-<section class="wrap" id="repro">
-  <p class="kicker">10 — Reproduce it</p>
-  <h2>Run it yourself</h2>
+<section class="panel-sec" id="repro">
+<div class="console">
+  <div class="console-head"><span class="step-no">10</span><span class="caps">Reproduce it</span></div>
+  <div class="console-body">
+    <div class="console-side"><div class="side-stick">
+    <h2>Run it yourself</h2>
+    </div></div>
+    <div class="console-main">
 
   <h3 id="download">Download the model</h3>
   <p>
@@ -1127,6 +1236,9 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
     <code>datasets</code> (streaming only), Kaggle free T4s. No pretrained weights, no
     paid services, no API keys.
   </p>
+    </div>
+  </div>
+</div>
 </section>
 
 </main>

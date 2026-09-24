@@ -18,7 +18,7 @@ OUT = ROOT / "docs" / "img"
 
 # Same hues as the page; blue nudged up so it passes the chroma check.
 CLAY, TIDE = "#b0401f", "#808080"  # one project colour; the control is grey
-PAPER, INK, MUTED, GRID = "#ffffff", "#000000", "#6b6b6b", "#e5e5e5"
+PAPER, INK, MUTED, GRID = "#ffffff", "#1c1917", "#78716c", "#e7e5e4"
 
 # Bundled so the images render the same on any machine (SIL OFL, see docs/fonts/OFL.txt).
 from matplotlib import font_manager
@@ -158,7 +158,7 @@ def runs_table():
     for (i, j), cell in t.get_celld().items():
         cell.set_edgecolor(GRID)
         if i == 0:
-            cell.set_facecolor("#000000"); cell.set_text_props(color="white", fontweight="bold")
+            cell.set_facecolor("#1c1917"); cell.set_text_props(color="white", fontweight="bold")
         else:
             cell.set_facecolor(tint[rows[i - 1][0]] if j in (0, 2) else "white")
     fig.text(0.5, 0.06, "32 generations per run from 8 fixed prompts. Shaded column = the metric the "
