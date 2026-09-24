@@ -10,6 +10,12 @@ work is the data.
 
 **[Read the case study →](https://zeref538.github.io/liitllm/)** · **[Models and results on Kaggle →](https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish)**
 
+![Results dashboard: the Taglish-filtered models write 2.8x more English than the unfiltered controls](docs/img/results.png)
+
+![Per-run table: English share, Tagalog share, Taglish pass rate and validation loss for all four runs](docs/img/runs.png)
+
+Both images are drawn from the committed result files by `python docs/make_figures.py`.
+
 ## Results
 
 Four runs: two arms × two seeds, 60,000 steps each, all trained identically.
