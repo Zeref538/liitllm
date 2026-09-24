@@ -18,3 +18,8 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 packages = ["liitllm"]
+
+[tool.pytest.ini_options]
+# results/ holds repo copies pulled back from Kaggle runs; their test_*.py
+# shadow these ones and break collection.
+norecursedirs = ["results", ".kernel-staging", ".publish"]

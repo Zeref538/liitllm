@@ -50,6 +50,9 @@ def main():
     from liitllm import taglish as tg
 
     verdict = json.loads((ROOT / "results" / "verdict" / "codeswitch.json").read_text())
+    for runs in verdict["arms"].values():  # ckpt is a local disk path; keep it off the public page
+        for r in runs:
+            r.pop("ckpt", None)
     data = {
         "tl": lexicon("tagalog"),
         "en": lexicon("english"),
