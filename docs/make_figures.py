@@ -20,8 +20,13 @@ OUT = ROOT / "docs" / "img"
 CLAY, TIDE = "#a8442a", "#0b6f99"
 PAPER, INK, MUTED, GRID = "#f3eee4", "#191510", "#6b6358", "#ddd5c7"
 
+# Bundled so the images render the same on any machine (SIL OFL, see docs/fonts/OFL.txt).
+from matplotlib import font_manager
+for f in (ROOT / "docs" / "fonts").glob("*.ttf"):
+    font_manager.fontManager.addfont(str(f))
+
 plt.rcParams.update({
-    "font.family": "DejaVu Sans", "font.size": 11, "text.color": INK,
+    "font.family": "Instrument Sans", "font.size": 11, "text.color": INK,
     "axes.facecolor": PAPER, "figure.facecolor": PAPER, "savefig.facecolor": PAPER,
     "axes.edgecolor": GRID, "axes.labelcolor": MUTED, "axes.spines.top": False,
     "axes.spines.right": False, "axes.spines.left": False, "axes.grid": True,
