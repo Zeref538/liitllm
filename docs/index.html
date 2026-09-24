@@ -594,7 +594,31 @@
 
   .byline { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); text-decoration: none; }
   .byline:hover { color: var(--ink); }
-  .byline img { width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--rule-2); object-fit: cover; }
+  .byline { margin-top: 16px; }
+  .byline img { width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--rule-2); object-fit: cover; }
+
+  .visit { font-size: 13.5px; font-weight: 600; color: var(--ink); text-decoration: none; padding: 6px 12px;
+           border: 1px solid var(--rule-2); border-radius: 999px; white-space: nowrap; }
+  .visit:hover { border-color: var(--ink); }
+  .visit-short { display: none; }
+  .site-foot a.pill { color: var(--paper); }
+  @media (max-width: 560px) { .visit-long { display: none; } .visit-short { display: inline; } .visit { padding: 5px 10px; font-size: 12.5px; } }
+  .pill-sm { min-height: 40px; padding: 0 20px; font-size: 14px; margin-top: 16px; }
+  .fig-open { display: block; }
+  @media (max-width: 700px) { .fig-open::after { content: "Tap to open full size"; display: block;
+    font-size: 12.5px; color: var(--ink-3); margin-top: 6px; } }
+  @media (max-width: 560px) { .hero .specs { grid-template-columns: 1fr; } }
+
+  /* softer glow: lights up only close to the edge, narrower wedge, fainter halo */
+  .console::before, .console > .edge-light { opacity: calc((var(--edge) - 55) / 45 * .7); }
+  .console::before { padding: 1.5px;
+    mask: conic-gradient(from var(--angle), #000 12%, transparent 26%, transparent 74%, #000 88%),
+          linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: intersect, exclude; }
+  .console > .edge-light { inset: -24px;
+    mask: conic-gradient(from var(--angle), #000 1.5%, transparent 7%, transparent 93%, #000 98.5%); }
+  .console > .edge-light::before { inset: 24px;
+    box-shadow: 0 0 2px 0 rgb(176 64 31 / 35%), 0 0 8px 0 rgb(176 64 31 / 18%), 0 0 18px 1px rgb(176 64 31 / 8%); }
 </style>
 </head>
 <body>
@@ -604,6 +628,7 @@
   <div class="wrap">
     <a class="mark" href="https://johnandrei.vercel.app" aria-label="zeref. portfolio home">zeref<span>.</span></a>
     <div class="brand"><span class="sep">/</span> LiitLLM</div>
+    <a class="visit" href="https://johnandrei.vercel.app"><span class="visit-long">Visit portfolio</span><span class="visit-short">Portfolio</span></a>
     <div class="seg" role="group" aria-label="Reading level">
       <button type="button" id="m-plain" aria-pressed="true">Simple</button>
       <button type="button" id="m-expert" aria-pressed="false">Technical</button>
@@ -622,7 +647,6 @@
     <div class="console-side">
       <div class="hero-kick">
         <p class="caps lined">Taglish language model</p>
-        <a class="byline" href="https://johnandrei.vercel.app"><img src="img/john.jpg" alt="" width="32" height="32">by John Andrei Martinez</a>
       </div>
       <h1>LiitLLM</h1>
       <p class="spec it">32.8M parameters &middot; 2 &times; 2 runs</p>
@@ -748,7 +772,7 @@
   </p>
 
   <figure class="doc-fig">
-    <img src="img/runs.png" alt="Table of all four training runs: English share, Tagalog share, Taglish pass rate and validation loss per seed" loading="lazy">
+    <a href="img/runs.png" class="fig-open"><img src="img/runs.png" alt="Table of all four training runs: English share, Tagalog share, Taglish pass rate and validation loss per seed" loading="lazy"></a>
     <figcaption>Drawn from the committed run results by <code>docs/make_figures.py</code>.</figcaption>
   </figure>
 
@@ -1320,7 +1344,8 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
   <div class="wrap foot-grid">
     <div>
       <a class="mark mark-lg" href="https://johnandrei.vercel.app">zeref<span>.</span></a>
-      <p class="small">Case studies by John Andrei Martinez.</p>
+      <a class="byline" href="https://johnandrei.vercel.app"><img src="img/john.jpg" alt="" width="40" height="40">Case studies by John Andrei Martinez</a>
+      <p><a class="pill pill-sm" href="https://johnandrei.vercel.app">Visit my portfolio</a></p>
     </div>
     <nav aria-label="More">
       <p class="foot-h">This project</p>
