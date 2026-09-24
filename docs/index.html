@@ -496,7 +496,7 @@
     grid-template-areas: "kick spec" "title title" "show lede" "steps steps" "try try" "tool specs" "tool cta"; }
   .hero .console-side, .hero .console-main { display: contents; }
   .hero .console-main > .caps:first-child { display: none; }
-  .hero .lined { grid-area: kick; }
+  .hero .hero-kick { grid-area: kick; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
   .hero .spec { grid-area: spec; justify-self: end; margin: 0; }
   .hero h1 { grid-area: title; font-size: clamp(72px, 10vw, 144px); line-height: .82; letter-spacing: -.07em;
     margin: 24px 0 40px; }
@@ -591,6 +591,10 @@
   /* interactive dot field (ported from the portfolio's ParticleField) replaces the CSS dots */
   body { background-image: none; }
   .dot-field { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+  .byline { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); text-decoration: none; }
+  .byline:hover { color: var(--ink); }
+  .byline img { width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--rule-2); object-fit: cover; }
 </style>
 </head>
 <body>
@@ -616,7 +620,10 @@
   </div>
   <div class="console-body">
     <div class="console-side">
-      <p class="caps lined">Taglish language model</p>
+      <div class="hero-kick">
+        <p class="caps lined">Taglish language model</p>
+        <a class="byline" href="https://johnandrei.vercel.app"><img src="img/john.jpg" alt="" width="32" height="32">by John Andrei Martinez</a>
+      </div>
       <h1>LiitLLM</h1>
       <p class="spec it">32.8M parameters &middot; 2 &times; 2 runs</p>
   <p class="lede side-lede" data-mode="plain">
