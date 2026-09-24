@@ -488,7 +488,8 @@
 
   /* hero: open on the page, no frame. Oversized title, statement beside the story, then the live filter. */
   .hero { max-width: 1408px; margin: 0 auto; padding: 48px 24px 64px; }
-  .hero .console { border: 0; border-radius: 0; background: none; overflow: visible; max-width: none; }
+  .hero .console { max-width: none; }
+  .hero .console-body { padding: 48px 48px 48px; }
   .hero .console-head { display: none; }
   .hero .console-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 64px;
     align-items: start;
@@ -508,11 +509,12 @@
   .hero .steps .it { position: static; font-size: 28px; color: var(--clay); }
   .hero .steps b { margin: 8px 0 4px; }
   .hero .try { grid-area: try; }
-  .hero .scorer { grid-area: tool; background: var(--paper); }
+  .hero .scorer { grid-area: tool; }
   .hero .specs { grid-area: specs; margin: 0 0 32px; }
   .hero .side-cta { grid-area: cta; margin: 0; }
   @media (max-width: 900px) {
-    .hero { padding: 24px 16px 48px; }
+    .hero { padding: 16px 12px 48px; }
+    .hero .console-body { padding: 24px 20px 32px; }
     .hero .console-body { grid-template-columns: minmax(0, 1fr);
       grid-template-areas: "kick" "spec" "title" "show" "lede" "steps" "specs" "cta" "try" "tool"; }
     .hero .spec { justify-self: start; margin-top: 8px; }
