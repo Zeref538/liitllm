@@ -6,6 +6,13 @@
 <title>LiitLLM — A Small Model That Speaks Taglish</title>
 <meta name="description" content="Case study: every large web corpus filters code-switching out as noise. This one filters for it — a 32.8M-parameter Taglish language model trained from scratch, with a two-seed ablation proving the filter is what causes the code-switching.">
 <style>
+  /* Self-hosted (SIL OFL, fonts/OFL.txt): no request to Google Fonts. */
+  @font-face { font-family: "Instrument Sans"; font-weight: 400; font-display: swap;
+    src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Sans"; font-weight: 600; font-display: swap;
+    src: url("fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Sans"; font-weight: 700; font-display: swap;
+    src: url("fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
   /* ============================================================
      LIITLLM — visual identity
 
@@ -69,7 +76,7 @@
   }
 
   :root {
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
   }
 
