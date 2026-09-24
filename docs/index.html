@@ -304,28 +304,7 @@
 
   /* The result band: dark in the light theme, raised in the dark theme. */
   .band {
-    border-top: 0; padding: 72px 0 64px;
-    --paper: #000000; --card: #141414; --sunk: #1c1c1c;
-    --ink: #ffffff; --ink-2: #c8c8c8; --ink-3: #8f8f8f;
-    --rule: #262626; --rule-2: #3a3a3a;
-    --clay: #e6653a; --tide: #2aa0c9; --switch: #b39aff;
-    --ash: #ff7fae; --good: #56d199; --track: #222222;
-    --clay-w: #4a2417; --tide-w: #123a48; --sw-w: #2f2657;
-    background: var(--paper); color: var(--ink);
-  }
-  :root[data-theme="dark"] .band { --paper: #ffffff; --card: #f7f7f7; --sunk: #efefef;
-    --ink: #000000; --ink-2: #333333; --ink-3: #6b6b6b;
-    --rule: #e5e5e5; --rule-2: #cccccc;
-    --clay: #b0401f; --tide: #0b6f99; --switch: #5b3cc4;
-    --ash: #a3244f; --good: #1c6b47; --track: #ececec;
-    --clay-w: #fbe3da; --tide-w: #dcecf4; --sw-w: #e8e1fb; }
-  @media (prefers-color-scheme: dark) {
-    :root:where(:not([data-theme="light"])) .band { --paper: #ffffff; --card: #f7f7f7; --sunk: #efefef;
-    --ink: #000000; --ink-2: #333333; --ink-3: #6b6b6b;
-    --rule: #e5e5e5; --rule-2: #cccccc;
-    --clay: #b0401f; --tide: #0b6f99; --switch: #5b3cc4;
-    --ash: #a3244f; --good: #1c6b47; --track: #ececec;
-    --clay-w: #fbe3da; --tide-w: #dcecf4; --sw-w: #e8e1fb; }
+    border-top: 1px solid var(--rule); padding: 72px 0 64px;
   }
   .band .wrap { max-width: 1040px; }
   .band h2 { font-size: clamp(24px, 3.6vw, 34px); max-width: 22ch; }
@@ -359,8 +338,6 @@
   @media (min-width: 1320px) {
     /* Band content starts at the text column's left edge, clear of the rail. */
     .band .wrap { margin-left: calc(50% - 426px); margin-right: auto; }
-    .rail.on-band { --ink: #ffffff; --ink-3: #8f8f8f; --rule: #3a3a3a; }
-    :root[data-theme="dark"] .rail.on-band { --ink: #000000; --ink-3: #6b6b6b; --rule: #cccccc; }
     .rail { opacity: 0; pointer-events: none; transition: opacity .2s; }
     .rail.on { opacity: 1; pointer-events: auto; }
     .rail {
@@ -409,16 +386,15 @@
   .byline-name { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
   .byline-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px !important; font-weight: 600; }
 
-  .site-foot { background: var(--ink); color: var(--paper); padding: 56px 0 28px; margin-top: 40px; }
-  .site-foot .mark { color: var(--paper); }
-  .site-foot a { color: var(--paper); }
+  .site-foot { border-top: 2px solid var(--ink); padding: 48px 0 28px; margin-top: 40px; }
+  .site-foot a { color: var(--ink); }
   .site-foot code { background: transparent; color: inherit; padding: 0; }
   .foot-grid { max-width: 1040px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
   .foot-grid nav a { display: block; margin: 0 0 8px; text-decoration: none; opacity: .85; }
   .foot-grid nav a:hover { opacity: 1; text-decoration: underline; }
   .foot-h { font-weight: 700; margin-bottom: 12px; }
   .foot-base { max-width: 1040px; margin-top: 36px; padding-top: 18px; opacity: .6;
-               border-top: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); }
+               border-top: 1px solid var(--rule); }
   @media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr 1fr; }
                               .foot-grid > div:first-child { grid-column: 1 / -1; } }
 </style>
@@ -1046,53 +1022,13 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
   </p>
 </section>
 
-
-<section class="wrap about" id="about">
-  <p class="kicker">11 — About</p>
-  <h2 class="giant">Why this exists</h2>
-  <div class="about-cols">
-    <div>
-      <h3>What LiitLLM does</h3>
-      <p>
-        It is a small language model that writes the way Filipinos write online:
-        Tagalog grammar with English dropped in mid-sentence. It was built from an
-        empty file, with its own tokenizer, its own training data and its own
-        transformer, on free Kaggle GPUs.
-      </p>
-    </div>
-    <div>
-      <h3>Why it exists</h3>
-      <p>
-        The data that language models learn from is sorted by language, and mixed
-        writing gets sorted out. Taglish is how millions of people actually write,
-        yet it is missing by accident. I wanted to know if keeping only that writing,
-        on purpose, is enough to get a model that writes it too. The answer on this
-        page says yes.
-      </p>
-    </div>
-  </div>
-
-  <div class="byline">
-    <img src="img/author.jpg" alt="John Andrei Martinez" width="112" height="112">
-    <div>
-      <p class="byline-role">Built by</p>
-      <p class="byline-name">John Andrei Martinez</p>
-      <p class="byline-links">
-        <a href="https://johnandrei.vercel.app">Portfolio</a>
-        <a href="https://github.com/Zeref538">GitHub</a>
-        <a href="https://www.kaggle.com/johnandreimartinez">Kaggle</a>
-      </p>
-    </div>
-  </div>
-</section>
 </main>
 
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div>
       <a class="mark mark-lg" href="https://johnandrei.vercel.app">zeref<span>.</span></a>
-      <p class="small">Case studies by John Andrei Martinez. Every figure on this page is
-        generated from the run artifacts in <code>results/</code>.</p>
+      <p class="small">Case studies by John Andrei Martinez.</p>
     </div>
     <nav aria-label="More">
       <p class="foot-h">This project</p>
@@ -1342,7 +1278,6 @@ try {
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     links.forEach(([sec, a]) => a.setAttribute("aria-current", sec === e.target));
-    rail.classList.toggle("on-band", e.target.classList.contains("band"));
   }), { rootMargin: "-45% 0px -50% 0px" });
   // Hidden over the hero, which is wider than the text column.
   new IntersectionObserver(([e]) => rail.classList.toggle("on", !e.isIntersecting))
