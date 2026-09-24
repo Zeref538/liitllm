@@ -17,8 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "img"
 
 # Same hues as the page; blue nudged up so it passes the chroma check.
-CLAY, TIDE = "#a8442a", "#0b6f99"
-PAPER, INK, MUTED, GRID = "#f3eee4", "#191510", "#6b6358", "#ddd5c7"
+CLAY, TIDE = "#b0401f", "#0b6f99"
+PAPER, INK, MUTED, GRID = "#ffffff", "#000000", "#6b6b6b", "#e5e5e5"
 
 # Bundled so the images render the same on any machine (SIL OFL, see docs/fonts/OFL.txt).
 from matplotlib import font_manager
@@ -149,7 +149,7 @@ def runs_table():
     cells = [[a, str(s), f"{r['en_mean']:.3f}", f"{r['tl_mean']:.3f}",
               f"{round(r['taglish_share'] * r['n'])} / {r['n']}", f"{r['val_loss']:.3f}",
               f"{r['step']:,}"] for a, s, r in rows]
-    tint = {"Filtered": "#f6ded3", "Unfiltered": "#d4e8ef"}
+    tint = {"Filtered": "#fbe3da", "Unfiltered": "#dcecf4"}
 
     fig, ax = plt.subplots(figsize=(11, 3.6)); ax.axis("off")
     fig.suptitle("Every training run, measured the same way", fontsize=16, fontweight="bold", y=0.95)
@@ -158,7 +158,7 @@ def runs_table():
     for (i, j), cell in t.get_celld().items():
         cell.set_edgecolor(GRID)
         if i == 0:
-            cell.set_facecolor("#1f2a37"); cell.set_text_props(color="white", fontweight="bold")
+            cell.set_facecolor("#000000"); cell.set_text_props(color="white", fontweight="bold")
         else:
             cell.set_facecolor(tint[rows[i - 1][0]] if j in (0, 2) else "white")
     fig.text(0.5, 0.06, "32 generations per run from 8 fixed prompts. Shaded column = the metric the "
