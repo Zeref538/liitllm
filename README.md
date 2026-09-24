@@ -8,7 +8,7 @@ Language sibling of [Munti](https://github.com/Zeref538/munti), which proved the
 English TinyStories. The model code is Munti's, essentially unchanged. The new
 work is the data.
 
-**[Read the case study →](https://zeref538.github.io/liitllm/)** · **[Models and results on Kaggle →](https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish)**
+**[Read the case study →](https://zeref538.github.io/liitllm/)** · **[Download the model (131 MB, no login) →](https://github.com/Zeref538/liitllm/releases/tag/v1.0)** · **[Models and results on Kaggle →](https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish)**
 
 ![Results dashboard: the Taglish-filtered models write 2.8x more English than the unfiltered controls](docs/img/results.png)
 

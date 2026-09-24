@@ -79,6 +79,7 @@ def generate_text(model, tok, prompt: str, device="cpu", **kw) -> str:
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--ckpt", default="out/ckpt.pt")
+    p.add_argument("--tokenizer", default="data/tokenizer.json")
     p.add_argument("--prompt", default="Kahapon nag-")
     p.add_argument("--tokens", type=int, default=200)
     p.add_argument("--temperature", type=float, default=0.8)
@@ -86,11 +87,13 @@ if __name__ == "__main__":
     p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = p.parse_args()
 
-    ckpt = torch.load(a.ckpt, map_location=a.device, weights_only=False)
+    # weights_only: checkpoints get downloaded from releases, and a full unpickle
+    # would run any code hidden in the file. Ours are plain tensors and dicts.
+    ckpt = torch.load(a.ckpt, map_location=a.device, weights_only=True)
     model = Liit.from_checkpoint(ckpt, device=a.device)
     print(
         generate_text(
-            model, tk.load(), a.prompt, device=a.device,
+            model, tk.load(a.tokenizer), a.prompt, device=a.device,
             max_new_tokens=a.tokens, temperature=a.temperature, top_k=a.top_k,
         )
     )

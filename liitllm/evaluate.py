@@ -54,7 +54,7 @@ FAILURE_PROMPTS = [
 
 
 def _load(ckpt_path, device):
-    ck = torch.load(ckpt_path, map_location=device, weights_only=False)
+    ck = torch.load(ckpt_path, map_location=device, weights_only=True)  # never unpickle code from a downloaded file
     return Liit.from_checkpoint(ck, device=device), ck.get("step"), ck.get("val_loss")
 
 

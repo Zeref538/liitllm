@@ -845,16 +845,38 @@
 <section class="wrap" id="repro">
   <p class="kicker">10 — Reproduce it</p>
   <h2>Run it yourself</h2>
+
+  <h3 id="download">Download the model</h3>
+  <p>
+    No login needed. Both files are weights only, so they load with PyTorch's safe
+    <code>weights_only=True</code> mode and run on a laptop CPU.
+  </p>
+  <ul>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-taglish.pt"><b>liitllm-taglish.pt</b></a>
+      — the Taglish model (131 MB)</li>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/liitllm-control-unfiltered.pt">liitllm-control-unfiltered.pt</a>
+      — the control it is compared against (131 MB)</li>
+    <li><a href="https://github.com/Zeref538/liitllm/releases/download/v1.0/tokenizer.json">tokenizer.json</a>
+      — needed by both (0.5 MB)</li>
+  </ul>
+  <pre><code>git clone https://github.com/Zeref538/liitllm &amp;&amp; cd liitllm
+pip install -e .
+python -m liitllm.sample --ckpt liitllm-taglish.pt --tokenizer tokenizer.json --prompt "Kahapon nag-"</code></pre>
+  <p class="small muted">
+    Checksums and release notes: <a href="https://github.com/Zeref538/liitllm/releases/tag/v1.0">GitHub release v1.0</a>.
+    All four runs (both seeds per arm) are on <a href="https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish">Kaggle</a>.
+  </p>
+
+  <h3>Train it from zero</h3>
   <p>
     The correctness gate runs on a CPU in about a minute and must pass before any GPU
     time is spent — it is the reason a bad generation can be blamed on data rather than
     on a broken attention mask.
   </p>
-  <pre><code>git clone &lt;repo&gt; &amp;&amp; cd LiitLLM
+  <pre><code>git clone https://github.com/Zeref538/liitllm &amp;&amp; cd liitllm
 pip install -e .
 
 python test_liitllm.py          # transformer + training loop correctness
-python test_taglish.py          # the code-switch scorer
 python test_data.py             # corpus parity and dedup
 python test_resume.py           # a killed session can resume
 
