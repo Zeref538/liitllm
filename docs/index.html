@@ -534,6 +534,35 @@
     .closing { padding: 64px 16px 48px; }
     .site-foot .foot-grid, .site-foot .foot-strip, .site-foot .foot-base { padding-left: 16px; padding-right: 16px; }
   }
+
+  /* hero, compact: fits one laptop screen. Title beside the headline, story beside the live filter. */
+  .hero { padding: 16px 24px 48px; }
+  .hero .console-body { padding: 32px 40px 0; column-gap: 56px; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: none;
+    grid-template-areas: "kick spec" "title show" "lede try" "lede tool" "specs tool" "cta tool" "steps steps"; }
+  .hero .spec { font-size: 18px; }
+  .hero h1 { font-size: clamp(60px, 7vw, 104px); margin: 8px 0 16px; align-self: end; }
+  .hero .display { align-self: end; margin: 0 0 16px; max-width: 22ch; }
+  .hero .side-lede { font-size: 15.5px; line-height: 1.6; margin: 0 0 20px; border-top: 1px solid var(--rule); padding-top: 20px; }
+  .hero .try { margin: 0 0 12px; border-top: 1px solid var(--rule); padding-top: 20px; }
+  .hero .specs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; margin: 0 0 20px; }
+  .hero .specs div { padding: 8px 0; }
+  .hero .side-cta .pill { min-height: 44px; }
+  .hero .side-cta p { margin-top: 8px; }
+  .hero .steps { margin: 20px -40px 0; border-top: 1px solid var(--rule); border-bottom: 0; }
+  .hero .steps li { padding: 14px 24px 16px 40px; font-size: 13.5px; }
+  .hero .steps li + li { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .hero .steps .it { font-size: 18px; margin-right: 8px; }
+  .hero .steps b { display: inline; margin: 0 0 0 0; font-size: 15px; }
+  .hero .steps b::after { content: ""; display: block; height: 4px; }
+  @media (max-width: 900px) {
+    .hero { padding: 16px 12px 40px; }
+    .hero .console-body { padding: 24px 20px 0; grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "kick" "spec" "title" "show" "lede" "specs" "cta" "try" "tool" "steps"; }
+    .hero .side-cta { margin-bottom: 28px; }
+    .hero .steps { margin: 28px -20px 0; }
+    .hero .steps li, .hero .steps li + li { padding: 14px 20px; border-left: 0; }
+  }
 </style>
 </head>
 <body>
@@ -543,7 +572,7 @@
     <a class="mark" href="https://johnandrei.vercel.app" aria-label="zeref. portfolio home">zeref<span>.</span></a>
     <div class="brand"><span class="sep">/</span> LiitLLM</div>
     <div class="seg" role="group" aria-label="Reading level">
-      <button type="button" id="m-plain" aria-pressed="true">Plain English</button>
+      <button type="button" id="m-plain" aria-pressed="true">Simple</button>
       <button type="button" id="m-expert" aria-pressed="false">Technical</button>
     </div>
     <button type="button" class="iconbtn" id="theme" aria-label="Switch colour theme">◐</button>
