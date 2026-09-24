@@ -492,8 +492,7 @@
   }
 
   /* ---------------- every section is a console panel ---------------- */
-  .rail { display: none !important; }
-  .panel-sec { padding: 0 24px 24px; border-top: 0; }
+  .panel-sec { padding: 0 0 24px; border-top: 0; }
   .panel-sec .console-side { display: block; }
   .side-stick { position: sticky; top: 88px; }
   .panel-sec .console-side h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.02; margin: 0; }
@@ -519,6 +518,31 @@
     .panel-sec { padding: 0 12px 16px; }
     .side-stick { position: static; }
   }
+
+  /* ---------------- two columns: contents rail | panels ---------------- */
+  .page-grid { max-width: 1408px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1100px) {
+    .page-grid { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; }
+    .page-grid > .rail {
+      display: block; position: sticky; top: 88px; align-self: start; left: auto; width: auto;
+      opacity: 1 !important; pointer-events: auto !important; font-size: 13px; line-height: 1.35;
+    }
+    .page-grid > .rail a { display: flex; gap: 12px; padding: 8px 0 8px 14px; color: var(--ink-3);
+      text-decoration: none; border-left: 1px solid var(--rule); }
+    .page-grid > .rail a:hover { color: var(--ink); }
+    .page-grid > .rail a[aria-current="true"] { color: var(--ink); font-weight: 600;
+      border-left: 2px solid var(--ink); padding-left: 13px; }
+    .page-grid > .rail a span { min-width: 1.6em; }
+    .panel-sec .console-body { grid-template-columns: minmax(220px, 1fr) 2fr; }
+  }
+  .rail-h { margin: 0 0 12px 14px; }
+  @media (max-width: 1099px) { .page-grid > .rail { display: none; } .page-grid { padding: 0 12px; } }
+
+  /* background: fine dots instead of grid lines */
+  body { background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 22px 22px; }
+  :root { --dot: rgba(28, 25, 23, .13); }
+  :root[data-theme="dark"] { --dot: rgba(255, 255, 255, .09); }
+  @media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) { --dot: rgba(255, 255, 255, .09); } }
 </style>
 </head>
 <body>
@@ -612,7 +636,8 @@
 </div>
 </header>
 
-<nav class="rail" aria-label="Chapters"></nav>
+<div class="page-grid">
+<nav class="rail" aria-label="Chapters"><p class="caps rail-h">Contents</p></nav>
 <main>
 
 <section class="panel-sec" id="result">
@@ -1242,6 +1267,7 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
 </section>
 
 </main>
+</div>
 
 <section class="closing">
   <p class="display closing-line">Built from an empty file. <span class="it">Made for how Filipinos actually write.</span></p>
@@ -1492,12 +1518,12 @@ try {
   const rail = document.querySelector(".rail");
   const secs = [...document.querySelectorAll("main section[id]")];
   const links = secs.map(sec => {
-    const k = sec.querySelector(".kicker");
-    if (!k) return null;
-    const [num, ...rest] = k.textContent.split("—");
+    const no = sec.querySelector(".console-head .step-no");
+    const title = sec.querySelector(".console-head .caps");
+    if (!no || !title) return null;
     const a = document.createElement("a");
     a.href = "#" + sec.id;
-    a.innerHTML = `<span>${num.trim()}</span>${rest.join("—").trim()}`;
+    a.innerHTML = `<span>${no.textContent.trim()}</span>${title.textContent.trim()}`;
     rail.appendChild(a);
     return [sec, a];
   }).filter(Boolean);
