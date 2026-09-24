@@ -563,9 +563,38 @@
     .hero .steps { margin: 28px -20px 0; }
     .hero .steps li, .hero .steps li + li { padding: 14px 20px; border-left: 0; }
   }
+
+  /* border glow, ported from the portfolio's BorderGlow: the edge nearest the pointer lights up.
+     --edge (0-100) = how close the pointer is to the edge; --angle = which side it is on. */
+  .console { position: relative; isolation: isolate; overflow: visible; --edge: 0; --angle: 45deg; }
+  .console::before, .console > .edge-light {
+    content: ""; position: absolute; border-radius: inherit; pointer-events: none;
+    opacity: calc((var(--edge) - 30) / 70); transition: opacity .25s ease-out; }
+  .console:not(:hover)::before, .console:not(:hover) > .edge-light { opacity: 0; transition: opacity .75s ease-in-out; }
+  /* the lit border: a clay mesh, cut to a 2px ring, then to a wedge facing the pointer */
+  .console::before { inset: -1px; padding: 2px; z-index: 2;
+    background: radial-gradient(at 80% 55%, #e6653a, transparent 50%), radial-gradient(at 8% 6%, #f2a37f, transparent 50%),
+                radial-gradient(at 51% 4%, #b0401f, transparent 50%), var(--clay);
+    mask: conic-gradient(from var(--angle), #000 25%, transparent 40%, transparent 60%, #000 75%),
+          linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: intersect, exclude; }
+  /* the soft halo outside the border, same wedge */
+  .console > .edge-light { inset: -40px; z-index: 1;
+    mask: conic-gradient(from var(--angle), #000 2.5%, transparent 10%, transparent 90%, #000 97.5%); }
+  .console > .edge-light::before { content: ""; position: absolute; inset: 40px; border-radius: inherit;
+    box-shadow: 0 0 2px 0 rgb(176 64 31 / 60%), 0 0 8px 0 rgb(176 64 31 / 35%),
+                0 0 24px 2px rgb(176 64 31 / 20%), 0 0 48px 4px rgb(176 64 31 / 10%); }
+  @media (hover: none) { .console::before, .console > .edge-light { display: none; } }
+
+  /* the card halos reach 40px past the cards; never let that widen the page */
+  html, body { overflow-x: clip; }
+  /* interactive dot field (ported from the portfolio's ParticleField) replaces the CSS dots */
+  body { background-image: none; }
+  .dot-field { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 </style>
 </head>
 <body>
+<canvas class="dot-field" aria-hidden="true"></canvas>
 
 <div class="bar">
   <div class="wrap">
@@ -1541,6 +1570,70 @@ try {
     links.forEach(([sec, a]) => a.setAttribute("aria-current", sec === e.target));
   }), { rootMargin: "-45% 0px -50% 0px" });
   links.forEach(([sec]) => io.observe(sec));
+})();
+
+// Border glow: same maths as the portfolio's BorderGlow.jsx, one listener for every card.
+document.querySelectorAll(".console").forEach(card => {
+  card.prepend(Object.assign(document.createElement("span"), { className: "edge-light" }));
+  card.addEventListener("pointermove", e => {
+    const r = card.getBoundingClientRect();
+    const dx = e.clientX - r.left - r.width / 2, dy = e.clientY - r.top - r.height / 2;
+    // 0 at the centre, 1 on the edge, whichever edge is nearer in proportion
+    const edge = Math.min(Math.max(Math.abs(dx) / (r.width / 2), Math.abs(dy) / (r.height / 2)), 1);
+    let angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+    if (angle < 0) angle += 360;
+    card.style.setProperty("--edge", (edge * 100).toFixed(1));
+    card.style.setProperty("--angle", angle.toFixed(1) + "deg");
+  });
+});
+
+// Dot field: a grid of dots that grow, turn clay and lean toward the pointer.
+// Same approach as the portfolio's ParticleField.jsx; sleeps when the pointer is still.
+(() => {
+  const canvas = document.querySelector(".dot-field");
+  const ctx = canvas.getContext("2d");
+  const dpr = Math.min(devicePixelRatio || 1, 2), GAP = 22, RADIUS = 140;
+  let dots = [], mouse = { x: -9999, y: -9999 }, raf = null, idle = 0, colours;
+  const readColours = () => {
+    const cs = getComputedStyle(document.documentElement);
+    colours = { dot: cs.getPropertyValue("--dot").trim() || "rgba(28,25,23,.13)",
+                hot: cs.getPropertyValue("--clay").trim() || "#b0401f" };
+  };
+  const build = () => {
+    canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dots = [];
+    for (let x = GAP / 2; x < innerWidth; x += GAP)
+      for (let y = GAP / 2; y < innerHeight; y += GAP) dots.push({ ox: x, oy: y, x, y });
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    let moving = false;
+    for (const d of dots) {
+      const dx = mouse.x - d.ox, dy = mouse.y - d.oy, dist = Math.hypot(dx, dy);
+      const t = dist < RADIUS ? 1 - dist / RADIUS : 0;           // 0 far away, 1 under the pointer
+      const tx = d.ox + dx * 0.08 * t, ty = d.oy + dy * 0.08 * t;
+      d.x += (tx - d.x) * 0.2; d.y += (ty - d.y) * 0.2;
+      if (Math.abs(tx - d.x) > 0.05 || Math.abs(ty - d.y) > 0.05) moving = true;
+      const size = 2 + t * 2;
+      ctx.globalAlpha = t ? 0.35 + t * 0.65 : 1;
+      ctx.fillStyle = t ? colours.hot : colours.dot;
+      ctx.beginPath(); ctx.arc(d.x, d.y, size / 2, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    idle = mouse.x === -9999 && !moving ? idle + 1 : 0;
+    raf = idle > 30 ? null : requestAnimationFrame(draw);
+  };
+  const wake = () => { if (raf === null) raf = requestAnimationFrame(draw); };
+  readColours(); build(); draw();
+  addEventListener("resize", () => { build(); wake(); });
+  // theme switch changes the colours: re-read them
+  new MutationObserver(() => { readColours(); wake(); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;   // static dots only
+  addEventListener("pointermove", e => { mouse.x = e.clientX; mouse.y = e.clientY; wake(); }, { passive: true });
+  document.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) wake(); });
 })();
 </script>
 </body>
