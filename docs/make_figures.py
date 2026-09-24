@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "img"
 
 # Same hues as the page; blue nudged up so it passes the chroma check.
-CLAY, TIDE = "#b0401f", "#0b6f99"
+CLAY, TIDE = "#b0401f", "#808080"  # one project colour; the control is grey
 PAPER, INK, MUTED, GRID = "#ffffff", "#000000", "#6b6b6b", "#e5e5e5"
 
 # Bundled so the images render the same on any machine (SIL OFL, see docs/fonts/OFL.txt).
@@ -149,7 +149,7 @@ def runs_table():
     cells = [[a, str(s), f"{r['en_mean']:.3f}", f"{r['tl_mean']:.3f}",
               f"{round(r['taglish_share'] * r['n'])} / {r['n']}", f"{r['val_loss']:.3f}",
               f"{r['step']:,}"] for a, s, r in rows]
-    tint = {"Filtered": "#fbe3da", "Unfiltered": "#dcecf4"}
+    tint = {"Filtered": "#fbe3da", "Unfiltered": "#ececec"}
 
     fig, ax = plt.subplots(figsize=(11, 3.6)); ax.axis("off")
     fig.suptitle("Every training run, measured the same way", fontsize=16, fontweight="bold", y=0.95)
