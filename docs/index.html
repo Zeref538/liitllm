@@ -292,6 +292,85 @@
   html[data-view="expert"] span[data-mode="expert"] { display: inline; }
   html[data-view="plain"] li[data-mode="plain"],
   html[data-view="expert"] li[data-mode="expert"] { display: list-item; }
+
+  /* ---------------- layout: breaking the single column ----------------
+     The page used to be one 800px column with ten identical sections.
+     Three places now break it: the hero puts the live filter beside the
+     headline, the result is one dark full-width band, and a chapter rail
+     sits in the left margin on wide screens. Everything else stays quiet. */
+
+  .kicker {
+    font-family: var(--sans); font-size: 13.5px; font-weight: 600;
+    letter-spacing: 0; text-transform: none; color: var(--clay);
+  }
+
+  @media (min-width: 1080px) {
+    .hero.wrap { max-width: 1160px; display: grid; grid-template-columns: 1.05fr 1fr;
+                 gap: 18px 56px; align-items: center; padding-top: 72px; padding-bottom: 64px; }
+    .hero h1 { font-size: 54px; }
+    .hero-demo { align-self: center; }
+  }
+
+  /* The result band: dark in the light theme, raised in the dark theme. */
+  .band {
+    border-top: 0; padding: 72px 0 64px;
+    --paper: #191510; --card: #221d17; --sunk: #2b251d;
+    --ink: #f6f1e7; --ink-2: #cfc5b3; --ink-3: #9a8f7d;
+    --rule: #342d24; --rule-2: #4a4135;
+    --clay: #ff8a5f; --tide: #5cc4e6; --switch: #b39aff; --ash: #ff7fae;
+    --track: #2b251d; --clay-w: #4a2417; --tide-w: #123a48; --sw-w: #2f2657;
+    background: var(--paper); color: var(--ink);
+  }
+  :root[data-theme="dark"] .band { --paper: #221d17; --card: #2b251d; }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .band { --paper: #221d17; --card: #2b251d; }
+  }
+  .band .wrap { max-width: 1040px; }
+  .band h2 { font-size: clamp(24px, 3.6vw, 34px); max-width: 22ch; }
+  .band p, .band .note { max-width: 70ch; }
+  .headline-num {
+    display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap;
+    margin: 26px 0 30px;
+  }
+  .headline-num .x {
+    font-size: clamp(76px, 15vw, 150px); font-weight: 700; line-height: .85;
+    letter-spacing: -.05em; color: var(--clay);
+  }
+  .headline-num p { font-size: 18px; color: var(--ink-2); max-width: 30ch; margin: 0; }
+  .pair { gap: 22px; margin-top: 8px; }
+  .pair > div { display: flex; flex-direction: column; }
+  .pair blockquote { flex: 1; }
+
+  /* Failures: hanging numerals, because it is a counted list. */
+  #broke { counter-reset: fail; }
+  #broke h3 { counter-increment: fail; position: relative; margin-top: 38px; }
+  #broke h3::before {
+    content: counter(fail); position: absolute; right: calc(100% + 18px); top: -.28em;
+    font-size: 40px; font-weight: 700; line-height: 1; color: var(--ash); opacity: .85;
+  }
+  @media (max-width: 960px) {
+    #broke h3::before { position: static; display: block; font-size: 30px; margin-bottom: 4px; }
+  }
+
+  /* Chapter rail: only where there is a margin wide enough to hold it. */
+  .rail { display: none; }
+  @media (min-width: 1320px) {
+    /* Band content starts at the text column's left edge, clear of the rail. */
+    .band .wrap { margin-left: calc(50% - 426px); margin-right: auto; }
+    .rail.on-band { --ink: #f6f1e7; --ink-3: #9a8f7d; --rule: #4a4135; }
+    .rail { opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .rail.on { opacity: 1; pointer-events: auto; }
+    .rail {
+      display: block; position: fixed; top: 110px;
+      left: max(24px, calc(50% - 400px - 250px)); width: 200px;
+      font-size: 13px; line-height: 1.35; z-index: 30;
+    }
+    .rail a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--ink-3);
+              text-decoration: none; border-left: 2px solid var(--rule); }
+    .rail a:hover { color: var(--ink); }
+    .rail a[aria-current="true"] { color: var(--ink); border-left-color: var(--clay); font-weight: 600; }
+    .rail a span { font-variant-numeric: tabular-nums; min-width: 1.4em; }
+  }
 </style>
 </head>
 <body>
@@ -308,6 +387,7 @@
 </div>
 
 <header class="wrap hero">
+  <div class="hero-text">
   <p class="kicker">Case study — from-scratch language model</p>
   <h1>Every big corpus throws Taglish away.<br>This one keeps only Taglish.</h1>
   <p class="lede" data-mode="plain">
@@ -336,6 +416,9 @@
     <span><b>&#8369;0</b> spent</span>
   </div>
 
+  </div>
+
+  <div class="hero-demo">
   <div class="scorer">
     <div class="scorer-head">
       <p class="kicker">The filter, running live</p>
@@ -364,14 +447,22 @@
     Type in the box. This is the actual scorer — the same 431 Tagalog and 647 English
     words, the same affix stripping — that chose which documents the model learned from.
   </p>
+  </div>
 </header>
 
+<nav class="rail" aria-label="Chapters"></nav>
 <main>
 
-<section class="wrap" id="result">
+<section class="band" id="result">
+<div class="wrap">
   <p class="kicker">01 — The result</p>
   <h2 data-mode="plain">The filtered model borrows about three times as much English</h2>
   <h2 data-mode="expert">en_mean 0.185 vs 0.065, with no overlap between arms</h2>
+
+  <div class="headline-num">
+    <span class="x">2.8&times;</span>
+    <p>more English in the filtered model's writing than in the control's, averaged over two training runs each.</p>
+  </div>
 
   <p data-mode="plain">
     Both models were given the same eight Taglish prompts and asked to continue them,
@@ -426,6 +517,8 @@
   <h3>What the difference actually sounds like</h3>
   <p class="small muted">Same prompt, both models, at 60,000 steps.</p>
 
+  <div class="two pair">
+  <div>
   <p><span class="gen-tag"><b style="color:var(--clay)">FILTERED</b> — <em>tl 0.46</em> · <i>en 0.27</i></span></p>
   <blockquote class="clay">
     Kahapon nag-iinom ako ng buko juice. Alam mo naman kasi yung feeling na gusto mo ng
@@ -434,12 +527,17 @@
     I'm not worried about it. Gets ko na lang, and I know I'm just hoping for that.
   </blockquote>
 
+  </div>
+  <div>
   <p><span class="gen-tag"><b style="color:var(--tide)">UNFILTERED</b> — <em>tl 0.73</em> · <i>en 0.01</i></span></p>
   <blockquote class="tide">
     Kahapon nag-usap sila ni Jimmy sa telepono. Nang tanungin kung anong oras na ang
     kanilang komunikasyon para sa Skype, tinanong sila ni Jimmy kung ano ang sagot.
     Sabi ni Jimmy, "Puwede na ulit nating sabihin na hindi natin naayos ang problema."
   </blockquote>
+
+  </div>
+  </div>
 
   <p>
     The difference is register, not just vocabulary. The filtered model writes the way
@@ -448,6 +546,7 @@
     reported speech in a news register. Both are fluent Filipino. Only one of them is
     Taglish.
   </p>
+</div>
 </section>
 
 <section class="wrap" id="why">
@@ -1122,6 +1221,31 @@ try {
   const v = localStorage.getItem("liit-view"); if (v) setView(v);
   const t = localStorage.getItem("liit-theme"); if (t) root.dataset.theme = t;
 } catch (e) {}
+
+// Chapter rail: built from each section's label, current one highlighted.
+(() => {
+  const rail = document.querySelector(".rail");
+  const secs = [...document.querySelectorAll("main section[id]")];
+  const links = secs.map(sec => {
+    const k = sec.querySelector(".kicker");
+    if (!k) return null;
+    const [num, ...rest] = k.textContent.split("—");
+    const a = document.createElement("a");
+    a.href = "#" + sec.id;
+    a.innerHTML = `<span>${num.trim()}</span>${rest.join("—").trim()}`;
+    rail.appendChild(a);
+    return [sec, a];
+  }).filter(Boolean);
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(([sec, a]) => a.setAttribute("aria-current", sec === e.target));
+    rail.classList.toggle("on-band", e.target.classList.contains("band"));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  // Hidden over the hero, which is wider than the text column.
+  new IntersectionObserver(([e]) => rail.classList.toggle("on", !e.isIntersecting))
+    .observe(document.querySelector(".hero"));
+  links.forEach(([sec]) => io.observe(sec));
+})();
 </script>
 </body>
 </html>
