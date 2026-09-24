@@ -321,6 +321,7 @@
   </p>
 
   <div class="stat-line">
+    <span><b>~3&times;</b> more English</span>
     <span><b>32.8M</b> parameters</span>
     <span><b>995M</b> tokens per arm</span>
     <span><b>4</b> runs &times; 60k steps</span>
@@ -360,277 +361,8 @@
 
 <main>
 
-<section class="wrap" id="why">
-  <p class="kicker">01 — The premise</p>
-  <h2 data-mode="plain">A filter that calls the real language "noise"</h2>
-  <h2 data-mode="expert">Language ID is a document-level classifier, and Taglish is a sentence-level phenomenon</h2>
-
-  <div data-mode="plain">
-    <p>
-      To build a training set, you crawl the web and sort pages by language. A tool
-      looks at each page and says "this is Tagalog" or "this is English." Pages it
-      can't confidently label get thrown out.
-    </p>
-    <p>
-      Now consider how a Filipino actually writes: <em>"Kahapon nag-commute ako
-      papuntang office kasi grabe ang traffic."</em> The grammar is Tagalog. Half the
-      nouns are English. The tool sees a page full of that, can't commit to either
-      label, and deletes it.
-    </p>
-    <p>
-      So the register that millions of people actually write in is systematically
-      absent from the data that language models learn from. Not by anyone's decision —
-      as a side effect of a sorting step nobody thinks about.
-    </p>
-  </div>
-  <div data-mode="expert">
-    <p>
-      CC-100, OSCAR, FineWeb-2 and friends all route documents through a fastText
-      langid classifier with a confidence floor. Intra-sentential code-switching —
-      English content words inserted into Tagalog morphosyntax — produces exactly the
-      low-confidence, split-posterior documents that floor is designed to remove.
-    </p>
-    <p>
-      The consequence is a systematic register gap. The Filipino text that survives
-      collection skews formal and monolingual: news copy, encyclopedic prose, official
-      statements. The conversational register — the one with the code-switching in it —
-      is thinned out at the point of collection, before any model sees it.
-    </p>
-    <p>
-      Tagalog Wikipedia is excluded here for the same reason, deliberately. It is
-      clean, well-formed, and almost entirely free of the phenomenon under study.
-    </p>
-  </div>
-</section>
-
-<section class="wrap" id="filter">
-  <p class="kicker">02 — The scorer</p>
-  <h2 data-mode="plain">Two word lists and a rule about prefixes</h2>
-  <h2 data-mode="expert">Lexicon-ratio scoring, and why the two lists are built differently</h2>
-
-  <div data-mode="plain">
-    <p>
-      The filter is about thirty lines. It splits text into words and asks, for each
-      one, "is this in my Tagalog list?" and "is this in my English list?" Then it
-      keeps documents where <em>both</em> answers come back often enough.
-    </p>
-    <p>
-      Two details make it work, and both took a rewrite to find.
-    </p>
-  </div>
-  <div data-mode="expert">
-    <p>
-      <code>score(text)</code> returns the fraction of word tokens matching each
-      lexicon; <code>is_taglish</code> keeps a document when both fractions clear a
-      floor. No new dependencies, no model, and explainable in a paragraph — which
-      matters, because this same function decides the training corpus, the ablation,
-      <em>and</em> the headline metric.
-    </p>
-  </div>
-
-  <h3>The two lists are not symmetric</h3>
-  <p>
-    The Tagalog list is almost all <b>function words</b> — <code>ang</code>,
-    <code>ng</code>, <code>sa</code>, <code>kasi</code>, <code>naman</code>. Those are
-    a closed class: you cannot write Tagalog syntax without them, and English text
-    will not accidentally produce them.
-  </p>
-  <p>
-    The English list deliberately includes <b>content words</b> — <code>office</code>,
-    <code>traffic</code>, <code>meeting</code>. That asymmetry is forced by the
-    phenomenon itself: in <em>"nag-commute ako sa office"</em> there is not a single
-    English function word. Score English by function words and the most
-    characteristically Taglish sentences read as pure Tagalog.
-  </p>
-
-  <h3>Hyphens get split, or the most Taglish word scores nothing</h3>
-  <p>
-    <code>nag-commute</code> matches neither list as a single token — and neither does
-    <code>nagcommute</code>, because the affix stripper only finds a stem that is itself
-    in the Tagalog list, and <code>commute</code> is English. So the single most
-    characteristically Taglish word in the sentence would contribute <b>zero</b> to
-    either side.
-  </p>
-  <p>
-    Splitting on the hyphen fixes half of that: <code>commute</code> lands in the
-    English list. The <code>nag-</code> half still scores nothing, since bare affixes
-    are not lexicon entries. That is a real limitation, not a design choice — but it
-    only ever <em>under</em>-counts, and it under-counts the Tagalog side of a word
-    already surrounded by Tagalog function words, so the document is not at risk of
-    being misread as English.
-  </p>
-
-  <div class="note">
-    <p class="kicker">Morphology</p>
-    <p style="margin:0">
-      Tagalog is agglutinative: <code>trabaho</code> becomes <code>nagtrabaho</code>,
-      <code>trabahuhan</code>, <code>pinagtrabahuhan</code>. A bare root list misses all
-      of those and under-counts the Tagalog side. The scorer peels one prefix and one
-      suffix, and handles reduplication (<code>nagcocommute</code> &rarr;
-      <code>commute</code>). It stops at one layer on purpose — two layers reduces
-      <code>nasa</code> to <code>sa</code> and starts inventing matches.
-    </p>
-  </div>
-</section>
-
-<section class="wrap" id="corpus">
-  <p class="kicker">03 — The finding that dented my own premise</p>
-  <h2 data-mode="plain">The web text was already 40% Taglish</h2>
-  <h2 data-mode="expert">Measured keep-rate: 38.0% and 39.5%, not the ~10% the thesis assumed</h2>
-
-  <p data-mode="plain">
-    My whole pitch was that code-switching gets filtered out of web corpora. So I
-    measured how much survives, expecting very little. Across 50,000 documents from
-    each of two sources, <b>38% and 39.5%</b> already passed the Taglish test —
-    untouched, straight out of the corpus.
-  </p>
-  <p data-mode="expert">
-    Bake-off across FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>,
-    50,000 documents sampled from each: keep-rates of <b>38.0%</b> and <b>39.5%</b>.
-    The langid filter thins code-switched text but does not come close to removing it.
-  </p>
-
-  <div class="two">
-    <div class="card">
-      <div class="big clay">38.0%</div>
-      <p class="small muted" style="margin:6px 0 0">FineWeb-2 <code>fil_Latn</code> already passes the Taglish filter</p>
-    </div>
-    <div class="card">
-      <div class="big clay">39.5%</div>
-      <p class="small muted" style="margin:6px 0 0">HPLT 2.0 <code>tgl_Latn</code>, same measurement</p>
-    </div>
-  </div>
-
-  <div class="note warn">
-    <p class="kicker">This weakens the control arm, and it stays in</p>
-    <p style="margin:0">
-      The "unfiltered" model is supposed to be the contrast. But if its corpus is
-      already ~40% code-switched, it is not a clean negative — it is a weaker dose,
-      not a zero dose. The honest framing is not "filtering creates code-switching
-      from nothing." It is: <b>Filipino web text is already heavily code-switched, and
-      filtering the rest of the way still measurably changes the model.</b> That is a
-      smaller claim than I set out to make, and it is the one the data supports.
-    </p>
-  </div>
-
-  <h3>An earlier version of this page would have said something false</h3>
-  <p>
-    I first ran that bake-off on <b>2,000</b> documents and got 46.8% versus 34.4% —
-    a clear win for FineWeb-2, and I wrote it down as one. At 50,000 documents it is
-    38.0% versus 39.5%: the two sources are equivalent and the ranking had
-    <em>inverted</em>. Small samples do not give you a quiet, proportional error.
-    They give you a confident answer that is backwards.
-  </p>
-</section>
-
-<section class="wrap" id="build">
-  <p class="kicker">04 — The model</p>
-  <h2 data-mode="plain">What it is, and what "from scratch" means</h2>
-  <h2 data-mode="expert">32.8M-parameter decoder-only transformer, no pretrained weights</h2>
-
-  <p data-mode="plain">
-    No downloaded model, no fine-tuning. The tokenizer, the transformer, the training
-    loop are code in this repository. The only things brought in from outside are the
-    raw text and PyTorch itself.
-  </p>
-  <p data-mode="expert">
-    Architecture is inherited unchanged from <a href="https://zeref538.github.io/munti/">Munti</a>,
-    a prior from-scratch model proven on TinyStories — deliberately, so that any
-    difference in output is attributable to data rather than code. What changed is
-    scale and context.
-  </p>
-
-  <div class="tw"><table>
-    <thead><tr><th>&nbsp;</th><th class="num">Munti</th><th class="num">LiitLLM</th></tr></thead>
-    <tbody>
-      <tr><td>Layers / heads / width</td><td class="num">6 / 6 / 384</td><td class="num">9 / 8 / 512</td></tr>
-      <tr><td>Context window</td><td class="num">256</td><td class="num">512</td></tr>
-      <tr><td>Vocabulary</td><td class="num">4,096</td><td class="num">8,192</td></tr>
-      <tr><td>Parameters</td><td class="num">12.3M</td><td class="num">32.8M</td></tr>
-      <tr><td>Training tokens</td><td class="num">~330M</td><td class="num">1.97B</td></tr>
-      <tr><td>GPU-hours</td><td class="num">~6</td><td class="num">~44</td></tr>
-    </tbody>
-  </table></div>
-
-  <p>
-    The <b>512-token context is a deliberate choice for this subject</b>. Code-switching
-    is a discourse-level behaviour — a writer flips register across clauses and
-    sentences, not within a three-word window. At 256 tokens the model would rarely see
-    a full switch cycle.
-  </p>
-
-  <div class="note">
-    <p class="kicker">One tokenizer, trained on the unfiltered corpus</p>
-    <p style="margin:0">
-      Both arms share a byte-level BPE tokenizer, and it is trained on the
-      <em>unfiltered</em> text on purpose. Training it on the filtered corpus would tune
-      the vocabulary to the filtered model's own distribution and hand that arm an
-      advantage that has nothing to do with the experiment. The two data-prep runs ran
-      on two different accounts a day apart and produced <b>byte-identical</b>
-      tokenizers, which is the check that this was actually deterministic rather than
-      merely intended to be.
-    </p>
-  </div>
-</section>
-
-<section class="wrap" id="training">
-  <p class="kicker">05 — Surviving the clock</p>
-  <h2 data-mode="plain">Four 11-hour runs on a service that kills you at 12</h2>
-  <h2 data-mode="expert">Crash-safe checkpointing, a wall-clock guard, and a chained runner across two accounts</h2>
-
-  <p data-mode="plain">
-    The free GPU I used stops every session at 12 hours, whether or not you are done.
-    Each run needs about 11. There is no room for a crash, and a crash at hour 10 that
-    loses everything is not a setback, it is the end of the project.
-  </p>
-  <p data-mode="expert">
-    Kaggle: ~30 GPU-h per week per account, hard 12-hour session wall. Four runs of
-    ~10.9h each across two accounts. Every failure mode below actually fired at least
-    once during this project.
-  </p>
-
-  <h3>What makes an 11-hour run survivable</h3>
-  <ul>
-    <li><b>Atomic checkpoints.</b> Write to a temp file, then <code>os.replace</code>
-      onto the target, keeping the previous one as a fallback. A crash mid-write
-      otherwise truncates the only copy you have.</li>
-    <li><b>Random state is saved too.</b> Without it, a resumed run replays the same
-      batches it already learned from and quietly trains on a shorter corpus than you
-      think.</li>
-    <li><b>A wall-clock guard.</b> The loop stops itself at 11 hours and checkpoints
-      cleanly, so <em>I</em> choose when the session ends rather than the platform
-      choosing mid-write.</li>
-    <li><b>A runner that assumes it will die.</b> Re-running the entrypoint skips
-      finished work and resumes partial work. It also detects the specific case where a
-      run finished on the server but its output was never downloaded — which is what
-      happens every time the laptop sleeps.</li>
-    <li><b>A lockfile.</b> Two runners once raced and pushed the same job 18 seconds
-      apart, burning double the GPU on identical work.</li>
-  </ul>
-
-  <p>
-    The last run made the case for all of it: it stopped at step 55,000 instead of
-    60,000. The runner noticed, pushed a continuation from the last checkpoint,
-    finished the remaining 5,000 steps, and moved on to scoring — with nobody awake.
-  </p>
-
-  <figure>
-    <div class="legend">
-      <span><i style="background:var(--clay)"></i>Filtered (Taglish)</span>
-      <span><i style="background:var(--tide)"></i>Unfiltered (control)</span>
-      <span class="muted">two seeds each</span>
-    </div>
-    <div id="chart-loss"></div>
-    <figcaption>
-      Validation loss, 60,000 steps. Both seeds of each arm sit on top of each other —
-      the runs are reproducible. <b>The two arms cannot be compared on this chart</b>,
-      and section 07 explains why.
-    </figcaption>
-  </figure>
-</section>
-
 <section class="wrap" id="result">
-  <p class="kicker">06 — The result</p>
+  <p class="kicker">01 — The result</p>
   <h2 data-mode="plain">The filtered model borrows about three times as much English</h2>
   <h2 data-mode="expert">en_mean 0.185 vs 0.065, with no overlap between arms</h2>
 
@@ -711,6 +443,275 @@
   </p>
 </section>
 
+<section class="wrap" id="why">
+  <p class="kicker">02 — The premise</p>
+  <h2 data-mode="plain">A filter that calls the real language "noise"</h2>
+  <h2 data-mode="expert">Language ID is a document-level classifier, and Taglish is a sentence-level phenomenon</h2>
+
+  <div data-mode="plain">
+    <p>
+      To build a training set, you crawl the web and sort pages by language. A tool
+      looks at each page and says "this is Tagalog" or "this is English." Pages it
+      can't confidently label get thrown out.
+    </p>
+    <p>
+      Now consider how a Filipino actually writes: <em>"Kahapon nag-commute ako
+      papuntang office kasi grabe ang traffic."</em> The grammar is Tagalog. Half the
+      nouns are English. The tool sees a page full of that, can't commit to either
+      label, and deletes it.
+    </p>
+    <p>
+      So the register that millions of people actually write in is systematically
+      absent from the data that language models learn from. Not by anyone's decision —
+      as a side effect of a sorting step nobody thinks about.
+    </p>
+  </div>
+  <div data-mode="expert">
+    <p>
+      CC-100, OSCAR, FineWeb-2 and friends all route documents through a fastText
+      langid classifier with a confidence floor. Intra-sentential code-switching —
+      English content words inserted into Tagalog morphosyntax — produces exactly the
+      low-confidence, split-posterior documents that floor is designed to remove.
+    </p>
+    <p>
+      The consequence is a systematic register gap. The Filipino text that survives
+      collection skews formal and monolingual: news copy, encyclopedic prose, official
+      statements. The conversational register — the one with the code-switching in it —
+      is thinned out at the point of collection, before any model sees it.
+    </p>
+    <p>
+      Tagalog Wikipedia is excluded here for the same reason, deliberately. It is
+      clean, well-formed, and almost entirely free of the phenomenon under study.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="filter">
+  <p class="kicker">03 — The scorer</p>
+  <h2 data-mode="plain">Two word lists and a rule about prefixes</h2>
+  <h2 data-mode="expert">Lexicon-ratio scoring, and why the two lists are built differently</h2>
+
+  <div data-mode="plain">
+    <p>
+      The filter is about thirty lines. It splits text into words and asks, for each
+      one, "is this in my Tagalog list?" and "is this in my English list?" Then it
+      keeps documents where <em>both</em> answers come back often enough.
+    </p>
+    <p>
+      Two details make it work, and both took a rewrite to find.
+    </p>
+  </div>
+  <div data-mode="expert">
+    <p>
+      <code>score(text)</code> returns the fraction of word tokens matching each
+      lexicon; <code>is_taglish</code> keeps a document when both fractions clear a
+      floor. No new dependencies, no model, and explainable in a paragraph — which
+      matters, because this same function decides the training corpus, the ablation,
+      <em>and</em> the headline metric.
+    </p>
+  </div>
+
+  <h3>The two lists are not symmetric</h3>
+  <p>
+    The Tagalog list is almost all <b>function words</b> — <code>ang</code>,
+    <code>ng</code>, <code>sa</code>, <code>kasi</code>, <code>naman</code>. Those are
+    a closed class: you cannot write Tagalog syntax without them, and English text
+    will not accidentally produce them.
+  </p>
+  <p>
+    The English list deliberately includes <b>content words</b> — <code>office</code>,
+    <code>traffic</code>, <code>meeting</code>. That asymmetry is forced by the
+    phenomenon itself: in <em>"nag-commute ako sa office"</em> there is not a single
+    English function word. Score English by function words and the most
+    characteristically Taglish sentences read as pure Tagalog.
+  </p>
+
+  <h3>Hyphens get split, or the most Taglish word scores nothing</h3>
+  <p>
+    <code>nag-commute</code> matches neither list as a single token — and neither does
+    <code>nagcommute</code>, because the affix stripper only finds a stem that is itself
+    in the Tagalog list, and <code>commute</code> is English. So the single most
+    characteristically Taglish word in the sentence would contribute <b>zero</b> to
+    either side.
+  </p>
+  <p>
+    Splitting on the hyphen fixes half of that: <code>commute</code> lands in the
+    English list. The <code>nag-</code> half still scores nothing, since bare affixes
+    are not lexicon entries. That is a real limitation, not a design choice — but it
+    only ever <em>under</em>-counts, and it under-counts the Tagalog side of a word
+    already surrounded by Tagalog function words, so the document is not at risk of
+    being misread as English.
+  </p>
+
+  <div class="note">
+    <p class="kicker">Morphology</p>
+    <p style="margin:0">
+      Tagalog is agglutinative: <code>trabaho</code> becomes <code>nagtrabaho</code>,
+      <code>trabahuhan</code>, <code>pinagtrabahuhan</code>. A bare root list misses all
+      of those and under-counts the Tagalog side. The scorer peels one prefix and one
+      suffix, and handles reduplication (<code>nagcocommute</code> &rarr;
+      <code>commute</code>). It stops at one layer on purpose — two layers reduces
+      <code>nasa</code> to <code>sa</code> and starts inventing matches.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="corpus">
+  <p class="kicker">04 — The finding that dented my own premise</p>
+  <h2 data-mode="plain">The web text was already 40% Taglish</h2>
+  <h2 data-mode="expert">Measured keep-rate: 38.0% and 39.5%, not the ~10% the thesis assumed</h2>
+
+  <p data-mode="plain">
+    My whole pitch was that code-switching gets filtered out of web corpora. So I
+    measured how much survives, expecting very little. Across 50,000 documents from
+    each of two sources, <b>38% and 39.5%</b> already passed the Taglish test —
+    untouched, straight out of the corpus.
+  </p>
+  <p data-mode="expert">
+    Bake-off across FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>,
+    50,000 documents sampled from each: keep-rates of <b>38.0%</b> and <b>39.5%</b>.
+    The langid filter thins code-switched text but does not come close to removing it.
+  </p>
+
+  <div class="two">
+    <div class="card">
+      <div class="big clay">38.0%</div>
+      <p class="small muted" style="margin:6px 0 0">FineWeb-2 <code>fil_Latn</code> already passes the Taglish filter</p>
+    </div>
+    <div class="card">
+      <div class="big clay">39.5%</div>
+      <p class="small muted" style="margin:6px 0 0">HPLT 2.0 <code>tgl_Latn</code>, same measurement</p>
+    </div>
+  </div>
+
+  <div class="note warn">
+    <p class="kicker">This weakens the control arm, and it stays in</p>
+    <p style="margin:0">
+      The "unfiltered" model is supposed to be the contrast. But if its corpus is
+      already ~40% code-switched, it is not a clean negative — it is a weaker dose,
+      not a zero dose. The honest framing is not "filtering creates code-switching
+      from nothing." It is: <b>Filipino web text is already heavily code-switched, and
+      filtering the rest of the way still measurably changes the model.</b> That is a
+      smaller claim than I set out to make, and it is the one the data supports.
+    </p>
+  </div>
+
+  <h3>An earlier version of this page would have said something false</h3>
+  <p>
+    I first ran that bake-off on <b>2,000</b> documents and got 46.8% versus 34.4% —
+    a clear win for FineWeb-2, and I wrote it down as one. At 50,000 documents it is
+    38.0% versus 39.5%: the two sources are equivalent and the ranking had
+    <em>inverted</em>. Small samples do not give you a quiet, proportional error.
+    They give you a confident answer that is backwards.
+  </p>
+</section>
+
+<section class="wrap" id="build">
+  <p class="kicker">05 — The model</p>
+  <h2 data-mode="plain">What it is, and what "from scratch" means</h2>
+  <h2 data-mode="expert">32.8M-parameter decoder-only transformer, no pretrained weights</h2>
+
+  <p data-mode="plain">
+    No downloaded model, no fine-tuning. The tokenizer, the transformer, the training
+    loop are code in this repository. The only things brought in from outside are the
+    raw text and PyTorch itself.
+  </p>
+  <p data-mode="expert">
+    Architecture is inherited unchanged from <a href="https://zeref538.github.io/munti/">Munti</a>,
+    a prior from-scratch model proven on TinyStories — deliberately, so that any
+    difference in output is attributable to data rather than code. What changed is
+    scale and context.
+  </p>
+
+  <div class="tw"><table>
+    <thead><tr><th>&nbsp;</th><th class="num">Munti</th><th class="num">LiitLLM</th></tr></thead>
+    <tbody>
+      <tr><td>Layers / heads / width</td><td class="num">6 / 6 / 384</td><td class="num">9 / 8 / 512</td></tr>
+      <tr><td>Context window</td><td class="num">256</td><td class="num">512</td></tr>
+      <tr><td>Vocabulary</td><td class="num">4,096</td><td class="num">8,192</td></tr>
+      <tr><td>Parameters</td><td class="num">12.3M</td><td class="num">32.8M</td></tr>
+      <tr><td>Training tokens</td><td class="num">~330M</td><td class="num">1.97B</td></tr>
+      <tr><td>GPU-hours</td><td class="num">~6</td><td class="num">~44</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>
+    The <b>512-token context is a deliberate choice for this subject</b>. Code-switching
+    is a discourse-level behaviour — a writer flips register across clauses and
+    sentences, not within a three-word window. At 256 tokens the model would rarely see
+    a full switch cycle.
+  </p>
+
+  <div class="note">
+    <p class="kicker">One tokenizer, trained on the unfiltered corpus</p>
+    <p style="margin:0">
+      Both arms share a byte-level BPE tokenizer, and it is trained on the
+      <em>unfiltered</em> text on purpose. Training it on the filtered corpus would tune
+      the vocabulary to the filtered model's own distribution and hand that arm an
+      advantage that has nothing to do with the experiment. The two data-prep runs ran
+      on two different accounts a day apart and produced <b>byte-identical</b>
+      tokenizers, which is the check that this was actually deterministic rather than
+      merely intended to be.
+    </p>
+  </div>
+</section>
+
+<section class="wrap" id="training">
+  <p class="kicker">06 — Surviving the clock</p>
+  <h2 data-mode="plain">Four 11-hour runs on a service that kills you at 12</h2>
+  <h2 data-mode="expert">Crash-safe checkpointing, a wall-clock guard, and a chained runner across two accounts</h2>
+
+  <p data-mode="plain">
+    The free GPU I used stops every session at 12 hours, whether or not you are done.
+    Each run needs about 11. There is no room for a crash, and a crash at hour 10 that
+    loses everything is not a setback, it is the end of the project.
+  </p>
+  <p data-mode="expert">
+    Kaggle: ~30 GPU-h per week per account, hard 12-hour session wall. Four runs of
+    ~10.9h each across two accounts. Every failure mode below actually fired at least
+    once during this project.
+  </p>
+
+  <h3>What makes an 11-hour run survivable</h3>
+  <ul>
+    <li><b>Atomic checkpoints.</b> Write to a temp file, then <code>os.replace</code>
+      onto the target, keeping the previous one as a fallback. A crash mid-write
+      otherwise truncates the only copy you have.</li>
+    <li><b>Random state is saved too.</b> Without it, a resumed run replays the same
+      batches it already learned from and quietly trains on a shorter corpus than you
+      think.</li>
+    <li><b>A wall-clock guard.</b> The loop stops itself at 11 hours and checkpoints
+      cleanly, so <em>I</em> choose when the session ends rather than the platform
+      choosing mid-write.</li>
+    <li><b>A runner that assumes it will die.</b> Re-running the entrypoint skips
+      finished work and resumes partial work. It also detects the specific case where a
+      run finished on the server but its output was never downloaded — which is what
+      happens every time the laptop sleeps.</li>
+    <li><b>A lockfile.</b> Two runners once raced and pushed the same job 18 seconds
+      apart, burning double the GPU on identical work.</li>
+  </ul>
+
+  <p>
+    The last run made the case for all of it: it stopped at step 55,000 instead of
+    60,000. The runner noticed, pushed a continuation from the last checkpoint,
+    finished the remaining 5,000 steps, and moved on to scoring — with nobody awake.
+  </p>
+
+  <figure>
+    <div class="legend">
+      <span><i style="background:var(--clay)"></i>Filtered (Taglish)</span>
+      <span><i style="background:var(--tide)"></i>Unfiltered (control)</span>
+      <span class="muted">two seeds each</span>
+    </div>
+    <div id="chart-loss"></div>
+    <figcaption>
+      Validation loss, 60,000 steps. Both seeds of each arm sit on top of each other —
+      the runs are reproducible. <b>The two arms cannot be compared on this chart</b>,
+      and section 07 explains why.
+    </figcaption>
+  </figure>
+</section>
+
 <section class="wrap" id="trap">
   <p class="kicker">07 — The number that looks like an answer and isn't</p>
   <h2 data-mode="plain">The "worse" model is the one that worked</h2>
@@ -729,7 +730,7 @@
     care about.
   </p>
   <p>
-    The only apples-to-apples measurement is the one in section 06: identical prompts,
+    The only apples-to-apples measurement is the one in section 01: identical prompts,
     identical scorer, comparing outputs rather than losses. It would have been very easy
     to put "2.635 vs 2.745" in a results table and let a reader draw the wrong
     conclusion.
