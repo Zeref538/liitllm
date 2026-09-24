@@ -11,6 +11,8 @@
     src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); }
   @font-face { font-family: "Instrument Sans"; font-weight: 600; font-display: swap;
     src: url("fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Sora"; font-weight: 700; font-display: swap;
+    src: url("fonts/sora-latin-700-normal.woff2") format("woff2"); } /* logo only, SIL OFL */
   @font-face { font-family: "Instrument Sans"; font-weight: 700; font-display: swap;
     src: url("fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
   /* ============================================================
@@ -372,13 +374,61 @@
     .rail a[aria-current="true"] { color: var(--ink); border-left-color: var(--clay); font-weight: 600; }
     .rail a span { font-variant-numeric: tabular-nums; min-width: 1.4em; }
   }
+
+  /* ---------------- brand mark, stats, about, footer ---------------- */
+  .mark { font-family: "Sora", var(--sans); font-weight: 700; font-size: 17px;
+          color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+  .mark span { color: #8b5cf6; }
+  .mark-lg { font-size: 30px; display: inline-block; margin-bottom: 10px; }
+  .brand { margin-right: auto; font-weight: 700; }
+  .brand .sep { color: var(--rule-2); margin: 0 6px 0 2px; font-weight: 400; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, auto); gap: 0; margin: 8px 0 28px;
+           border-top: 2px solid var(--ink); }
+  .stats div { padding: 12px 18px 0 0; }
+  .stats div + div { padding-left: 18px; border-left: 1px solid var(--rule); }
+  .stats dd { margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+  .stats dt { font-size: 12.5px; color: var(--ink-3); order: 2; }
+  .stats div { display: flex; flex-direction: column-reverse; }
+  @media (max-width: 620px) {
+    .stats { grid-template-columns: repeat(3, auto); row-gap: 14px; }
+    .stats div:nth-child(4) { border-left: 0; padding-left: 0; }
+  }
+
+  .giant { font-size: clamp(44px, 9vw, 96px); line-height: .95; letter-spacing: -.045em;
+           font-weight: 700; margin: 6px 0 34px; max-width: none; }
+  .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .about-cols h3 { margin-top: 0; }
+  @media (max-width: 700px) { .about-cols { grid-template-columns: 1fr; gap: 8px; } }
+  .byline { display: flex; gap: 22px; align-items: center; margin-top: 30px;
+            padding: 22px; border: 2px solid var(--ink); border-radius: 14px; }
+  .byline img { width: 112px; height: 112px; border-radius: 10px; object-fit: cover;
+                filter: grayscale(1); }
+  .byline p { margin: 0; }
+  .byline-role { font-size: 13px; color: var(--ink-3); }
+  .byline-name { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+  .byline-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px !important; font-weight: 600; }
+
+  .site-foot { background: var(--ink); color: var(--paper); padding: 56px 0 28px; margin-top: 40px; }
+  .site-foot .mark { color: var(--paper); }
+  .site-foot a { color: var(--paper); }
+  .site-foot code { background: transparent; color: inherit; padding: 0; }
+  .foot-grid { max-width: 1040px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
+  .foot-grid nav a { display: block; margin: 0 0 8px; text-decoration: none; opacity: .85; }
+  .foot-grid nav a:hover { opacity: 1; text-decoration: underline; }
+  .foot-h { font-weight: 700; margin-bottom: 12px; }
+  .foot-base { max-width: 1040px; margin-top: 36px; padding-top: 18px; opacity: .6;
+               border-top: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); }
+  @media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr 1fr; }
+                              .foot-grid > div:first-child { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
 
 <div class="bar">
   <div class="wrap">
-    <div class="brand">Liit<span>LLM</span></div>
+    <a class="mark" href="https://johnandrei.vercel.app" aria-label="zeref. portfolio home">zeref<span>.</span></a>
+    <div class="brand"><span class="sep">/</span> LiitLLM</div>
     <div class="seg" role="group" aria-label="Reading level">
       <button type="button" id="m-plain" aria-pressed="true">Plain English</button>
       <button type="button" id="m-expert" aria-pressed="false">Technical</button>
@@ -408,14 +458,13 @@
     unfiltered corpus at exactly equal token budget, two seeds per arm.
   </p>
 
-  <div class="stat-line">
-    <span><b>~3&times;</b> more English</span>
-    <span><b>32.8M</b> parameters</span>
-    <span><b>995M</b> tokens per arm</span>
-    <span><b>4</b> runs &times; 60k steps</span>
-    <span><b>~44</b> GPU-hours</span>
-    <span><b>&#8369;0</b> spent</span>
-  </div>
+  <dl class="stats">
+    <div><dt>more English</dt><dd>2.8&times;</dd></div>
+    <div><dt>parameters</dt><dd>32.8M</dd></div>
+    <div><dt>tokens per arm</dt><dd>995M</dd></div>
+    <div><dt>GPU-hours</dt><dd>~44</dd></div>
+    <div><dt>pesos spent</dt><dd>0</dd></div>
+  </dl>
 
   </div>
 
@@ -997,18 +1046,71 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
   </p>
 </section>
 
+
+<section class="wrap about" id="about">
+  <p class="kicker">11 — About</p>
+  <h2 class="giant">Why this exists</h2>
+  <div class="about-cols">
+    <div>
+      <h3>What LiitLLM does</h3>
+      <p>
+        It is a small language model that writes the way Filipinos write online:
+        Tagalog grammar with English dropped in mid-sentence. It was built from an
+        empty file, with its own tokenizer, its own training data and its own
+        transformer, on free Kaggle GPUs.
+      </p>
+    </div>
+    <div>
+      <h3>Why it exists</h3>
+      <p>
+        The data that language models learn from is sorted by language, and mixed
+        writing gets sorted out. Taglish is how millions of people actually write,
+        yet it is missing by accident. I wanted to know if keeping only that writing,
+        on purpose, is enough to get a model that writes it too. The answer on this
+        page says yes.
+      </p>
+    </div>
+  </div>
+
+  <div class="byline">
+    <img src="img/author.jpg" alt="John Andrei Martinez" width="112" height="112">
+    <div>
+      <p class="byline-role">Built by</p>
+      <p class="byline-name">John Andrei Martinez</p>
+      <p class="byline-links">
+        <a href="https://johnandrei.vercel.app">Portfolio</a>
+        <a href="https://github.com/Zeref538">GitHub</a>
+        <a href="https://www.kaggle.com/johnandreimartinez">Kaggle</a>
+      </p>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer class="wrap">
-  <p>
-    <b>LiitLLM</b> — a 32.8M-parameter Taglish language model built from scratch.
-    Sibling project to <a href="https://zeref538.github.io/munti/">Munti</a>.
-  </p>
-  <p class="small">
-    Every figure on this page is generated from the run artifacts in
-    <code>results/</code>. Corpora: FineWeb-2 <code>fil_Latn</code> and HPLT 2.0
-    <code>tgl_Latn</code>, both openly licensed, streamed rather than redistributed.
-  </p>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="mark mark-lg" href="https://johnandrei.vercel.app">zeref<span>.</span></a>
+      <p class="small">Case studies by John Andrei Martinez. Every figure on this page is
+        generated from the run artifacts in <code>results/</code>.</p>
+    </div>
+    <nav aria-label="More">
+      <p class="foot-h">This project</p>
+      <a href="https://github.com/Zeref538/liitllm">Source code</a>
+      <a href="https://github.com/Zeref538/liitllm/releases/tag/v1.0">Download the model</a>
+      <a href="https://www.kaggle.com/datasets/johnandreimartinez/liitllm-taglish">All runs on Kaggle</a>
+    </nav>
+    <nav aria-label="Elsewhere">
+      <p class="foot-h">More work</p>
+      <a href="https://johnandrei.vercel.app">Portfolio</a>
+      <a href="https://zeref538.github.io/munti/">Munti, the sister model</a>
+      <a href="https://github.com/Zeref538">GitHub</a>
+    </nav>
+  </div>
+  <div class="wrap foot-base small">
+    Corpora: FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>, openly
+    licensed and streamed rather than redistributed. Fonts: Instrument Sans and Sora, SIL OFL.
+  </div>
 </footer>
 
 <script>
