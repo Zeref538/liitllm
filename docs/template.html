@@ -7,18 +7,18 @@
 <meta name="description" content="Case study: every large web corpus filters code-switching out as noise. This one filters for it: a 32.8M-parameter Taglish language model trained from scratch, with a two-seed ablation proving the filter is what causes the code-switching.">
 <style>
   /* Self-hosted (SIL OFL, fonts/OFL.txt): no request to Google Fonts. */
-  @font-face { font-family: "Instrument Sans"; font-weight: 400; font-display: swap;
-    src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Instrument Sans"; font-weight: 500; font-display: swap;
-    src: url("fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
-    src: url("fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
-  @font-face { font-family: "Instrument Sans"; font-weight: 600; font-display: swap;
-    src: url("fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Schibsted Grotesk"; font-weight: 400; font-display: swap;
+    src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Schibsted Grotesk"; font-weight: 500; font-display: swap;
+    src: url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Newsreader"; font-style: italic; font-weight: 400; font-display: swap;
+    src: url("fonts/newsreader-latin-400-italic.woff2") format("woff2"); }
+  @font-face { font-family: "Schibsted Grotesk"; font-weight: 600; font-display: swap;
+    src: url("fonts/schibsted-grotesk-latin-600-normal.woff2") format("woff2"); }
   @font-face { font-family: "Sora"; font-weight: 700; font-display: swap;
     src: url("fonts/sora-latin-700-normal.woff2") format("woff2"); } /* logo only, SIL OFL */
-  @font-face { font-family: "Instrument Sans"; font-weight: 700; font-display: swap;
-    src: url("fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Schibsted Grotesk"; font-weight: 700; font-display: swap;
+    src: url("fonts/schibsted-grotesk-latin-700-normal.woff2") format("woff2"); }
   /* ============================================================
      LIITLLM: visual identity
 
@@ -71,7 +71,7 @@
   }
 
   :root {
-    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
   }
 
@@ -337,7 +337,7 @@
                               .foot-grid > div:first-child { grid-column: 1 / -1; } }
 
   /* ---------------- console layout (after LiquidAI's LFM2.5 demo) ---------------- */
-  :root { --grid: rgba(28, 25, 23, .045); --serif: "Instrument Serif", Georgia, serif; }
+  :root { --grid: rgba(28, 25, 23, .045); --serif: "Newsreader", Georgia, serif; }
   :root[data-theme="dark"] { --grid: rgba(255, 255, 255, .04); }
   @media (prefers-color-scheme: dark) {
     :root:where(:not([data-theme="light"])) { --grid: rgba(255, 255, 255, .04); }
@@ -464,7 +464,6 @@
     .page-grid > .rail a[aria-current="true"] { color: var(--ink); font-weight: 600;
       border-left: 2px solid var(--ink); padding-left: 13px; }
     .page-grid > .rail a span { min-width: 1.6em; }
-    .panel-sec .console-body { grid-template-columns: minmax(220px, 1fr) 2fr; }
   }
   .rail-h { margin: 0 0 12px 14px; }
   @media (max-width: 1099px) { .page-grid > .rail { display: none; } .page-grid { padding: 0 12px; } }
@@ -474,6 +473,17 @@
   :root { --dot: rgba(28, 25, 23, .13); }
   :root[data-theme="dark"] { --dot: rgba(255, 255, 255, .09); }
   @media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) { --dot: rgba(255, 255, 255, .09); } }
+
+  /* inside each section card: title band on top, content gets the full width */
+  .panel-sec .console-body { display: block; }
+  .panel-sec .console-side { border-right: 0; border-bottom: 1px solid var(--rule); padding: 40px 48px 32px; }
+  .panel-sec .side-stick { position: static; }
+  .panel-sec .console-side h2 { font-size: clamp(30px, 4vw, 52px); max-width: 24ch; }
+  .panel-sec .console-main { padding: 40px 48px 48px; }
+  @media (max-width: 900px) {
+    .panel-sec .console-side { padding: 24px 20px; }
+    .panel-sec .console-main { padding: 24px 20px 32px; }
+  }
 </style>
 </head>
 <body>
@@ -1214,7 +1224,7 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
   </div>
   <div class="wrap foot-base small">
     Corpora: FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>, openly
-    licensed and streamed rather than redistributed. Fonts: Instrument Sans, Instrument Serif and Sora, SIL OFL.
+    licensed and streamed rather than redistributed. Fonts: Schibsted Grotesk, Newsreader and Sora, SIL OFL.
   </div>
 </footer>
 
