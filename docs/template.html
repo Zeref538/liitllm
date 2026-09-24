@@ -153,12 +153,6 @@
 
   /* ---------------- hero ---------------- */
   .hero { padding: 64px 0 48px; }
-  .stat-line {
-    display: flex; flex-wrap: wrap; gap: 7px 20px;
-    font-family: var(--mono); font-size: 12.5px; color: var(--ink-3);
-    margin-bottom: 26px;
-  }
-  .stat-line b { color: var(--ink); font-weight: 700; }
 
   /* ---------------- the scorer widget ---------------- */
   .scorer {
@@ -263,7 +257,6 @@
     font-weight: 700; letter-spacing: -.03em; line-height: 1;
   }
   .big.clay { color: var(--clay); } .big.tide { color: var(--tide); }
-  .big.switch { color: var(--switch); }
 
   figure { margin: 32px 0; }
   figcaption { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
@@ -289,34 +282,13 @@
   html[data-view="plain"] li[data-mode="plain"],
   html[data-view="expert"] li[data-mode="expert"] { display: list-item; }
 
-  /* ---------------- layout: breaking the single column ----------------
-     The page used to be one 800px column with ten identical sections.
-     Three places now break it: the hero puts the live filter beside the
-     headline, the result is one dark full-width band, and a chapter rail
-     sits in the left margin on wide screens. Everything else stays quiet. */
 
   .kicker {
     font-family: var(--sans); font-size: 13.5px; font-weight: 600;
     letter-spacing: 0; text-transform: none; color: var(--clay);
   }
 
-  @media (min-width: 1080px) {
-    .hero.wrap { max-width: 1160px; display: grid; grid-template-columns: 1.05fr 1fr;
-                 gap: 16px 64px; align-items: center; padding-top: 64px; padding-bottom: 32px; }
-    .hero h1 { font-size: 54px; }
-    .hero-demo { align-self: center; }
-  }
 
-  /* The result band: dark in the light theme, raised in the dark theme. */
-  .band {
-    border-top: 1px solid var(--rule); padding: 64px 0;
-  }
-  .band h2 { font-size: clamp(24px, 3.6vw, 34px); max-width: 22ch; }
-  .band p, .band .note { max-width: 70ch; }
-  /* The result runs wider than the text column but keeps its left edge. */
-  @media (min-width: 1100px) {
-    .band .wrap { max-width: 1040px; margin-left: calc(50% - 400px); margin-right: auto; }
-  }
   .headline-num {
     display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap;
     margin: 24px 0 32px;
@@ -341,23 +313,6 @@
     #broke h3::before { position: static; display: block; font-size: 30px; margin-bottom: 4px; }
   }
 
-  /* Chapter rail: only where there is a margin wide enough to hold it. */
-  .rail { display: none; }
-  @media (min-width: 1320px) {
-    /* Band content starts at the text column's left edge, clear of the rail. */
-    .rail { opacity: 0; pointer-events: none; transition: opacity .2s; }
-    .rail.on { opacity: 1; pointer-events: auto; }
-    .rail {
-      display: block; position: fixed; top: 110px;
-      left: max(24px, calc(50% - 400px - 250px)); width: 200px;
-      font-size: 13px; line-height: 1.35; z-index: 30;
-    }
-    .rail a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--ink-3);
-              text-decoration: none; border-left: 2px solid var(--rule); }
-    .rail a:hover { color: var(--ink); }
-    .rail a[aria-current="true"] { color: var(--ink); border-left-color: var(--clay); font-weight: 600; }
-    .rail a span { font-variant-numeric: tabular-nums; min-width: 1.4em; }
-  }
 
   /* ---------------- brand mark, stats, about, footer ---------------- */
   .mark { font-family: "Sora", var(--sans); font-weight: 700; font-size: 17px;
@@ -367,31 +322,7 @@
   .brand { margin-right: auto; font-weight: 700; }
   .brand .sep { color: var(--rule-2); margin: 0 6px 0 2px; font-weight: 400; }
 
-  .stats { display: grid; grid-template-columns: repeat(5, auto); gap: 0; margin: 24px 0 32px;
-           border-top: 2px solid var(--ink); }
-  .stats div { padding: 12px 18px 0 0; }
-  .stats div + div { padding-left: 18px; border-left: 1px solid var(--rule); }
-  .stats dd { margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-  .stats dt { font-size: 12.5px; color: var(--ink-3); order: 2; }
-  .stats div { display: flex; flex-direction: column-reverse; }
-  @media (max-width: 620px) {
-    .stats { grid-template-columns: repeat(3, auto); row-gap: 14px; }
-    .stats div:nth-child(4) { border-left: 0; padding-left: 0; }
-  }
 
-  .giant { font-size: clamp(44px, 9vw, 96px); line-height: .95; letter-spacing: -.045em;
-           font-weight: 700; margin: 8px 0 32px; max-width: none; }
-  .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  .about-cols h3 { margin-top: 0; }
-  @media (max-width: 700px) { .about-cols { grid-template-columns: 1fr; gap: 8px; } }
-  .byline { display: flex; gap: 22px; align-items: center; margin-top: 30px;
-            padding: 22px; border: 2px solid var(--ink); border-radius: 14px; }
-  .byline img { width: 112px; height: 112px; border-radius: 10px; object-fit: cover;
-                filter: grayscale(1); }
-  .byline p { margin: 0; }
-  .byline-role { font-size: 13px; color: var(--ink-3); }
-  .byline-name { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
-  .byline-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px !important; font-weight: 600; }
 
   .site-foot { border-top: 2px solid var(--ink); padding: 48px 0 32px; margin-top: 0; }
   .site-foot a { color: var(--ink); }
@@ -1517,14 +1448,6 @@ try {
     if (!e.isIntersecting) return;
     links.forEach(([sec, a]) => a.setAttribute("aria-current", sec === e.target));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  // Hidden over the hero, which is wider than the text column.
-  // Hidden wherever the page runs wider than the text column (hero, closing, footer).
-  const wide = new Set();
-  const wideIO = new IntersectionObserver(es => {
-    es.forEach(e => e.isIntersecting ? wide.add(e.target) : wide.delete(e.target));
-    rail.classList.toggle("on", wide.size === 0);
-  });
-  document.querySelectorAll(".hero, .closing, .site-foot").forEach(el => wideIO.observe(el));
   links.forEach(([sec]) => io.observe(sec));
 })();
 </script>
