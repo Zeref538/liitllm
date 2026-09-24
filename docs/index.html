@@ -485,44 +485,52 @@
     .panel-sec .console-main { padding: 24px 20px 32px; }
   }
 
-  /* closing line + footer: one card in the panel column, so its edges match the panels */
-  .end-card { margin: 0 0 48px; }
-  .end-card .closing { padding: 64px 48px 48px; max-width: none; }
-  .end-card .site-foot { border-top: 1px solid var(--rule); padding: 40px 0 0; }
-  .end-card .foot-grid, .end-card .foot-base, .end-card .foot-strip { max-width: none; margin-left: 0; margin-right: 0;
-    padding-left: 48px; padding-right: 48px; }
-  .end-card .foot-strip { margin-top: 40px; border-top: 1px solid var(--rule); }
-  .end-card .foot-base { margin-top: 0; padding-top: 20px; padding-bottom: 24px; border-top: 1px solid var(--rule); }
+
+  /* hero: open on the page, no frame. Oversized title, statement beside the story, then the live filter. */
+  .hero { max-width: 1408px; margin: 0 auto; padding: 48px 24px 64px; }
+  .hero .console { border: 0; border-radius: 0; background: none; overflow: visible; max-width: none; }
+  .hero .console-head { display: none; }
+  .hero .console-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 64px;
+    align-items: start;
+    grid-template-areas: "kick spec" "title title" "show lede" "steps steps" "try try" "tool specs" "tool cta"; }
+  .hero .console-side, .hero .console-main { display: contents; }
+  .hero .console-main > .caps:first-child { display: none; }
+  .hero .lined { grid-area: kick; }
+  .hero .spec { grid-area: spec; justify-self: end; margin: 0; }
+  .hero h1 { grid-area: title; font-size: clamp(88px, 15vw, 220px); line-height: .8; letter-spacing: -.07em;
+    margin: 24px 0 40px; }
+  .hero .display { grid-area: show; margin: 0; max-width: 16ch; }
+  .hero .side-lede { grid-area: lede; max-width: none; margin: 8px 0 0; }
+  .hero .steps { grid-area: steps; margin: 48px 0; border: 0; border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--rule); border-radius: 0; background: none; }
+  .hero .steps li { padding: 20px 24px 24px 0; }
+  .hero .steps li + li { border-left: 0; padding-left: 24px; }
+  .hero .steps .it { position: static; font-size: 28px; color: var(--clay); }
+  .hero .steps b { margin: 8px 0 4px; }
+  .hero .try { grid-area: try; }
+  .hero .scorer { grid-area: tool; background: var(--paper); }
+  .hero .specs { grid-area: specs; margin: 0 0 32px; }
+  .hero .side-cta { grid-area: cta; margin: 0; }
   @media (max-width: 900px) {
-    .end-card .closing { padding: 40px 20px 32px; }
-    .end-card .foot-grid, .end-card .foot-base, .end-card .foot-strip { padding-left: 20px; padding-right: 20px; }
+    .hero { padding: 24px 16px 48px; }
+    .hero .console-body { grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "kick" "spec" "title" "show" "lede" "steps" "specs" "cta" "try" "tool"; }
+    .hero .spec { justify-self: start; margin-top: 8px; }
+    .hero .side-lede { margin-top: 24px; }
+    .hero .steps li, .hero .steps li + li { padding: 16px 0; }
+    .hero .side-cta { margin-bottom: 40px; }
   }
 
-  /* hero: title row on top, story beside the live filter, the three steps as a band along the bottom */
-  .hero .console-head { display: none; }
-  .hero .console-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: 48px; padding: 40px 40px 0; align-items: start;
-    grid-template-rows: auto auto 1fr; /* the tall headline's extra height lands under the spec line, not between title and spec */
-    grid-template-areas: "kick eye" "title show" "spec show" "lede try" "lede tool" "specs tool" "cta tool" "steps steps"; }
-  .hero .console-side, .hero .console-main { display: contents; }
-  .hero .lined { grid-area: kick; }
-  .hero h1 { grid-area: title; margin: 16px 0 8px; }
-  .hero .spec { grid-area: spec; }
-  .hero .console-main > .caps:first-child { grid-area: eye; }
-  .hero .display { grid-area: show; align-self: end; margin: 16px 0 24px; max-width: 20ch; }
-  .hero .side-lede { grid-area: lede; }
-  .hero .side-lede, .hero .try { border-top: 1px solid var(--rule); padding-top: 32px; margin-top: 8px; }
-  .hero .try { grid-area: try; }
-  .hero .side-lede, .hero .try, .hero .display { max-width: none; }
-  .hero .display { max-width: 20ch; }
-  .hero .scorer { grid-area: tool; }
-  .hero .specs { grid-area: specs; }
-  .hero .side-cta { grid-area: cta; margin: 0 0 40px; }
-  .hero .steps { grid-area: steps; margin: 0 -40px; border: 0; border-top: 1px solid var(--rule); border-radius: 0; }
+  /* footer: a plain full-width band, not a card */
+  .closing { max-width: 1408px; margin: 0 auto; padding: 96px 24px 64px; }
+  .site-foot { background: var(--paper); border-top: 1px solid var(--ink); padding: 48px 0 24px; }
+  .site-foot .foot-grid, .site-foot .foot-strip, .site-foot .foot-base {
+    max-width: 1408px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+  .site-foot .foot-strip { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .site-foot .foot-base { margin-top: 16px; padding-top: 0; }
   @media (max-width: 900px) {
-    .hero .console-body { grid-template-columns: minmax(0, 1fr); padding: 24px 20px 0;
-      grid-template-areas: "kick" "title" "spec" "eye" "show" "lede" "specs" "cta" "try" "tool" "steps"; }
-    .hero .steps { margin: 32px -20px 0; }
+    .closing { padding: 64px 16px 48px; }
+    .site-foot .foot-grid, .site-foot .foot-strip, .site-foot .foot-base { padding-left: 16px; padding-right: 16px; }
   }
 </style>
 </head>
@@ -1233,7 +1241,10 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
 </div>
 </section>
 
-<div class="console end-card">
+
+</main>
+</div>
+
 <section class="closing">
   <p class="display closing-line">Built from an empty file. <span class="it">Made for how Filipinos actually write.</span></p>
 </section>
@@ -1265,9 +1276,6 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
     licensed and streamed rather than redistributed. Fonts: Schibsted Grotesk, Newsreader and Sora, SIL OFL.
   </div>
 </footer>
-</div>
-</main>
-</div>
 
 
 
