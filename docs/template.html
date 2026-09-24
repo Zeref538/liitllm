@@ -9,6 +9,10 @@
   /* Self-hosted (SIL OFL, fonts/OFL.txt): no request to Google Fonts. */
   @font-face { font-family: "Instrument Sans"; font-weight: 400; font-display: swap;
     src: url("fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Sans"; font-weight: 500; font-display: swap;
+    src: url("fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
+    src: url("fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
   @font-face { font-family: "Instrument Sans"; font-weight: 600; font-display: swap;
     src: url("fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); }
   @font-face { font-family: "Sora"; font-weight: 700; font-display: swap;
@@ -38,9 +42,9 @@
      ============================================================ */
   :root {
     color-scheme: light;
-    --paper: #ffffff; --card: #f7f7f7; --sunk: #efefef;
-    --ink: #000000; --ink-2: #333333; --ink-3: #6b6b6b;
-    --rule: #e5e5e5; --rule-2: #cccccc;
+    --paper: #f5f5f4; --card: #fafaf9; --sunk: #e7e5e4;
+    --ink: #1c1917; --ink-2: #57534e; --ink-3: #78716c;
+    --rule: #d6d3d1; --rule-2: #a8a29e;
     --clay: #b0401f; --tide: #808080; --switch: #000000;
     --ash: #b0401f; --good: #000000; --track: #ececec;
     --clay-w: #fbe3da; --tide-w: #ececec; --sw-w: #e5e5e5;
@@ -400,6 +404,92 @@
                border-top: 1px solid var(--rule); }
   @media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr 1fr; }
                               .foot-grid > div:first-child { grid-column: 1 / -1; } }
+
+  /* ---------------- console layout (after LiquidAI's LFM2.5 demo) ---------------- */
+  :root { --grid: rgba(28, 25, 23, .045); --serif: "Instrument Serif", Georgia, serif; }
+  :root[data-theme="dark"] { --grid: rgba(255, 255, 255, .04); }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) { --grid: rgba(255, 255, 255, .04); }
+  }
+  body {
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  h1, h2, .display { font-weight: 500; letter-spacing: -.05em; }
+  h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.02; }
+  .it { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+  .caps { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+          color: var(--ink-3); margin: 0; }
+  .kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--ink-3); display: flex; align-items: center; gap: 12px; }
+  .kicker::before { content: ""; width: 32px; height: 1px; background: var(--ink); }
+
+  .hero { padding: 32px 24px 64px; }
+  .console { max-width: 1360px; margin: 0 auto; border: 1px solid var(--ink); border-radius: 16px;
+             background: color-mix(in srgb, var(--paper) 88%, transparent); overflow: hidden; }
+  .console-head { display: flex; align-items: center; gap: 12px; padding: 20px 32px;
+                  border-bottom: 1px solid var(--rule); }
+  .step-no { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px;
+             border: 1px solid var(--rule-2); font-size: 11px; font-weight: 700; color: var(--ink-3); }
+  .status { margin-left: auto; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .status i { width: 6px; height: 6px; border-radius: 99px; background: var(--ink); }
+  .console-body { display: grid; grid-template-columns: minmax(300px, 1fr) 2fr; }
+  .console-side { padding: 32px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; }
+  .console-main { padding: 32px; min-width: 0; }
+  .lined { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+  .lined::before { content: ""; width: 32px; height: 1px; background: var(--ink); }
+  .console h1 { font-size: clamp(56px, 7vw, 80px); line-height: .86; margin: 32px 0 12px; }
+  .spec { font-size: 24px; margin: 0 0 24px; }
+  .side-lede { font-size: 17px; color: var(--ink-2); margin-bottom: 24px; }
+  .specs { margin: 0 0 32px; border-top: 1px solid var(--rule); }
+  .specs div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0;
+               border-bottom: 1px solid var(--rule); font-size: 14px; }
+  .specs dt { color: var(--ink-3); }
+  .specs dd { margin: 0; font-weight: 700; text-align: right; }
+  .side-cta { margin-top: auto; }
+  .pill { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px;
+          border-radius: 999px; background: var(--ink); color: var(--paper); font-weight: 700;
+          letter-spacing: -.01em; text-decoration: none; }
+  .pill:hover { opacity: .88; }
+  .side-cta p { margin: 12px 0 0; }
+  .display { font-size: clamp(34px, 4.6vw, 60px); line-height: 1; margin: 12px 0 32px; max-width: 18ch; }
+  .display .it { letter-spacing: -.01em; }
+  .steps { list-style: none; padding: 0; margin: 0 0 32px; display: grid; grid-template-columns: repeat(3, 1fr);
+           border: 1px solid var(--rule-2); border-radius: 12px; overflow: hidden; }
+  .steps li { margin: 0; padding: 20px; font-size: 14px; color: var(--ink-3); line-height: 1.55; position: relative; }
+  .steps li + li { border-left: 1px solid var(--rule-2); }
+  .steps .it { position: absolute; top: 16px; right: 20px; color: var(--ink-3); }
+  .steps b { display: block; margin: 24px 0 6px; font-size: 17px; color: var(--ink); }
+  .try { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .try .it { text-transform: none; font-size: 16px; }
+  .console .scorer { border: 1px solid var(--rule-2); border-radius: 12px; }
+
+  .closing { border-top: 0; padding: 96px 24px 64px; max-width: 1360px; margin: 0 auto; }
+  .display.closing-line { font-size: clamp(44px, 7vw, 88px); max-width: 16ch; margin: 0; }
+  .foot-strip { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+                max-width: 1360px; margin: 40px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--rule); }
+  .rail a span { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 15px; }
+
+  @media (max-width: 900px) {
+    .console-body { grid-template-columns: 1fr; }
+    .console-side { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .steps { grid-template-columns: 1fr; }
+    .steps li + li { border-left: 0; border-top: 1px solid var(--rule-2); }
+    .console-head, .console-side, .console-main { padding-left: 20px; padding-right: 20px; }
+    .hero { padding: 16px 12px 48px; }
+  }
+  .bar .wrap { max-width: 1408px; padding: 0 57px; }
+  @media (max-width: 900px) { .bar .wrap { padding: 0 32px; } }
+  .foot-grid, .foot-base { max-width: 1408px; padding-left: 57px; padding-right: 57px; }
+  .foot-strip { max-width: 1408px; padding-left: 57px; padding-right: 57px; }
+  @media (max-width: 900px) { .foot-grid, .foot-base, .foot-strip { padding-left: 20px; padding-right: 20px; } }
+  @media (max-width: 560px) {
+    .bar .brand { display: none; }
+    .bar .wrap { padding: 0 12px; gap: 8px; }
+    .console-head .status { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -416,11 +506,18 @@
   </div>
 </div>
 
-<header class="wrap hero">
-  <div class="hero-text">
-  <p class="kicker">Case study — from-scratch language model</p>
-  <h1>Every big corpus throws Taglish away.<br>This one keeps only Taglish.</h1>
-  <p class="lede" data-mode="plain">
+<header class="hero">
+<div class="console">
+  <div class="console-head">
+    <span class="step-no">01</span><span class="caps">Case study</span>
+    <span class="caps status"><i></i>Trained from scratch, &#8369;0</span>
+  </div>
+  <div class="console-body">
+    <div class="console-side">
+      <p class="caps lined">Taglish language model</p>
+      <h1>LiitLLM</h1>
+      <p class="spec it">32.8M parameters &middot; 2 &times; 2 runs</p>
+  <p class="lede side-lede" data-mode="plain">
     Filipinos online don't write pure Tagalog or pure English — they switch between
     them mid-sentence. The tools that assemble training data for large language
     models treat that mixing as garbage and delete it. I built the opposite: a
@@ -428,7 +525,7 @@
     and then trained an identical model on unfiltered text to prove the filter is
     what made the difference.
   </p>
-  <p class="lede" data-mode="expert">
+  <p class="lede side-lede" data-mode="expert">
     Web-scale corpora are assembled with document-level fastText language ID, which
     scores heavily code-switched Filipino as low-confidence and drops it or misroutes
     it to <code>en</code>. Standard pipelines filter code-switching out; this one
@@ -437,20 +534,29 @@
     unfiltered corpus at exactly equal token budget, two seeds per arm.
   </p>
 
-  <dl class="stats">
-    <div><dt>more English</dt><dd>2.8&times;</dd></div>
-    <div><dt>parameters</dt><dd>32.8M</dd></div>
-    <div><dt>tokens per arm</dt><dd>995M</dd></div>
-    <div><dt>GPU-hours</dt><dd>~44</dd></div>
-    <div><dt>pesos spent</dt><dd>0</dd></div>
-  </dl>
-
-  </div>
-
-  <div class="hero-demo">
+      <dl class="specs">
+        <div><dt>More English than control</dt><dd>2.8&times;</dd></div>
+        <div><dt>Tokens per arm</dt><dd>995M</dd></div>
+        <div><dt>Training</dt><dd>4 &times; 60k steps</dd></div>
+        <div><dt>GPU time</dt><dd>~44 h, free T4</dd></div>
+      </dl>
+      <div class="side-cta">
+        <a class="pill" href="https://github.com/Zeref538/liitllm/releases/tag/v1.0">Download model (131 MB)</a>
+        <p class="small muted">Weights only, no login. Runs on a laptop CPU.</p>
+      </div>
+    </div>
+    <div class="console-main">
+      <p class="caps">What this project shows</p>
+      <p class="display">Every big corpus throws Taglish away. <span class="it">This one keeps only Taglish.</span></p>
+      <ol class="steps">
+        <li><span class="it">01</span><b>Filter</b>Keep only web text that mixes Tagalog and English.</li>
+        <li><span class="it">02</span><b>Train</b>Two identical models, one on the filtered text, one on everything.</li>
+        <li><span class="it">03</span><b>Measure</b>Same prompts, same scorer. Count the English that comes out.</li>
+      </ol>
+      <p class="caps try">The filter, running live <span class="it">type in the box</span></p>
   <div class="scorer">
     <div class="scorer-head">
-      <p class="kicker">The filter, running live</p>
+      <p class="small muted" style="margin:0">431 Tagalog and 647 English words</p>
       <div class="chips">
         <button type="button" class="chip" data-ex="taglish">Taglish</button>
         <button type="button" class="chip" data-ex="tagalog">Formal Tagalog</button>
@@ -472,11 +578,9 @@
       <div class="verdict drop" id="verdict">—</div>
     </div>
   </div>
-  <p class="small muted" style="margin-top:10px">
-    Type in the box. This is the actual scorer — the same 431 Tagalog and 647 English
-    words, the same affix stripping — that chose which documents the model learned from.
-  </p>
+    </div>
   </div>
+</div>
 </header>
 
 <nav class="rail" aria-label="Chapters"></nav>
@@ -1027,6 +1131,10 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
 
 </main>
 
+<section class="closing">
+  <p class="display closing-line">Built from an empty file. <span class="it">Made for how Filipinos actually write.</span></p>
+</section>
+
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div>
@@ -1046,9 +1154,12 @@ python -m liitllm.evaluate --baseline out/ckpt.pt --ablation out-unfiltered/ckpt
       <a href="https://github.com/Zeref538">GitHub</a>
     </nav>
   </div>
+  <div class="foot-strip caps">
+    <span>LiitLLM case study</span><span>32.8M &middot; PyTorch &middot; free Kaggle T4</span><span>Model: GitHub release v1.0</span>
+  </div>
   <div class="wrap foot-base small">
     Corpora: FineWeb-2 <code>fil_Latn</code> and HPLT 2.0 <code>tgl_Latn</code>, openly
-    licensed and streamed rather than redistributed. Fonts: Instrument Sans and Sora, SIL OFL.
+    licensed and streamed rather than redistributed. Fonts: Instrument Sans, Instrument Serif and Sora, SIL OFL.
   </div>
 </footer>
 
@@ -1283,8 +1394,13 @@ try {
     links.forEach(([sec, a]) => a.setAttribute("aria-current", sec === e.target));
   }), { rootMargin: "-45% 0px -50% 0px" });
   // Hidden over the hero, which is wider than the text column.
-  new IntersectionObserver(([e]) => rail.classList.toggle("on", !e.isIntersecting))
-    .observe(document.querySelector(".hero"));
+  // Hidden wherever the page runs wider than the text column (hero, closing, footer).
+  const wide = new Set();
+  const wideIO = new IntersectionObserver(es => {
+    es.forEach(e => e.isIntersecting ? wide.add(e.target) : wide.delete(e.target));
+    rail.classList.toggle("on", wide.size === 0);
+  });
+  document.querySelectorAll(".hero, .closing, .site-foot").forEach(el => wideIO.observe(el));
   links.forEach(([sec]) => io.observe(sec));
 })();
 </script>
